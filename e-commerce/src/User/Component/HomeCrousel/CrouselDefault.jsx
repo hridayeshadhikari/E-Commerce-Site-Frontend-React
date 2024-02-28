@@ -10,13 +10,16 @@ const CarouselDefault = () => {
     const items = CrouselData.map((item) => <img className='cursor-pointer'
         role='presentation' src={item.image} alt='' />)
     return (
+        <div>
         <AliceCarousel
             items={items}
             disableButtonsControls
             autoPlay
             autoPlayInterval={4000}
             infinite
-        />)
+        
+        />
+        </div>)
 };
 
 export default CarouselDefault;

@@ -5,8 +5,11 @@ import ProductCarousel from '../User/Component/HomeProductsCrousel/ProductsCrous
 const HomePage = () => {
   return (
     <div>
-       <CarouselDefault/>
-       <ProductCarousel/>
+       <CarouselDefault sectionName={"Mens Shooes"}/>
+       <ProductCarousel sectionName={"Mens Shooes"}/>
+       <ProductCarousel sectionName={"Mens Shooes"}/>
+       <ProductCarousel sectionName={"Mens Shooes"}/>
+       <ProductCarousel sectionName={"Mens Shooes"}/>
       
     </div>
   )
