@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Instagram } from "@mui/icons-material";
 import { Facebook } from "@mui/icons-material";
-import { Twitter } from "@mui/icons-material";
+import XIcon from '@mui/icons-material/X';
 import { LinkedIn } from "@mui/icons-material";
 import MailIcon from "@mui/icons-material/Mail";
 import { Grid } from "@mui/material";
@@ -22,9 +22,9 @@ function Copyright() {
     return (
         <Typography variant="body2" color="whitesmoke">
             {"Copyright © "}
-            <a color="inherit" href="https://mui.com/" className="linkStyle">
+            <Link color="inherit" to="https://mui.com/" className="linkStyle">
                 TrendSphere
-            </a>{" "}
+            </Link>{" "}
             {new Date().getFullYear()}
             {"."}
         </Typography>
@@ -51,90 +51,90 @@ const Footer = () => {
                             <Typography
                                 variant="h5"
                                 sx={{ margin: "15px" }}
-                                style={{ fontSize: "20px", fontWeight: "500" }}
+                                style={{ fontSize: "17px", fontWeight: "300",color:"gray"}}
                             >
                                 About
                             </Typography>
-                            <Typography variant="h6" sx={{ margin: "15px" }}>
-                                <a style={{ fontSize: "15px" }} to="/about-us" className="linkStyle cursor-pointer">
+                            <Typography variant="h5" sx={{ margin: "15px" }}>
+                                <Link style={{ fontSize: "13px" }} to="/about-us" className="linkStyle cursor-pointer">
                                     About us
-                                </a>
+                                </Link>
                             </Typography>
                             <Typography variant="h6" sx={{ margin: "15px" }}>
-                                <a style={{ fontSize: "15px" }} to="/contact-us" className="linkStyle">
+                                <Link style={{ fontSize: "13px" }} to="/contact-us" className="linkStyle">
                                     Contact us
-                                </a>
+                                </Link>
                             </Typography>
                         </Grid>
                         <Grid item sm={6} md={6} lg={3}>
                             <Typography
                                 variant="h5"
                                 sx={{ margin: "15px" }}
-                                style={{ fontSize: "20px", fontWeight: "500" }}
+                                style={{ fontSize: "17px", fontWeight: "500",color:"gray" }}
                             >
                                 Help
                             </Typography>
                             <Typography variant="h6" sx={{ margin: "15px" }}>
-                                <a style={{ fontSize: "15px" }} to="/payment" className="linkStyle">
+                                <Link style={{ fontSize: "13px" }} to="/paymentf" className="linkStyle">
                                     Payments
-                                </a>
+                                </Link>
                             </Typography>
                             <Typography variant="h6" sx={{ margin: "15px" }}>
-                                <a style={{ fontSize: "15px" }} to="/faq" className="linkStyle">
+                                <Link style={{ fontSize: "13px" }} to="/faq" className="linkStyle">
                                     FAQ
-                                </a>
+                                </Link>
                             </Typography>
                             <Typography variant="h6" sx={{ margin: "15px" }}>
-                                <a style={{ fontSize: "15px" }} to="/site-map" className="linkStyle">
+                                <Link style={{ fontSize: "13px" }} to="/site-map" className="linkStyle">
                                     Sitemap
-                                </a>
+                                </Link>
                             </Typography>
                         </Grid>
                         <Grid item sm={6} md={6} lg={3}>
                             <Typography
                                 variant="h5"
                                 sx={{ margin: "15px" }}
-                                style={{ fontSize: "20px", fontWeight: "500" }}
+                                style={{ fontSize: "17px", fontWeight: "500",color:"gray" }}
                             >
                                 Consumer Policy
                             </Typography>
                             <Typography variant="h6" sx={{ margin: "15px" }}>
-                                <a style={{ fontSize: "15px" }} to="/terms-of-use" className="linkStyle">
+                                <Link style={{ fontSize: "13px" }} to="/terms-of-use" className="linkStyle">
                                     Terms Of Use
-                                </a>
+                                </Link>
                             </Typography>
                             <Typography variant="h6" sx={{ margin: "15px" }}>
-                                <a style={{ fontSize: "15px" }} to="/privacy-policy" className="linkStyle">
+                                <Link style={{ fontSize: "13px" }} to="/privacy-policy" className="linkStyle">
                                     Privacy
-                                </a>
+                                </Link>
                             </Typography>
                             <Typography variant="h6" sx={{ margin: "15px" }}>
-                                <a style={{ fontSize: "15px" }} to="/security" className="linkStyle">
+                                <Link style={{ fontSize: "13px" }} to="/security" className="linkStyle">
                                     Security
-                                </a>
+                                </Link>
                             </Typography>
                         </Grid>
                         <Grid item sm={6} md={6} lg={3}>
                             <Typography
                                 variant="h5"
                                 sx={{ margin: "15px" }}
-                                style={{ fontSize: "20px", fontWeight: "500" }}
+                                style={{ fontSize: "17px", fontWeight: "500" ,color:"gray"}}
                             >
                                 Mail us
                             </Typography>
                             <Typography
                                 variant="h6"
                                 sx={{ margin: "15px" }}
-                                style={{ fontSize: "15px" }}
+                                style={{ fontSize: "13px" }}
                             >
                                 TheTrendSphereCompany
                             </Typography>
                             <Typography
                                 variant="h7"
                                 sx={{ margin: "15px" }}
-                                style={{ display: "flex", fontSize: "15px" }}
+                                style={{ display: "flex", fontSize: "13px" }}
                             >
-                                <MailIcon />
+                                <MailIcon className='mr-2'/>
                                 trendsphere@gmail.com
                             </Typography>
                         </Grid>
@@ -142,27 +142,27 @@ const Footer = () => {
                             <Typography
                                 variant="h5"
                                 sx={{ margin: "15px" }}
-                                style={{ fontSize: "20px", fontWeight: "500" }}
+                                style={{ fontSize: "17px", fontWeight: "500" ,color:"gray"}}
                             >
-                                Follow us
+                                Social
                             </Typography>
                             <Typography variant="h7" sx={{ margin: "15px" }}>
-                                <a to="/" className="icn">
+                                <a href="instagram.com" target='blank' className="icn">
                                     <Instagram />
                                 </a>
                             </Typography>
                             <Typography variant="h7" sx={{ margin: "15px" }}>
-                                <a to="/" className="icn">
+                                <a href="facebook.com" target='blank' className="icn">
                                     <Facebook />
                                 </a>
                             </Typography>
                             <Typography variant="h7" sx={{ margin: "15px" }}>
-                                <a to="/" className="icn">
-                                    <Twitter />
+                                <a href="twitter.com" target='blank' className="icn">
+                                    <XIcon />
                                 </a>
                             </Typography>
                             <Typography variant="h7" sx={{ margin: "15px" }}>
-                                <a to="/" className="icn">
+                                <a href="linkedin.com" target='blank' className="icn">
                                     <LinkedIn />
                                 </a>
                             </Typography>
@@ -171,7 +171,7 @@ const Footer = () => {
                             <Typography
                                 variant="h5"
                                 sx={{ margin: "15px" }}
-                                style={{ fontSize: "20px", fontWeight: "500" }}
+                                style={{ fontSize: "17px", fontWeight: "500",color:"gray" }}
                             >
                                 Secure Payment Gateway
                             </Typography>
@@ -206,7 +206,7 @@ const Footer = () => {
                             <Typography
                                 variant="h5"
                                 sx={{ margin: "15px" }}
-                                style={{ fontSize: "15px", fontWeight: "bold" }}
+                                style={{ fontSize: "13px", fontWeight: "bold" }}
                             >
                                 Discover, Shop, Smile
                             </Typography>
