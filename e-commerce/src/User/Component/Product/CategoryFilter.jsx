@@ -8,6 +8,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import {useLocation, useNavigate } from 'react-router-dom';
 
 const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
@@ -24,10 +25,20 @@ const filters = [
     options: [
       { value: 'white', label: 'White', checked: false },
       { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: true },
+      { value: 'blue', label: 'Blue', checked: false },
       { value: 'brown', label: 'Brown', checked: false },
       { value: 'green', label: 'Green', checked: false },
       { value: 'purple', label: 'Purple', checked: false },
+    ],
+  },
+  {
+    id: 'size',
+    name: 'Size',
+    options: [
+      { value: 'S', label: 'S', checked: false },
+      { value: 'M', label: 'M', checked: false },
+      { value: 'L', label: 'L', checked: false },
+      { value: 'XL', label: 'XL', checked: false },
     ],
   },
 ]
@@ -42,16 +53,7 @@ const singleFilter = [{
     { value: '1999-4999', label: '1999 To 4999' },
   ],
 },
-{
-  id: 'size',
-  name: 'Size',
-  options: [
-    { value: 'S', label: 'S', checked: false },
-    { value: 'M', label: 'M', checked: false },
-    { value: 'L', label: 'L', checked: false },
-    { value: 'XL', label: 'XL', checked: false },
-  ],
-},
+
 {
   id: 'discount',
   name: 'Discount',
@@ -84,6 +86,37 @@ function classNames(...classes) {
 
 export default function CategoryFilter() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const location=useLocation();
+  const navigate=useNavigate();
+  const handleFilter=(sectionId,value)=>{
+      const searchParams=new URLSearchParams(location.search)
+      let filterValue=searchParams.getAll(sectionId)
+
+      if(filterValue.length>0 && filterValue[0].split(",").includes(value)){
+        filterValue=filterValue[0].split(",").filter((item)=>item!==value);
+
+        if(filterValue.length===0){
+          searchParams.delete(sectionId)
+        }
+
+      }
+      else{
+        filterValue.push(value)
+      }
+      if(filterValue.length>0){
+        searchParams.set(sectionId,filterValue.join(","))
+        
+      }
+      const query=searchParams.toString();
+        navigate({search:`?${query}`})
+  }
+
+  const handleSingleFilter=(e,sectionId)=>{
+    const searchParams=new URLSearchParams(location.search)
+    searchParams.set(sectionId,e.target.value)
+    const query=searchParams.toString();
+        navigate({search:`?${query}`})
+  }
 
   return (
     <div className="bg-white">
@@ -151,6 +184,7 @@ export default function CategoryFilter() {
                                 {section.options.map((option, optionIdx) => (
                                   <div key={option.value} className="flex items-center">
                                     <input
+                                    onChange={()=>handleFilter(option.value,section.id)}
                                       id={`filter-mobile-${section.id}-${optionIdx}`}
                                       name={`${section.id}[]`}
                                       defaultValue={option.value}
@@ -197,7 +231,7 @@ export default function CategoryFilter() {
                                     name="radio-buttons-group"
                                   >
                                     {section.options.map((option, optionIdx) => (
-                                      <FormControlLabel value={option.id} control={<Radio />} label={option.label} />
+                                      <FormControlLabel onChange={(e)=>handleSingleFilter(e,section.id)} value={option.value} control={<Radio />} label={option.label} />
 
 
                                     ))}
@@ -310,6 +344,7 @@ export default function CategoryFilter() {
                               {section.options.map((option, optionIdx) => (
                                 <div key={option.value} className="flex items-center">
                                   <input
+                                  onChange={()=>handleFilter(option.value,section.id)}
                                     id={`filter-${section.id}-${optionIdx}`}
                                     name={`${section.id}[]`}
                                     defaultValue={option.value}
@@ -356,7 +391,7 @@ export default function CategoryFilter() {
                                   name="radio-buttons-group"
                                 >
                                   {section.options.map((option, optionIdx) => (
-                                    <FormControlLabel value={option.id} control={<Radio />} label={option.label} />
+                                    <FormControlLabel onChange={(e)=>handleSingleFilter(e,section.id)} value={option.value} control={<Radio />} label={option.label} />
                                   ))}
                                 </RadioGroup>
                               </FormControl>
