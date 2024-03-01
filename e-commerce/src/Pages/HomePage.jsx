@@ -10,12 +10,12 @@ const HomePage = () => {
   return (
     <div>
       <Navbar/>
-      <CarouselDefault/>
+      {/* <CarouselDefault/>
       <ProductCarousel/>
       <ProductCarousel/>
       <ProductCarousel/> 
-      {/* <Product/> */}
-      <CategoryFilter/>
+      <CategoryFilter/> */}
+      <Product/>
       <Footer/>
     </div>
   )
