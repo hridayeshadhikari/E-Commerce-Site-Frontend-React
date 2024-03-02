@@ -6,6 +6,7 @@ import Footer from '../User/Component/Footer/Footer';
 import Product from '../User/Component/Product/Product';
 import CategoryFilter from '../User/Component/Product/CategoryFilter';
 import Cart from '../User/Component/Cart/Cart';
+import Checkout from '../User/Component/Checkout/Checkout';
 
 const HomePage = () => {
   return (
@@ -16,8 +17,9 @@ const HomePage = () => {
       <ProductCarousel/>
       <ProductCarousel/> 
       <CategoryFilter/>
-      <Product/> */}
-      <Cart/>
+      <Product/> 
+      <Cart/>*/}
+      <Checkout/>
       <Footer/>
     </div>
   )
