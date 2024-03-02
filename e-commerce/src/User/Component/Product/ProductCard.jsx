@@ -269,7 +269,7 @@ export default function Example() {
 
                 <button
                   type="submit"
-                  className="mt-10 flex w-[11rem] items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="mt-10 flex w-[11rem] items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-base font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
                 >
                   <AddShoppingCartIcon />
                   Add to cart
