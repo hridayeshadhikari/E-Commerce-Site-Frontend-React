@@ -5,6 +5,7 @@ import Navbar from '../User/Component/Navbar/Navbar'
 import Footer from '../User/Component/Footer/Footer';
 import Product from '../User/Component/Product/Product';
 import CategoryFilter from '../User/Component/Product/CategoryFilter';
+import Cart from '../User/Component/Cart/Cart';
 
 const HomePage = () => {
   return (
@@ -14,8 +15,9 @@ const HomePage = () => {
       <ProductCarousel/>
       <ProductCarousel/>
       <ProductCarousel/> 
-      <CategoryFilter/> */}
-      <Product/>
+      <CategoryFilter/>
+      <Product/> */}
+      <Cart/>
       <Footer/>
     </div>
   )
