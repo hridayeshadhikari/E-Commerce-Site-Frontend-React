@@ -23,6 +23,9 @@ import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Rating from '@mui/material/Rating';
+import { Grid } from '@mui/material';
+import ProductReviewCard from './ProductReviewCard';
+import DefaultProductCard from '../HomeSectionCard/DefaultProductCard'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -309,7 +312,31 @@ export default function Example() {
           </div>
         </section>
 
+        <section>
+          <h1 className='font-semibold text-lg pb-4 ml-4'>Recent ratings and reviews</h1>
+          <div className='border p-5'>
+          <Grid container spacing={7}>
+            <Grid item xs={7}>
+                      <div className='space-y-5'>
+                          { [1,1,1,1].map(()=><ProductReviewCard/>)}
+                      </div>
+            </Grid>
+
+          </Grid>
+          </div>
+        </section>
+        <section className='pt-10'>
+          <h1 className='ml-4 font-bold text-xl'>Similar Products</h1>
+          <div className='flex flex-wrap space-y-5 pb-5'>
+              {
+                [1,1,1,1,1,1,1,1,1,1,1,1,1].map(()=><DefaultProductCard/>)
+              }
+          </div>
+
+        </section>
+
       </div>
     </div>
+
   )
 }
