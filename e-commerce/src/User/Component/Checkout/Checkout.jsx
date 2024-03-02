@@ -37,19 +37,8 @@ export default function Checkout() {
                     ))}
                 </Stepper>
 
-                <Stack direction="row" spacing={2} justifyContent="center">
-                    <Button
-                        color="inherit"
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        sx={{ mr: 1 }}
-                    >
-                        Back
-                    </Button>
-                    <Box sx={{ flex: '1 1 auto' }} />
-
-                </Stack>
-                <div className='mt-8'>
+                
+                <div className='pt-[5rem]'>
                     {step == 2 ? <DeliveryAddress /> : <OrderSummary />}
                 </div>
             </Box>
