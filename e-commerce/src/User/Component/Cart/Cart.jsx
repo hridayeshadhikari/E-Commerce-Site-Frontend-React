@@ -1,6 +1,5 @@
 import React from 'react'
 import CartItem from './CartItem'
-import { Button } from '@mui/material'
 
 const Cart = () => {
     return (

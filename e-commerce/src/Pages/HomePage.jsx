@@ -17,7 +17,7 @@ const HomePage = () => {
       <ProductCarousel/>
       <ProductCarousel/> 
       <CategoryFilter/>
-      <Product/> 
+  <Product/> 
       <Cart/>*/}
       <Checkout/>
       <Footer/>
