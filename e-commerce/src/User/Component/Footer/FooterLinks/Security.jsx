@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useEffect } from 'react';
-import Navbar from "../../Navbar/Navbar";
-import Footer from "../Footer";
-
 const Security = () => {
   const securityRef = React.createRef();
   useEffect(() => {
@@ -12,7 +9,6 @@ const Security = () => {
   }, [securityRef]);
   return (
     <div ref={securityRef}>
-      <Navbar />
       <div className="prpo p-10">
         <div className="innerprpo">
           <div className="inner1prpo">
@@ -51,7 +47,6 @@ const Security = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

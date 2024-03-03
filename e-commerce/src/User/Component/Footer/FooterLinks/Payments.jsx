@@ -1,7 +1,5 @@
 import React from 'react';
 import { useEffect } from 'react';
-import Navbar from '../../Navbar/Navbar';
-import Footer from '../Footer';
 
 
 
@@ -13,7 +11,6 @@ const Payments = () => {
     }, [paymentsRef]);
     return (
         <div >
-            <Navbar />
             <div ref={paymentsRef}>
 
                 <div className="prpo p-10">
@@ -55,7 +52,6 @@ const Payments = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }

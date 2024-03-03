@@ -1,8 +1,5 @@
 import React from 'react';
 import { useEffect } from 'react';
-import Navbar from '../../Navbar/Navbar';
-import Footer from '../Footer';
-
 
 
 const PrivacyPolicy = () => {
@@ -13,7 +10,6 @@ const PrivacyPolicy = () => {
   }, [privacyRef]);
   return (
     <div ref={privacyRef}>
-      <Navbar />
       <div className="prpo p-10">
         <div className="innerprpo">
           <div className="inner1prpo">
@@ -87,7 +83,6 @@ const PrivacyPolicy = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

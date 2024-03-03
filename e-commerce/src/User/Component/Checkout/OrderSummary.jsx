@@ -1,11 +1,10 @@
 import React from 'react'
 import AddressCard from '../AddressCard/AddressCard'
-import CartItem from '../Cart/CartItem'
 
 const OrderSummary = () => {
   return (
     <div>
-      <div className='p-5 shadow-lg rounded-s-md border mb-3 lg:ml-[4rem]  lg:mr-[5rem]'>
+      <div className='p-5 shadow-lg rounded-s-md border mb-3 '>
         <AddressCard />
       </div>
       <div>

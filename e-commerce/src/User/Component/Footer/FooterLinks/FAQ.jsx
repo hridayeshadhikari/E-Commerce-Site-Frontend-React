@@ -6,9 +6,6 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
-import Navbar from '../../Navbar/Navbar';
-import Footer from '../Footer';
-
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -63,7 +60,7 @@ export default function FAQ() {
 
   return (
     <div>
-      <Navbar />
+      
       <div ref={faqRef} className='p-10'>
         <div><h1 className='font-bold mb-3'>Frequently Asked Questions</h1>
           <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -161,7 +158,6 @@ export default function FAQ() {
         </div>
 
       </div>
-      <Footer />
     </div>
 
   );

@@ -3,66 +3,68 @@ import { Fragment, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import companyLogo from '../../../Assets/trendsphere-high-resolution-logo-transparent.png'
+import { useNavigate } from 'react-router-dom'
+import { Avatar, Button, Menu, MenuItem } from '@mui/material'
 
 
 const navigation = {
   categories: [
     {
-        id: 'men',
-        name: 'Men',
-        featured: [
-          {
-            name: 'New Arrivals',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
-            imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
-          },
-          {
-            name: 'Artwork Tees',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
-            imageAlt:
-              'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-          },
-        ],
-        sections: [
-          {
-            id: 'clothing',
-            name: 'Clothing',
-            items: [
-              { name: 'Tops', href: '#' },
-              { name: 'Pants', href: '#' },
-              { name: 'Sweaters', href: '#' },
-              { name: 'T-Shirts', href: '#' },
-              { name: 'Jackets', href: '#' },
-              { name: 'Activewear', href: '#' },
-              { name: 'Browse All', href: '#' },
-            ],
-          },
-          {
-            id: 'accessories',
-            name: 'Accessories',
-            items: [
-              { name: 'Watches', href: '#' },
-              { name: 'Wallets', href: '#' },
-              { name: 'Bags', href: '#' },
-              { name: 'Sunglasses', href: '#' },
-              { name: 'Hats', href: '#' },
-              { name: 'Belts', href: '#' },
-            ],
-          },
-          {
-            id: 'brands',
-            name: 'Brands',
-            items: [
-              { name: 'Re-Arranged', href: '#' },
-              { name: 'Counterfeit', href: '#' },
-              { name: 'Full Nelson', href: '#' },
-              { name: 'My Way', href: '#' },
-            ],
-          },
-        ],
-      },
+      id: 'men',
+      name: 'Men',
+      featured: [
+        {
+          name: 'New Arrivals',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
+          imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
+        },
+        {
+          name: 'Artwork Tees',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
+          imageAlt:
+            'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
+        },
+      ],
+      sections: [
+        {
+          id: 'clothing',
+          name: 'Clothing',
+          items: [
+            { name: 'Tops', href: '#' },
+            { name: 'Pants', href: '#' },
+            { name: 'Sweaters', href: '#' },
+            { name: 'T-Shirts', href: '#' },
+            { name: 'Jackets', href: '#' },
+            { name: 'Activewear', href: '#' },
+            { name: 'Browse All', href: '#' },
+          ],
+        },
+        {
+          id: 'accessories',
+          name: 'Accessories',
+          items: [
+            { name: 'Watches', href: '#' },
+            { name: 'Wallets', href: '#' },
+            { name: 'Bags', href: '#' },
+            { name: 'Sunglasses', href: '#' },
+            { name: 'Hats', href: '#' },
+            { name: 'Belts', href: '#' },
+          ],
+        },
+        {
+          id: 'brands',
+          name: 'Brands',
+          items: [
+            { name: 'Re-Arranged', href: '#' },
+            { name: 'Counterfeit', href: '#' },
+            { name: 'Full Nelson', href: '#' },
+            { name: 'My Way', href: '#' },
+          ],
+        },
+      ],
+    },
     {
       id: 'women',
       name: 'Women',
@@ -121,7 +123,7 @@ const navigation = {
         },
       ],
     },
-    
+
   ],
   pages: [
     { name: 'Company', href: '#' },
@@ -130,12 +132,34 @@ const navigation = {
 }
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false)
+  const [openAuthModal, setOpenAuthModal] = useState(false);
+  const [anchorE1, setAnchorE1] = useState(null);
+  const openUserMenu = Boolean(anchorE1);
+  const jwt = localStorage.getItem("jwt")
+  const handleOpen = () => {
+    setOpenAuthModal(false);
+  }
 
+  const handleUserClick = (event) => {
+    setAnchorE1(event.currentTarget);
+  }
+
+  const handleCloseUserMenu = (event) => {
+    setAnchorE1(null);
+  }
+  const handleClose = () => {
+    setOpenAuthModal(false);
+  };
+  const handleCategoryClick = (category, section, item, close) => {
+    navigate(`/${category.id}/${section.id}/${item.id}`);
+    close();
+  };
   return (
     <div className="bg-white relative z-50">
       {/* Mobile menu */}
@@ -262,7 +286,7 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                
+
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -368,9 +392,16 @@ export default function Navbar() {
                                           >
                                             {section.items.map((item) => (
                                               <li key={item.name} className="flex">
-                                                <a href={item.href} className="hover:text-gray-800">
+                                                <p
+                                                  onClick={() => handleCategoryClick(
+                                                    category,
+                                                    section,
+                                                    item,
+                                                    
+                                                  )}
+                                                  className="cursor-pointer hover:text-gray-800">
                                                   {item.name}
-                                                </a>
+                                                </p>
                                               </li>
                                             ))}
                                           </ul>
@@ -401,17 +432,53 @@ export default function Navbar() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                    Sign in
-                  </a>
-                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                  <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                    Create account
-                  </a>
+                  {
+                    true ? (
+                      <div>
+                        <Avatar
+                          className='text-white'
+                          onClick={handleUserClick}
+                          aria-controls={open ? "basic-menu" : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={open ? "true" : undefined}
+                          sx={{
+                            bgcolor: "purple",
+                            color: 'white',
+                            cursor: "pointer",
+                          }}
+                        >
+                          H
+                        </Avatar>
+                        <Menu
+                          id="basic-menu"
+                          anchorEl={anchorE1}
+                          open={openUserMenu}
+                          onClose={handleCloseUserMenu}
+                          MenuListProps={{
+                            "aria-labelledby": "basic-button",
+                          }}
+                        >
+                          <MenuItem onClick={handleCloseUserMenu}>
+                            Profile
+                          </MenuItem>
+                          <MenuItem onClick={()=>navigate("/account/order")}>
+                            My Orders
+                          </MenuItem>
+                          <MenuItem onClick={handleCloseUserMenu}>
+                            Logout
+                          </MenuItem>
+                        </Menu>
+                      </div>) : (
+                      <Button
+                        onClick={handleOpen}
+                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >Signin
+
+                      </Button>
+
+                    )
+                  }
                 </div>
-
-                
-
                 {/* Search */}
                 <div className="flex lg:ml-6">
                   <a href="#" className="p-2 text-gray-400 hover:text-gray-500">

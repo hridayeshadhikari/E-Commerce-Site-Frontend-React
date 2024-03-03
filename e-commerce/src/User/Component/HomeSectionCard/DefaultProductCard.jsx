@@ -1,13 +1,12 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
 export default function DefaultProductCard() {
+  const navigate=useNavigate();
   return (
+    <div onClick={()=>navigate(`/product/${1}`)}>
     <Card sx={{ maxWidth: 345 }} className="cursor-pointer mt-5 items-center mx-3 flex h-[20rem] w-[15rem] flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
       
       <CardMedia className="relative mx-3 mt-3 flex h-[17rem] w-[13rem] overflow-hidden rounded-xl" >
@@ -29,5 +28,6 @@ export default function DefaultProductCard() {
         </div>
     
     </Card>
+    </div>
   );
 }

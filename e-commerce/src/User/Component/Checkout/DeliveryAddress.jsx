@@ -22,7 +22,7 @@ function DeliveryAddress() {
   return (
     <div className='container'>
       <Grid container spacing={4}>
-        <Grid xs={12} lg={4} className='border rounded-e-md shadow-md h-[30rem] overflow-y-scroll lg:ml-[5rem]'>
+        <Grid xs={12} lg={4} className=' h-[30rem] overflow-y-scroll lg:ml-[5rem]'>
           <div className='p-5 py-7 border-b cursor-pointer'>
             <AddressCard />
             <Button

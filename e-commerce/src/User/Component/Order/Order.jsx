@@ -1,10 +1,12 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import AdjustIcon from '@mui/icons-material/Adjust';
+import { useNavigate } from 'react-router-dom';
 
 const Order = () => {
+    const navigate=useNavigate();
     return (
-        <div className="container mt-8 lg:mx-auto mb-3 p-4 border shadow-md rounded-e-md justify-center">
+        <div onClick={()=>navigate(`/account/order/${5}`)} className="cursor-pointer container mt-8 lg:mx-auto mb-3 p-4 border shadow-md rounded-e-md justify-center">
             <Grid container spacing={2} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
                 <Grid item xs={12} sm={6}>
                     <div className='flex'>

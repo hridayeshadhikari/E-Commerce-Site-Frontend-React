@@ -7,8 +7,8 @@ import AdjustIcon from '@mui/icons-material/Adjust';
 const OrderDetail = () => {
     return (
         <div>
-            <div>
-                <h1 className='text-lg font-bold lg:mt-[3rem] lg:ml-[4rem]'>Delivery Address</h1>
+            <div className='ml-[4rem] mr-[4rem] mt-5'>
+                <h1 className='text-lg font-bold lg:mt-[3rem] '>Delivery Address</h1>
                 <AddressCard />
             </div>
             <div className='mt-[3rem]'>

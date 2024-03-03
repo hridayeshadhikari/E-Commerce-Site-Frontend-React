@@ -1,24 +1,4 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        gridTemplateRows: {
-          '[auto,auto,1fr]': 'auto auto 1fr',
-        },
-      },
-    },
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
+
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -26,6 +6,7 @@ import Rating from '@mui/material/Rating';
 import { Grid } from '@mui/material';
 import ProductReviewCard from './ProductReviewCard';
 import DefaultProductCard from '../HomeSectionCard/DefaultProductCard'
+import { useNavigate } from 'react-router-dom';
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -86,6 +67,11 @@ function classNames(...classes) {
 export default function Example() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+  const navigate=useNavigate();
+
+  const handleAddToCart=()=>{ 
+    navigate('/cart')
+  }
 
   return (
     <div className="bg-white">
@@ -268,6 +254,7 @@ export default function Example() {
                 </div>
 
                 <button
+                  onClick={handleAddToCart}
                   type="submit"
                   className="mt-10 flex w-[11rem] items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-base font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
                 >

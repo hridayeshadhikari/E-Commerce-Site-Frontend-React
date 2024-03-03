@@ -1,8 +1,5 @@
 import React from 'react';
 import { useEffect } from 'react';
-import Navbar from '../../Navbar/Navbar';
-import Footer from '../Footer';
-
 
 
 const Sitemap = () => {
@@ -13,7 +10,6 @@ const Sitemap = () => {
   }, [sitemapRef]);
   return (
     <div ref={sitemapRef}>
-      <Navbar />
 
       <div className="site-map p-10">
         <div className="innersite">
@@ -56,7 +52,6 @@ const Sitemap = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }
