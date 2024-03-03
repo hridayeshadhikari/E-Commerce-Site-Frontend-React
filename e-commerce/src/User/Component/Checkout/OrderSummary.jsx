@@ -28,15 +28,15 @@ const OrderSummary = () => {
                       <span className="text-md text-green-500 p-2 ">50% Off</span>
                       <p className="text-md text-gray-500">quantity : 2</p>
                     </p>
-                    
-                    
+
+
 
 
                   </div>
                 </div>
 
               </div>
-             
+
 
             </div>
           </div>

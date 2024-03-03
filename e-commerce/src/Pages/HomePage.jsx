@@ -7,6 +7,8 @@ import Product from '../User/Component/Product/Product';
 import CategoryFilter from '../User/Component/Product/CategoryFilter';
 import Cart from '../User/Component/Cart/Cart';
 import Checkout from '../User/Component/Checkout/Checkout';
+import Order from '../User/Component/Order/Order';
+import OrderDetail from '../User/Component/Order/OrderDetail';
 
 const HomePage = () => {
   return (
@@ -18,8 +20,10 @@ const HomePage = () => {
       <ProductCarousel/> 
       <CategoryFilter/>
   <Product/> 
-      <Cart/>*/}
+      <Cart/>
       <Checkout/>
+      <Order/>*/}
+      <OrderDetail/>
       <Footer/>
     </div>
   )
