@@ -15,6 +15,8 @@ import PrivacyPolicy from '../User/Component/Footer/FooterLinks/PrivacyPolicy';
 import Security from '../User/Component/Footer/FooterLinks/Security';
 import Sitemap from '../User/Component/Footer/FooterLinks/Sitemap';
 import TermsOfUse from '../User/Component/Footer/FooterLinks/TermsOfUse';
+import Login from '../Auth/Login'
+import Register from '../Auth/Register'
 
 const UserRouter = () => {
   return (

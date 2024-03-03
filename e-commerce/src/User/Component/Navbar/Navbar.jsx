@@ -5,6 +5,7 @@ import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@her
 import companyLogo from '../../../Assets/trendsphere-high-resolution-logo-transparent.png'
 import { useNavigate } from 'react-router-dom'
 import { Avatar, Button, Menu, MenuItem } from '@mui/material'
+import AuthModal from '../../../Auth/AuthModal'
 
 
 const navigation = {
@@ -143,7 +144,7 @@ export default function Navbar() {
   const openUserMenu = Boolean(anchorE1);
   const jwt = localStorage.getItem("jwt")
   const handleOpen = () => {
-    setOpenAuthModal(false);
+    setOpenAuthModal(true);
   }
 
   const handleUserClick = (event) => {
@@ -275,15 +276,11 @@ export default function Navbar() {
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
-                    <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
+                    <button onClick={handleOpen} className="-m-2 block p-2 font-medium text-gray-900">
                       Sign in
-                    </a>
+                    </button>
                   </div>
-                  <div className="flow-root">
-                    <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
-                      Create account
-                    </a>
-                  </div>
+                  
                 </div>
 
 
@@ -433,7 +430,7 @@ export default function Navbar() {
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   {
-                    true ? (
+                    false ? (
                       <div>
                         <Avatar
                           className='text-white'
@@ -472,7 +469,7 @@ export default function Navbar() {
                       <Button
                         onClick={handleOpen}
                         className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                      >Signin
+                      >Sign in
 
                       </Button>
 
@@ -503,6 +500,7 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
+      <AuthModal handleClose={handleClose} open={openAuthModal}/>
     </div>
   )
 }
