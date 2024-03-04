@@ -11,11 +11,17 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import sitelogo from "../Assets/trendsphere-high-resolution-logo-transparent.png";
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../Redux/Auth/Action';
+import { useEffect } from 'react';
 
 const defaultTheme = createTheme();
 
-export default function SignUp() {
 
+export default function SignUp() {
+    const jwt=localStorage.getItem("jwt")
+    const {auth}=useSelector(store=>store)
+    const dispatch=useDispatch();
     const navigate=useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,8 +31,15 @@ export default function SignUp() {
             password:data.get("password"),
 
         }
+        dispatch(login(userData))
         console.log("userdata",userData)
     };
+
+    // useEffect(() => {
+    //     if (jwt) {
+    //         dispatch(login(jwt))
+    //     }
+    // }, [jwt, auth.jwt])
 
     return (
         <div className='mb-[4rem]'> 

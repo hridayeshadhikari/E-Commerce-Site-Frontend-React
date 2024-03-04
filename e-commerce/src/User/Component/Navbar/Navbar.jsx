@@ -1,12 +1,13 @@
 
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import companyLogo from '../../../Assets/trendsphere-high-resolution-logo-transparent.png'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Avatar, Button, Menu, MenuItem } from '@mui/material'
 import AuthModal from '../../../Auth/AuthModal'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserProfile, logout } from '../../../Redux/Auth/Action'
 
 const navigation = {
   categories: [
@@ -138,11 +139,14 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false)
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [anchorE1, setAnchorE1] = useState(null);
   const openUserMenu = Boolean(anchorE1);
   const jwt = localStorage.getItem("jwt")
+  const { auth } = useSelector(store => store);
+  const dispatch = useDispatch()
   const handleOpen = () => {
     setOpenAuthModal(true);
   }
@@ -161,6 +165,27 @@ export default function Navbar() {
     navigate(`/${category.id}/${section.id}/${item.id}`);
     close();
   };
+
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getUserProfile(jwt))
+    }
+  }, [jwt,auth.jwt])
+
+  useEffect(() => {
+    if (auth.user) {
+      handleClose();
+    }
+    if (location.pathname === "/login" || location.pathname === "/signup") {
+      navigate(-1)
+    }
+  },[auth.user])
+
+  const handleLogout=()=>{
+    dispatch(logout())
+    handleCloseUserMenu()
+  }
+
   return (
     <div className="bg-white relative z-50">
       {/* Mobile menu */}
@@ -275,12 +300,16 @@ export default function Navbar() {
                 </div>
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  <div className="flow-root">
-                    <button onClick={handleOpen} className="-m-2 block p-2 font-medium text-gray-900">
-                      Sign in
-                    </button>
-                  </div>
-                  
+                  {!auth.user?.firstName? (
+                    <div className="flow-root">
+                      <button onClick={handleOpen} className="-m-2 block p-2 font-medium text-gray-900">
+                        Sign in
+                      </button>
+                    </div>
+                  ) :
+                  <div className="flow-root">{auth.user.firstName + " " + auth.user.lastName}</div>
+                  }
+
                 </div>
 
 
@@ -394,7 +423,7 @@ export default function Navbar() {
                                                     category,
                                                     section,
                                                     item,
-                                                    
+
                                                   )}
                                                   className="cursor-pointer hover:text-gray-800">
                                                   {item.name}
@@ -430,7 +459,7 @@ export default function Navbar() {
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   {
-                    false ? (
+                    auth.user?.firstName ? (
                       <div>
                         <Avatar
                           className='text-white'
@@ -444,7 +473,7 @@ export default function Navbar() {
                             cursor: "pointer",
                           }}
                         >
-                          H
+                          {auth.user?.firstName[0].toUpperCase()}
                         </Avatar>
                         <Menu
                           id="basic-menu"
@@ -458,10 +487,10 @@ export default function Navbar() {
                           <MenuItem onClick={handleCloseUserMenu}>
                             Profile
                           </MenuItem>
-                          <MenuItem onClick={()=>navigate("/account/order")}>
+                          <MenuItem onClick={() => navigate("/account/order")}>
                             My Orders
                           </MenuItem>
-                          <MenuItem onClick={handleCloseUserMenu}>
+                          <MenuItem onClick={handleLogout}>
                             Logout
                           </MenuItem>
                         </Menu>
@@ -500,7 +529,7 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
-      <AuthModal handleClose={handleClose} open={openAuthModal}/>
+      <AuthModal handleClose={handleClose} open={openAuthModal} />
     </div>
   )
 }

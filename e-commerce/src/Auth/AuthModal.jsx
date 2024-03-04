@@ -33,7 +33,7 @@ const AuthModal = ({handleClose,open}) => {
                         ...style,
                         '@media (max-width: 1024px)': {
                             width: '90%',
-                            height:'100%', // Adjust the width for large devices
+                            height:'100%', 
                         },
                     }}>
                     {location.pathname==="/login"?<Login/>:<Register/>}

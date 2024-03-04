@@ -11,7 +11,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import sitelogo from "../Assets/trendsphere-high-resolution-logo-transparent.png";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getUserProfile, signup } from '../Redux/Auth/Action';
+import { useEffect } from 'react';
 
 
 
@@ -19,19 +21,30 @@ const defaultTheme = createTheme();
 
 export default function Register() {
 
-    const navigate=useNavigate();
+    const jwt = localStorage.getItem("jwt");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {auth}=useSelector(store=>store)
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const userData={
-            firstName:data.get("firstName"),
-            lastname:data.get("lastName"),
-            email:data.get("email"),
-            password:data.get("password"),
+        const userData = {
+            firstName: data.get("firstName"),
+            lastName: data.get("lastName"),
+            email: data.get("email"),
+            password: data.get("password"),
 
         }
-        console.log("userdata",userData)
+        dispatch(signup(userData));
+        console.log("userdata", userData)
     };
+
+    useEffect(() => {
+        if (jwt) {
+            dispatch(getUserProfile(jwt))
+        }
+    }, [jwt, auth.jwt])
+
 
     return (
         <div className='mb-[4rem]'>
@@ -46,7 +59,7 @@ export default function Register() {
                             alignItems: 'center',
                         }}
                     >
-                         <div className='mb-4'>
+                        <div className='mb-4'>
                             <img className='h-[4rem] ' src={sitelogo} alt="" />
                         </div>
                         <Typography component="h1" variant="h5">
@@ -114,7 +127,7 @@ export default function Register() {
                             <Grid container justifyContent="flex-end">
                                 <Grid item>
                                     <p className='text-sm text-blue-600'>
-                                        Already have an account? <button className='cursor-pointer hover:underline' onClick={()=>navigate("/login")}>Sign in</button>
+                                        Already have an account? <button className='cursor-pointer hover:underline' onClick={() => navigate("/login")}>Sign in</button>
                                     </p>
                                 </Grid>
                             </Grid>
