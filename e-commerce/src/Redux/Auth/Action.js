@@ -8,8 +8,8 @@ export const signup = (userData) => async (dispatch) => {
     dispatch({ type: SIGNUP_REQUEST })
     try {
         const { data } = await axios.post(`${API_BASE_URL}/auth/register`, userData)
-        if (data.jwt) {
-            localStorage.setItem("jwt", data.jwt)
+        if (data.token) {
+            localStorage.setItem("jwt", data.token)
         }
         console.log("register success", data)
         dispatch({ type: SIGNUP_SUCCESS, payload: data.jwt })
@@ -23,8 +23,8 @@ export const login = (userData) => async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST })
     try {
         const { data } = await axios.post(`${API_BASE_URL}/auth/login`, userData)
-        if (data.jwt) {
-            localStorage.setItem("jwt", data.jwt)
+        if (data.token) {
+            localStorage.setItem("jwt", data.token)
         }
         console.log("login success", data)
         dispatch({ type: LOGIN_SUCCESS, payload: data })
