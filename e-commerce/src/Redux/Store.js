@@ -3,6 +3,8 @@ import {thunk} from "redux-thunk";
 import { authReducer } from "./Auth/Reducer";
 import { productReducer } from "./Product/Reducer";
 import { cartReducer } from "./Cart/Reducer";
+import {orderReducer} from "./Order/Reducer"
+
 
 const rootReducer=combineReducers({
     auth:authReducer,

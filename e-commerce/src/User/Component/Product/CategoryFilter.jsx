@@ -1,5 +1,5 @@
 
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
@@ -8,7 +8,9 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import {useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { products } from '../../../Redux/Product/Action'
 
 const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
@@ -86,36 +88,72 @@ function classNames(...classes) {
 
 export default function CategoryFilter() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const location=useLocation();
-  const navigate=useNavigate();
-  const handleFilter=(sectionId,value)=>{
-      const searchParams=new URLSearchParams(location.search)
-      let filterValue=searchParams.getAll(sectionId)
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch=useDispatch();
+  const param = useParams();
+  const decodedQueryString = decodeURIComponent(location.search)
+  const searchParams = new URLSearchParams(decodedQueryString)
+  const colorValue = searchParams.get("color");
+  const sizeValue = searchParams.get("size");
+  const priceValue = searchParams.get("price");
+  const discount = searchParams.get("discount");
+  const sortValue = searchParams.get("sort");
+  const pageNumber = searchParams.get("page") || 1;
+  const stock = searchParams.get("stock");
 
-      if(filterValue.length>0 && filterValue[0].split(",").includes(value)){
-        filterValue=filterValue[0].split(",").filter((item)=>item!==value);
+  useEffect(() => {
+    const [minPrice, maxPrice] = priceValue === null ? [0, 0] : priceValue.split("-").map(Number);
+    const data={
+      category:param.levelThree,
+      color:colorValue || [],
+      size:sizeValue || [],
+      minPrice,
+      maxPrice,
+      minDiscount:discount || 0,
+      sort:sortValue || "price_low",
+      pageNumber : pageNumber-1,
+      pageSize:10,
+      stock:stock
+    }
+    dispatch(products(data));
+  }, [param.levelThree,
+    colorValue,
+    sizeValue,
+    priceValue,
+    discount,
+    sortValue,
+    pageNumber,
+    stock])
 
-        if(filterValue.length===0){
-          searchParams.delete(sectionId)
-        }
+  const handleFilter = (sectionId, value) => {
+    const searchParams = new URLSearchParams(location.search)
+    let filterValue = searchParams.getAll(sectionId)
 
+    if (filterValue.length > 0 && filterValue[0].split(",").includes(value)) {
+      filterValue = filterValue[0].split(",").filter((item) => item !== value);
+
+      if (filterValue.length === 0) {
+        searchParams.delete(sectionId)
       }
-      else{
-        filterValue.push(value)
-      }
-      if(filterValue.length>0){
-        searchParams.set(sectionId,filterValue.join(","))
-        
-      }
-      const query=searchParams.toString();
-        navigate({search:`?${query}`})
+
+    }
+    else {
+      filterValue.push(value)
+    }
+    if (filterValue.length > 0) {
+      searchParams.set(sectionId, filterValue.join(","))
+
+    }
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` })
   }
 
-  const handleSingleFilter=(e,sectionId)=>{
-    const searchParams=new URLSearchParams(location.search)
-    searchParams.set(sectionId,e.target.value)
-    const query=searchParams.toString();
-        navigate({search:`?${query}`})
+  const handleSingleFilter = (e, sectionId) => {
+    const searchParams = new URLSearchParams(location.search)
+    searchParams.set(sectionId, e.target.value)
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` })
   }
 
   return (
@@ -184,7 +222,7 @@ export default function CategoryFilter() {
                                 {section.options.map((option, optionIdx) => (
                                   <div key={option.value} className="flex items-center">
                                     <input
-                                    onChange={()=>handleFilter(option.value,section.id)}
+                                      onChange={() => handleFilter(option.value, section.id)}
                                       id={`filter-mobile-${section.id}-${optionIdx}`}
                                       name={`${section.id}[]`}
                                       defaultValue={option.value}
@@ -231,7 +269,7 @@ export default function CategoryFilter() {
                                     name="radio-buttons-group"
                                   >
                                     {section.options.map((option, optionIdx) => (
-                                      <FormControlLabel onChange={(e)=>handleSingleFilter(e,section.id)} value={option.value} control={<Radio />} label={option.label} />
+                                      <FormControlLabel onChange={(e) => handleSingleFilter(e, section.id)} value={option.value} control={<Radio />} label={option.label} />
 
 
                                     ))}
@@ -344,7 +382,7 @@ export default function CategoryFilter() {
                               {section.options.map((option, optionIdx) => (
                                 <div key={option.value} className="flex items-center">
                                   <input
-                                  onChange={()=>handleFilter(option.value,section.id)}
+                                    onChange={() => handleFilter(option.value, section.id)}
                                     id={`filter-${section.id}-${optionIdx}`}
                                     name={`${section.id}[]`}
                                     defaultValue={option.value}
@@ -391,7 +429,7 @@ export default function CategoryFilter() {
                                   name="radio-buttons-group"
                                 >
                                   {section.options.map((option, optionIdx) => (
-                                    <FormControlLabel onChange={(e)=>handleSingleFilter(e,section.id)} value={option.value} control={<Radio />} label={option.label} />
+                                    <FormControlLabel onChange={(e) => handleSingleFilter(e, section.id)} value={option.value} control={<Radio />} label={option.label} />
                                   ))}
                                 </RadioGroup>
                               </FormControl>

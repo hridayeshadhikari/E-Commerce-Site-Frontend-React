@@ -14,14 +14,15 @@ export const findById = (productId) => async (dispatch) => {
     }
 }
 
-export const products = (reqData) => (dispatch) => {
+export const products = (reqData) =>async (dispatch) => {
     const { color, price, size, minPrice, maxPrice, minDiscount, maxDiscount, stock, category, sort, pageNumber, pageSize } = reqData
     dispatch({ type: FIND_PRODUCT_BY_CAREGORY_REQUEST })
     try {
-        const { data } = api.get(`/api/products/color=${color}&price=${price}&size=${size}
+        const { data } =await api.get(`/api/products?color=${color}&price=${price}&size=${size}
       &minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}
-      &maxDiscount=${maxDiscount}&stock=${stock}&
+      &maxDiscount=${maxDiscount}&stock=${stock}&category=${category}&
       sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
+      console.log("product-----",data)
         dispatch({type:FIND_PRODUCT_BY_CATEGORY_SUCCESS,payload:data})
     } catch (error) {
         dispatch({type:FIND_PRODUCT_BY_CATEGORY_FAILURE,payload:error.message})

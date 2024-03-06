@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import companyLogo from '../../../Assets/trendsphere-high-resolution-logo-transparent.png'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Avatar, Button, Menu, MenuItem } from '@mui/material'
 import AuthModal from '../../../Auth/AuthModal'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,8 +12,8 @@ import { getUserProfile, logout } from '../../../Redux/Auth/Action'
 const navigation = {
   categories: [
     {
-      id: 'men',
-      name: 'Men',
+      id: 'mens',
+      name: 'Mens',
       featured: [
         {
           name: 'New Arrivals',
@@ -34,13 +34,13 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
+            { name: 'Shirt',id:"shirt", href: '#' },
+            { name: 'Pants',id:"pant", href: '#' },
+            { name: 'Sweaters',id:"sweatshirt", href: '#' },
+            { name: 'T-Shirts',id:"tshirts", href: '#' },
+            { name: 'Jackets',id:"jackets", href: '#' },
+            { name: 'Activewear',id:"activewear", href: '#' },
+            { name: 'Browse All',id:"all", href: '#' },
           ],
         },
         {
@@ -104,23 +104,23 @@ const navigation = {
           id: 'accessories',
           name: 'Accessories',
           items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
+            { name: 'Watches', id:"women_watch",href: '{women/clothing/watches}' },
+            { name: 'Wallets', id:"women_wallet"},
+            { name: 'Bags', id:"bag" },
+            { name: 'Sunglasses', id:"women_sunglasses"},
+            { name: 'Hats', id:"women_hat"},
+            { name: 'Belts', id:"women_belt"},
           ],
         },
         {
           id: 'brands',
           name: 'Brands',
           items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' },
+            { name: 'Full Nelson', id: '#' },
+            { name: 'My Way', id: '#' },
+            { name: 'Re-Arranged', id: '#' },
+            { name: 'Counterfeit', id: '#' },
+            { name: 'Significant Other', id: '#' },
           ],
         },
       ],
@@ -128,8 +128,8 @@ const navigation = {
 
   ],
   pages: [
-    { name: 'Company', href: '#' },
-    { name: 'Stores', href: '#' },
+    { name: 'Company', id: '/' },
+    { name: 'Stores', id: '/' },
   ],
 }
 
@@ -161,8 +161,8 @@ export default function Navbar() {
   const handleClose = () => {
     setOpenAuthModal(false);
   };
-  const handleCategoryClick = (category, section, item, close) => {
-    navigate(`/${category.id}/${section.id}/${item.id}`);
+  const handleCategoryClick = (category, section, items, close) => {
+    navigate(`/${category.id}/${section.id}/${items.id}`);
     close();
   };
 
