@@ -9,8 +9,9 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
-import { products } from '../../../Redux/Product/Action'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProducts } from '../../../Redux/Product/Action'
+import { Pagination } from '@mui/material'
 
 const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
@@ -80,7 +81,7 @@ const singleFilter = [{
 },
 ]
 
-const items = [1, 1, 1, 1, 1, 1, 1].map((item) => <DefaultProductCard />);
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -90,43 +91,57 @@ export default function CategoryFilter() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const param = useParams();
-  const decodedQueryString = decodeURIComponent(location.search)
-  const searchParams = new URLSearchParams(decodedQueryString)
+  const {product}=useSelector(store=>store)
+
+
+  const decodedQueryString = decodeURIComponent(location.search);
+  const searchParams = new URLSearchParams(decodedQueryString);
   const colorValue = searchParams.get("color");
   const sizeValue = searchParams.get("size");
-  const priceValue = searchParams.get("price");
+  const price = searchParams.get("price");
   const discount = searchParams.get("discount");
   const sortValue = searchParams.get("sort");
   const pageNumber = searchParams.get("page") || 1;
   const stock = searchParams.get("stock");
 
+  const handlePaginationChange = (event, value) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("page", value);
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+  };
+  
   useEffect(() => {
-    const [minPrice, maxPrice] = priceValue === null ? [0, 0] : priceValue.split("-").map(Number);
-    const data={
-      category:param.levelThree,
-      color:colorValue || [],
-      size:sizeValue || [],
+    const [minPrice, maxPrice] =
+      price === null ? [0, 10000] : price.split("-").map(Number);
+    const data = {
+      category: param.levelThree,
+      colors: colorValue || [],
+      sizes: sizeValue || [],
       minPrice,
       maxPrice,
-      minDiscount:discount || 0,
-      sort:sortValue || "price_low",
-      pageNumber : pageNumber-1,
-      pageSize:10,
-      stock:stock
-    }
-    dispatch(products(data));
-  }, [param.levelThree,
+      minDiscount: discount || 0,
+      sort: sortValue || "price_low",
+      pageNumber: pageNumber - 1,
+      pageSize: 1,
+      stock: stock,
+    };
+    dispatch(getProducts(data));
+  }, [
+    param.levelThree,
     colorValue,
     sizeValue,
-    priceValue,
+    price,
     discount,
     sortValue,
     pageNumber,
-    stock])
+    stock,
+  ]);
 
-  const handleFilter = (sectionId, value) => {
+
+  const handleFilter = (value,sectionId) => {
     const searchParams = new URLSearchParams(location.search)
     let filterValue = searchParams.getAll(sectionId)
 
@@ -446,10 +461,20 @@ export default function CategoryFilter() {
 
               {/* Product grid */}
               <div className="lg:col-span-4 w-full ">
-                <div className='flex flex-wrap justify-center bg-white'>{items}
+                <div className='flex flex-wrap justify-center bg-white'>
+                  {
+                    product.products && product.products?.content?.map((item)=>(
+                      <DefaultProductCard product={item}/>
+                    ))
+                  }
                 </div>
               </div>
 
+            </div>
+          </section>
+          <section className='w-full px-[3rem]'>
+            <div className='px-4 py-5 flex justify-center'>
+                <Pagination count={product.products?.totalPages} onChange={handlePaginationChange} color='primary'/>
             </div>
           </section>
         </main>

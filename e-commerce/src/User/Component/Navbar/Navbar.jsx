@@ -320,9 +320,7 @@ export default function Navbar() {
       </Transition.Root>
 
       <header className="relative bg-white">
-        <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-          Get free delivery on orders over ₹500
-        </p>
+        
 
         <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="border-b border-gray-200">
@@ -354,7 +352,7 @@ export default function Navbar() {
                 <div className="flex h-full space-x-8">
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
-                      {({ open }) => (
+                      {({ open ,close}) => (
                         <>
                           <div className="relative flex">
                             <Popover.Button
@@ -423,7 +421,7 @@ export default function Navbar() {
                                                     category,
                                                     section,
                                                     item,
-
+                                                    close
                                                   )}
                                                   className="cursor-pointer hover:text-gray-800">
                                                   {item.name}
@@ -476,6 +474,7 @@ export default function Navbar() {
                           {auth.user?.firstName[0].toUpperCase()}
                         </Avatar>
                         <Menu
+                        sx={{marginTop:".5rem"}}
                           id="basic-menu"
                           anchorEl={anchorE1}
                           open={openUserMenu}
