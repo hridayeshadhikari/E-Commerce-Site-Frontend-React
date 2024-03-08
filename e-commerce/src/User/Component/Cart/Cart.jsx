@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CartItem from './CartItem'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { usersCart } from '../../../Redux/Cart/Action';
 
 const Cart = () => {
     const navigate=useNavigate();
+    const {cart}=useSelector(store=>store)
+    const dispatch=useDispatch();
     const handleCheckout=()=>{
         navigate("/checkout?step=2")
     }
+
+    useEffect(()=>{
+        dispatch(usersCart);
+    },[])
+
+
 
     return (
         <div>
@@ -35,7 +45,7 @@ const Cart = () => {
                             <hr />
                             <div className='flex justify-between pt-3 text-black '>
                                 <span className='font-bold'>Total Price</span>
-                                <span>₹5999</span>
+                                <span>{cart.cart?.totalDiscountedPrice}</span>
                             </div>
                         </div>
                         

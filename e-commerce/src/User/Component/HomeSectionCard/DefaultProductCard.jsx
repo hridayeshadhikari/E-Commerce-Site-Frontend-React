@@ -3,10 +3,10 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import { useNavigate } from 'react-router-dom';
 
-export default function DefaultProductCard() {
+export default function DefaultProductCard({product}) {
   const navigate=useNavigate();
   return (
-    <div onClick={()=>navigate(`/product/${1}`)}>
+    <div onClick={()=>navigate(`/product/${product.productId}`)}>
     <Card sx={{ maxWidth: 345 }} className="cursor-pointer mt-5 items-center mx-3 flex h-[20rem] w-[15rem] flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
       
       <CardMedia className="relative mx-3 mt-3 flex h-[17rem] w-[13rem] overflow-hidden rounded-xl" >

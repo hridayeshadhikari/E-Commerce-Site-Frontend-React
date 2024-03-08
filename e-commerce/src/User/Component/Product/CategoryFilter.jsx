@@ -93,7 +93,7 @@ export default function CategoryFilter() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const param = useParams();
-  const {product}=useSelector(store=>store)
+  const { product } = useSelector(store => store)
 
 
   const decodedQueryString = decodeURIComponent(location.search);
@@ -112,7 +112,7 @@ export default function CategoryFilter() {
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
-  
+
   useEffect(() => {
     const [minPrice, maxPrice] =
       price === null ? [0, 10000] : price.split("-").map(Number);
@@ -141,7 +141,7 @@ export default function CategoryFilter() {
   ]);
 
 
-  const handleFilter = (value,sectionId) => {
+  const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search)
     let filterValue = searchParams.getAll(sectionId)
 
@@ -462,11 +462,9 @@ export default function CategoryFilter() {
               {/* Product grid */}
               <div className="lg:col-span-4 w-full ">
                 <div className='flex flex-wrap justify-center bg-white'>
-                  {
-                    product.products && product.products?.content?.map((item)=>(
-                      <DefaultProductCard product={item}/>
-                    ))
-                  }
+                  {product?.products?.content?.map((item) => (
+                    <DefaultProductCard product={item} />
+                  ))}
                 </div>
               </div>
 
@@ -474,7 +472,7 @@ export default function CategoryFilter() {
           </section>
           <section className='w-full px-[3rem]'>
             <div className='px-4 py-5 flex justify-center'>
-                <Pagination count={product.products?.totalPages} onChange={handlePaginationChange} color='primary'/>
+              <Pagination count={product.products?.totalPages} onChange={handlePaginationChange} color='primary' />
             </div>
           </section>
         </main>

@@ -1,12 +1,15 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Rating from '@mui/material/Rating';
 import { Grid } from '@mui/material';
 import ProductReviewCard from './ProductReviewCard';
 import DefaultProductCard from '../HomeSectionCard/DefaultProductCard'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { findById } from '../../../Redux/Product/Action';
+import { addToCart } from '../../../Redux/Cart/Action';
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -65,11 +68,21 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0])
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+  const [selectedColor, setSelectedColor] = useState()
+  const [selectedSize, setSelectedSize] = useState("")
   const navigate=useNavigate();
+  const params=useParams();
+  const dispatch=useDispatch();
+  const {products}=useSelector(store=>store);
+
+  useEffect(()=>{
+    const data={productId:params.productId}
+    dispatch(findById(data))
+  },[params.productId])
 
   const handleAddToCart=()=>{ 
+    const data={productId:params.productId,size:selectedSize.name}
+    dispatch(addToCart(data))
     navigate('/cart')
   }
 
@@ -99,7 +112,7 @@ export default function Example() {
             ))}
             <li className="text-sm">
               <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                {product.name}
+                {products.product?.title}
               </a>
             </li>
           </ol>
@@ -109,7 +122,7 @@ export default function Example() {
           <div className="flex flex-col items-center">
             <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
               <img
-                src={product.images[0].src}
+                src={products.product?.imageUrl}
                 alt={product.images[0].alt}
                 className="h-full w-full object-cover object-center"
               />
@@ -132,7 +145,7 @@ export default function Example() {
           {/* Product info */}
           <div className="col-span-1 px-4 pb-15 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24 max-w-2xl" >
             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
+              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{products.product?.title}</h1>
             </div>
 
             {/* Options */}
@@ -140,9 +153,9 @@ export default function Example() {
               <h2 className="sr-only">Product information</h2>
               <div className="mt-2 mb-1 flex items-center justify-between">
                 <p>
-                  <span className="text-2xl font-semibold text-slate-900">₹449</span>
-                  <span className="text-lg text-gray-500 p-1 line-through">₹699</span>
-                  <span className="text-lg text-green-500 p-1 ">50% Off</span>
+                  <span className="text-2xl font-semibold text-slate-900">₹{products.product?.discountedPrice}</span>
+                  <span className="text-lg text-gray-500 p-1 line-through">₹{products.product?.price}</span>
+                  <span className="text-lg text-green-500 p-1 ">{products.product?.discountedPercent}Off</span>
                 </p>
 
               </div>
@@ -151,8 +164,8 @@ export default function Example() {
               <div className="mt-6">
                 <div className='flex items-center space-x-5'>
                   <Rating name="read-only" value={4.1} readOnly />
-                  <p className='opacity-50 text-sm'>2323 ratings</p>
-                  <p className='text-sm text-indigo-600 hover:text-indigo-500'>233 reviews</p>
+                  <p className='opacity-50 text-sm'>{products.product?.rating}</p>
+                  <p className='text-sm text-indigo-600 hover:text-indigo-500'>{products.product?.review}</p>
                 </div>
               </div>
 
@@ -270,7 +283,7 @@ export default function Example() {
                 <h3 className="sr-only">Description</h3>
 
                 <div className="space-y-6">
-                  <p className="text-base text-gray-900">{product.description}</p>
+                  <p className="text-base text-gray-900">{products.product?.description}</p>
                 </div>
               </div>
 

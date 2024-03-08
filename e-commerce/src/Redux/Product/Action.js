@@ -2,11 +2,11 @@
 import api from "../../Config/ApiConfig";
 import { FIND_PRODUCT_BY_CATEGORY_REQUEST, FIND_PRODUCT_BY_CATEGORY_FAILURE, FIND_PRODUCT_BY_CATEGORY_SUCCESS, FIND_PRODUCT_BY_ID_FAILURE, FIND_PRODUCT_BY_ID_REQUEST, FIND_PRODUCT_BY_ID_SUCCESS } from "./ActionType"
 
-export const findById = (productId) => async (dispatch) => {
+export const findById = (reqData) => async (dispatch) => {
   dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST })
-  const { id } = productId;
+  const {productId}=reqData
   try {
-    const { data } = await api.get(`/api/product/${id}`)
+    const { data } = await api.get(`/api/product/${productId}`)
     console.log("product----", data)
     dispatch({ type: FIND_PRODUCT_BY_ID_SUCCESS, payload: data })
   } catch (error) {
