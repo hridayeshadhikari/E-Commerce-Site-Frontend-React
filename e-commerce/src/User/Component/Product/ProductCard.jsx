@@ -82,6 +82,7 @@ export default function Example() {
 
   const handleAddToCart=()=>{ 
     const data={productId:params.productId,size:selectedSize.name}
+    console.log("data----",data)
     dispatch(addToCart(data))
     navigate('/cart')
   }

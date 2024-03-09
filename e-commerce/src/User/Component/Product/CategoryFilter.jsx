@@ -93,7 +93,7 @@ export default function CategoryFilter() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const param = useParams();
-  const { product } = useSelector(store => store)
+  const { products } = useSelector(store => store)
 
 
   const decodedQueryString = decodeURIComponent(location.search);
@@ -462,7 +462,7 @@ export default function CategoryFilter() {
               {/* Product grid */}
               <div className="lg:col-span-4 w-full ">
                 <div className='flex flex-wrap justify-center bg-white'>
-                  {product?.products?.content?.map((item) => (
+                  {products?.products?.content?.map((item) => (
                     <DefaultProductCard product={item} />
                   ))}
                 </div>
@@ -472,7 +472,7 @@ export default function CategoryFilter() {
           </section>
           <section className='w-full px-[3rem]'>
             <div className='px-4 py-5 flex justify-center'>
-              <Pagination count={product.products?.totalPages} onChange={handlePaginationChange} color='primary' />
+              <Pagination count={products.products?.totalPages} onChange={handlePaginationChange} color='primary' />
             </div>
           </section>
         </main>

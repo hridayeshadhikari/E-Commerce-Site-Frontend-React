@@ -1,0 +1,137 @@
+[33mcommit 478c9c07dc1a97f7be5f51c6454e455dbb29af0c[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Fri Mar 8 22:34:27 2024 +0530
+
+    api integration for product details
+
+[33mcommit 9bc1325df196d4c91fc5a6bff0470645dc15fdfb[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Thu Mar 7 19:46:30 2024 +0530
+
+    added filtering products functionality
+
+[33mcommit 5c043fafe90c5f2dbe55945f6b4d6cc7e0011910[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Wed Mar 6 23:15:21 2024 +0530
+
+    product api integration starts
+
+[33mcommit 646f3f3321997e9ddb9d22e9f7538a5c67c3d326[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Tue Mar 5 20:17:07 2024 +0530
+
+    order redux store
+
+[33mcommit 3acf4678c29123504c822ab7d01d054d7e8dd84d[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Mon Mar 4 23:48:37 2024 +0530
+
+    cart redux store
+
+[33mcommit a21602f957013a7750eff67210d8303da64579f9[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Mon Mar 4 22:24:19 2024 +0530
+
+    product redux store
+
+[33mcommit cdc5bfd97d1c77e677302d837ac8dee9b1c2a079[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Mon Mar 4 17:46:49 2024 +0530
+
+    user api integration
+
+[33mcommit 4c418ac2bb3a28872d3f4e725b23d47f30e7a459[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Sun Mar 3 20:11:49 2024 +0530
+
+    login register modal
+
+[33mcommit f80c0b6829a250767644c8eb843cf257423c9a90[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Sun Mar 3 13:56:49 2024 +0530
+
+    router setup
+
+[33mcommit dcb86f9b36c58130ec5e5be74cd1a2df74290593[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Sun Mar 3 10:26:41 2024 +0530
+
+    order and order detatil page
+
+[33mcommit a40cca4fe76783bfdf0d028937d5deba1ac7bcd2[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Sat Mar 2 17:49:36 2024 +0530
+
+    Address detail page complete
+
+[33mcommit 4083caa80e612e3561d52872fbd48aa9489a5586[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Sat Mar 2 17:15:36 2024 +0530
+
+    Address detail page complete
+
+[33mcommit 41015324ac65601e6edd6166375e40cd812956de[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Sat Mar 2 17:15:18 2024 +0530
+
+    Address detail page
+
+[33mcommit 0727d410afe2d59f750a0511e6f99aeee3201840[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Sat Mar 2 11:51:03 2024 +0530
+
+    cart page designed
+
+[33mcommit 4e0ff1bb5aaac0065db92ddf4c0295ffd4ea2631[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Sat Mar 2 11:02:16 2024 +0530
+
+    cart item section designed
+
+[33mcommit d7f5386cf1b9ebea176992f511f874963edfc7a9[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Sat Mar 2 10:00:50 2024 +0530
+
+    product detail page design completed
+
+[33mcommit 9af0432e62f56143fbc42cd86e7463ec38f571ea[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Fri Mar 1 22:10:54 2024 +0530
+
+    product detail page design
+
+[33mcommit 9516ba3a64a2a3d382798d9e42adbb870bf69a6c[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Thu Feb 29 23:11:32 2024 +0530
+
+    query parameter functions
+
+[33mcommit 80621661de56cb4e7b2fbd3bcd2f0480da2fd1a9[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Thu Feb 29 21:50:21 2024 +0530
+
+    product filter page designed
+
+[33mcommit bc1d8ed55682027810ea38bcd808b540e237fa4a[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Wed Feb 28 15:55:00 2024 +0530
+
+    footer pages and routes
+
+[33mcommit f52d6df66ab34c48d3352387f9972d2aeccc0c39[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Wed Feb 28 12:54:36 2024 +0530
+
+    footer
+
+[33mcommit 7fa8c19f4d04ea26ed41d7ccd0c0f5df6ddd4bc9[m
+Author: Hridayesh Adhikari <harshitadhikari99@gmail.com>
+Date:   Tue Feb 27 22:51:29 2024 +0530
+
+    navigation bar and home page crousel
+
+[33mcommit 55cd5f22657e8b31923154f8c6839de779368aca[m[33m ([m[1;32mtmp[m[33m)[m
+Author: Hridayesh Adhikari <140496685+hridayeshadhikari@users.noreply.github.com>
+Date:   Mon Feb 26 19:33:35 2024 +0530
+
+    Initial commit

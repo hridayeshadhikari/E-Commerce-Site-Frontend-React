@@ -13,8 +13,8 @@ const Cart = () => {
     }
 
     useEffect(()=>{
-        dispatch(usersCart);
-    },[])
+        dispatch(usersCart());
+    },[cart.updateCartItem,cart.deleteCartItem])
 
 
 
@@ -22,7 +22,7 @@ const Cart = () => {
         <div>
             <div className='lg:grid grid-cols-3 lg:px-16 relative pt-3'>
                 <div className='col-span-2'>
-                    <CartItem />
+                    {cart.cart?.cartItems.map((item)=><CartItem item={item}/>)}
                 </div>
 
                 <div className='px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0'>
@@ -32,7 +32,7 @@ const Cart = () => {
                         <div className='space-y-3 font-semibold p-3'>
                             <div className='flex justify-between pt-3 text-black'>
                                 <span>Price</span>
-                                <span>₹599</span>
+                                <span>₹{cart.cart?.totalPrice}</span>
                             </div>
                             <div className='flex justify-between pt-3 text-black'>
                                 <span>Delivery</span>
@@ -40,12 +40,12 @@ const Cart = () => {
                             </div>
                             <div className='flex justify-between pt-3 text-black'>
                                 <span>Discount</span>
-                                <span className='text-green-600'>-₹5999</span>
+                                <span className='text-green-600'>-₹{cart.cart?.discount}</span>
                             </div>
                             <hr />
                             <div className='flex justify-between pt-3 text-black '>
                                 <span className='font-bold'>Total Price</span>
-                                <span>{cart.cart?.totalDiscountedPrice}</span>
+                                <span>{cart.cart?.discountPrice}</span>
                             </div>
                         </div>
                         
