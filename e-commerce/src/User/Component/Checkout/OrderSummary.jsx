@@ -1,45 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AddressCard from '../AddressCard/AddressCard'
+import { useDispatch, useSelector } from 'react-redux'
+import { getOrderById } from '../../../Redux/Order/Action';
+import { useLocation } from 'react-router-dom';
+import CheckoutOrderItems from './CheckoutOrderItems';
 
 const OrderSummary = () => {
+  const dispatch = useDispatch();
+  const { order } = useSelector(store => store)
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search)
+  const orderId = searchParams.get("order_id")
+
+  useEffect(() => {
+    dispatch(getOrderById(orderId))
+  }, [orderId])
+
   return (
     <div>
-      <div className='p-5 shadow-lg rounded-s-md border mb-3 '>
-        <AddressCard />
+      <div className='p-5 shadow-lg rounded-s-md border mb-3 mr-5'>
+        <AddressCard address={order.order?.shippingAddress} />
       </div>
       <div>
-        <div className='lg:grid grid-cols-3 lg:px-16 relative pt-3'>
-          <div className='col-span-2'>
-            <div className='p-3 shadow-lg border rounded-md'>
-              <div className='flex items-center'>
-                <div className='h-[7rem] w-[6rem] lg:h-[8rem] lg:w-[8rem] mb-3'>
-                  <img className='w-full h-full object-cover object-top'
-                    src="https://img3.junaroad.com/uiproducts/20397167/zoom_0-1696990448.jpg" alt="" />
-                </div>
-                <div className='ml-5'>
-                  <p className='font-semibold'>Mens shooes</p>
-                  <p className='opacity-70'>Size M, Black</p>
-                  <p className='opacity-70'>Seller:Harry</p>
-                  <div className=" items-center justify-between">
-                    <p>
-                      <span className="text-lg font-semibold text-slate-900">₹449</span>
-                      <span className="text-md text-gray-500 p-2 line-through">₹699</span>
-                      <span className="text-md text-green-500 p-2 ">50% Off</span>
-                      <p className="text-md text-gray-500">quantity : 2</p>
-                    </p>
-
-
-
-
-                  </div>
-                </div>
-
-              </div>
-
-
+        <div className='lg:grid grid-cols-3 lg:px-0 relative pt-3'>
+          <div className="lg:col-span-2 ">
+            <div className=" space-y-3">
+              {order.order?.orderItems.map((item) => (
+                <>
+                  <CheckoutOrderItems item={item} showButton={false} />
+                </>
+              ))}
             </div>
           </div>
-
           <div className='px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0'>
             <div className="border">
               <p className='p-3'>Price Details</p>
@@ -47,7 +39,7 @@ const OrderSummary = () => {
               <div className='space-y-3 font-semibold p-3'>
                 <div className='flex justify-between pt-3 text-black'>
                   <span>Price</span>
-                  <span>₹599</span>
+                  <span>₹{order.order?.price}</span>
                 </div>
                 <div className='flex justify-between pt-3 text-black'>
                   <span>Delivery</span>
@@ -55,17 +47,26 @@ const OrderSummary = () => {
                 </div>
                 <div className='flex justify-between pt-3 text-black'>
                   <span>Discount</span>
-                  <span className='text-green-600'>-₹5999</span>
+                  <span className='text-green-600'>-₹{order.order?.discount}</span>
                 </div>
                 <hr />
                 <div className='flex justify-between pt-3 text-black '>
                   <span className='font-bold'>Total Price</span>
-                  <span>₹5999</span>
+                  <span>₹{order.order?.discountPrice}</span>
                 </div>
+
               </div>
 
             </div>
+            <div> <button
 
+              type="submit"
+              className="mt-2 flex w-full items-center justify-center rounded-md border border-transparent
+                         bg-lime-600 px-8 py-3 text-base text-white
+                          hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 font-semibold"
+            >
+              Payment
+            </button></div>
           </div>
         </div>
       </div>
