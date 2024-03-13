@@ -15,7 +15,6 @@ const responsive = {
 const items = [1, 1, 1, 1, 1, 1, 1].map((item) => <DefaultProductCard />);
 
 const ProductCarousel = ({sectionName}) => {
-    
     const [activeIndex, setActiveIndex] = useState(0); // State to hold the active index
 
     const handlePrevClick = () => {
@@ -31,7 +30,7 @@ const ProductCarousel = ({sectionName}) => {
     let carousel = null;
 
     return (
-        <div className=' px-4 lg:px-8 mt-5 mb-5' >
+        <div className=' px-4 lg:px-8 mt-5' >
             <h2 className='text-2xl font-extrabold text-gray-800'>{sectionName}</h2>
             <div className='relative '>
                 <AliceCarousel

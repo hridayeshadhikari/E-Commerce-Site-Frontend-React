@@ -125,7 +125,7 @@ export default function CategoryFilter() {
       minDiscount: discount || 0,
       sort: sortValue || "price_low",
       pageNumber: pageNumber - 1,
-      pageSize: 10,
+      pageSize: 1,
       stock: stock,
     };
     dispatch(getProducts(data));

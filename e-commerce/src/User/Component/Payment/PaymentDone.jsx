@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePayment } from "../../../Redux/Customers/Payment/Action";
 import { Alert, AlertTitle, Grid } from "@mui/material";
-import { getOrderById } from "../../../Redux/Customers/Order/Action";
 import OrderTracker from "../Order/OrderTracker";
 import AddressCard from "../AddressCard/AddressCard";
 import { useParams } from "react-router-dom";
+import { getOrderById } from "../../../Redux/Order/Action";
+import { updatePayment } from "../../../Redux/Payment/Action";
 
-const Payment = () => {
+const PaymentDone = () => {
   const [paymentId, setPaymentId] = useState();
   const [referenceId, setReferenceId] = useState();
   const [paymentStatus, setPaymentStatus] = useState();
   const {orderId}=useParams();
 
   const dispatch = useDispatch();
-  const { order } = useSelector((store) => store);
+  const { order } = useSelector(store=> store);
 
   useEffect(() => {
     console.log("orderId",orderId)
-    const urlParams = new URLSearchParams(window.location.search);
-    setPaymentId(urlParams.get("razorpay_payment_link_id"));
-    setReferenceId(urlParams.get("razorpay_payment_link_reference_id"));
-    setPaymentStatus(urlParams.get("razorpay_payment_link_status"));
+    const urlParam = new URLSearchParams(window.location.search);
+    setPaymentId(urlParam.get("razorpay_payment_id"));
+    setReferenceId(urlParam.get("razorpay_payment_link_reference_id"));
+    setPaymentStatus(urlParam.get("razorpay_payment_link_status"));
   }, []);
 
   useEffect(() => {
-    if (paymentId && paymentStatus === "paid") {
+    if(paymentId){
       const data = { orderId, paymentId};
       dispatch(getOrderById(orderId));
       dispatch(updatePayment(data));
@@ -69,7 +69,7 @@ const Payment = () => {
                     <span>Color: pink</span> <span>Size: {item.size}</span>
                   </p>
                   <p>Seller: {item.product.brand}</p>
-                  <p>₹{item.price}</p>
+                  <p>₹{item.discountedPrice}</p>
                 </div>
               </div>
             </Grid>
@@ -83,4 +83,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default PaymentDone;
