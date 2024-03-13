@@ -17,7 +17,7 @@ const OrderSummary = () => {
     dispatch(getOrderById(orderId))
   }, [orderId])
 
-  const handleCheckout=()=>{
+  const handlePayment=()=>{
     dispatch(createPayment(orderId));
   }
 
@@ -30,11 +30,10 @@ const OrderSummary = () => {
         <div className='lg:grid grid-cols-3 lg:px-0 relative pt-3'>
           <div className="lg:col-span-2 ">
             <div className=" space-y-3">
-              {order.order?.orderItems.map((item) => (
-                <>
-                  <CheckoutOrderItems item={item} showButton={false} />
-                </>
-              ))}
+            {order?.order?.orderItems &&
+                order.order.orderItems.map((item) => (
+                  <CheckoutOrderItems key={item.id} item={item} showButton={false} />
+                ))}
             </div>
           </div>
           <div className='px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0'>
@@ -64,7 +63,7 @@ const OrderSummary = () => {
 
             </div>
             <div> <button
-              onClick={handleCheckout}
+              onClick={handlePayment}
               type="submit"
               className="mt-2 flex w-full items-center justify-center rounded-md border border-transparent
                          bg-lime-600 px-8 py-3 text-base text-white

@@ -18,7 +18,7 @@ export const createPayment=(orderId)=>async(dispatch)=>{
 export const updatePayment=(reqData)=>async(dispatch)=>{
     dispatch({type:UPDATE_PAYMENT_REQUEST})
     try {
-        const {data}=await api.get(`/api/payments?payment_id=${reqData.orderId}&order_id=${reqData.orderId}`);
+        const {data}=await api.get(`/api/payments?payment_id=${reqData.paymentId}&order_id=${reqData.orderId}`);
         
     } catch (error) {
         dispatch({type:UPDATE_PAYMENT_FAILURE,payload:error.message})

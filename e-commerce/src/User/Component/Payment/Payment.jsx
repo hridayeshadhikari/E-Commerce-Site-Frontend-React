@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePayment } from "../../../Redux/Customers/Payment/Action";
 import { Alert, AlertTitle, Grid } from "@mui/material";
-import { getOrderById } from "../../../Redux/Customers/Order/Action";
+import { getOrderById } from "../../../Redux/Order/Action";
 import OrderTracker from "../Order/OrderTracker";
 import AddressCard from "../AddressCard/AddressCard";
 import { useParams } from "react-router-dom";
+import { updatePayment } from "../../../Redux/Payment/Action";
 
 const Payment = () => {
   const [paymentId, setPaymentId] = useState();
@@ -19,13 +19,13 @@ const Payment = () => {
   useEffect(() => {
     console.log("orderId",orderId)
     const urlParams = new URLSearchParams(window.location.search);
-    setPaymentId(urlParams.get("razorpay_payment_link_id"));
+    setPaymentId(urlParams.get("razorpay_payment_id"));
     setReferenceId(urlParams.get("razorpay_payment_link_reference_id"));
     setPaymentStatus(urlParams.get("razorpay_payment_link_status"));
   }, []);
 
   useEffect(() => {
-    if (paymentId && paymentStatus === "paid") {
+    if (paymentId) {
       const data = { orderId, paymentId};
       dispatch(getOrderById(orderId));
       dispatch(updatePayment(data));
@@ -64,12 +64,12 @@ const Payment = () => {
                   alt=""
                 />
                 <div className="ml-5 space-y-2">
-                  <p className="">{item.product.title}</p>
+                  <p className="">{item?.product?.title}</p>
                   <p className="opacity-50 text-xs font-semibold space-x-5">
-                    <span>Color: pink</span> <span>Size: {item.size}</span>
+                    <span>Color: {item?.product.color}</span> <span>Size: {item?.size}</span>
                   </p>
-                  <p>Seller: {item.product.brand}</p>
-                  <p>₹{item.price}</p>
+                  <p>Seller: {item.product?.brand}</p>
+                  <p>₹{item?.discountedPrice}</p>
                 </div>
               </div>
             </Grid>
