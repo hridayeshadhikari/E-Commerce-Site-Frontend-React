@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { updatePayment } from "../../../Redux/Customers/Payment/Action";
 import { Alert, AlertTitle, Grid } from "@mui/material";
+import { getOrderById } from "../../../Redux/Customers/Order/Action";
 <<<<<<< HEAD:e-commerce/src/User/Component/Payment/PaymentDone.jsx
 import OrderTracker from "../Order/OrderTracker";
 import AddressCard from "../AddressCard/AddressCard";
@@ -14,17 +16,21 @@ import { useParams } from "react-router-dom";
 >>>>>>> dev1:e-commerce/src/User/Component/Payment/Payment.jsx
 import { updatePayment } from "../../../Redux/Payment/Action";
 
-const PaymentDone = () => {
+const Payment = () => {
   const [paymentId, setPaymentId] = useState();
   const [referenceId, setReferenceId] = useState();
   const [paymentStatus, setPaymentStatus] = useState();
   const {orderId}=useParams();
 
   const dispatch = useDispatch();
-  const { order } = useSelector(store=> store);
+  const { order } = useSelector((store) => store);
 
   useEffect(() => {
     console.log("orderId",orderId)
+    const urlParams = new URLSearchParams(window.location.search);
+    setPaymentId(urlParams.get("razorpay_payment_link_id"));
+    setReferenceId(urlParams.get("razorpay_payment_link_reference_id"));
+    setPaymentStatus(urlParams.get("razorpay_payment_link_status"));
 <<<<<<< HEAD:e-commerce/src/User/Component/Payment/PaymentDone.jsx
     const urlParam = new URLSearchParams(window.location.search);
     setPaymentId(urlParam.get("razorpay_payment_id"));
@@ -33,6 +39,7 @@ const PaymentDone = () => {
   }, []);
 
   useEffect(() => {
+    if (paymentId && paymentStatus === "paid") {
     if(paymentId){
 =======
     const urlParams = new URLSearchParams(window.location.search);
@@ -88,6 +95,7 @@ const PaymentDone = () => {
                   </p>
 <<<<<<< HEAD:e-commerce/src/User/Component/Payment/PaymentDone.jsx
                   <p>Seller: {item.product.brand}</p>
+                  <p>₹{item.price}</p>
                   <p>₹{item.discountedPrice}</p>
 =======
                   <p>Seller: {item.product?.brand}</p>
@@ -106,4 +114,4 @@ const PaymentDone = () => {
   );
 };
 
-export default PaymentDone;
+export default Payment;

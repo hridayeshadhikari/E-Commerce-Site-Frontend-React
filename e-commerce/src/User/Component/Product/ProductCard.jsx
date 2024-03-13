@@ -86,6 +86,7 @@ export default function Example() {
     dispatch(addToCart(data))
     navigate('/cart')
   }
+  var result = Math.round(((products.product?.price - products.product?.discountedPrice) / products.product?.price) * 100);
 
   return (
     <div className="bg-white">
@@ -113,7 +114,7 @@ export default function Example() {
             ))}
             <li className="text-sm">
               <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                {products.product?.title}
+                {products?.product?.category?.name}
               </a>
             </li>
           </ol>
@@ -156,7 +157,7 @@ export default function Example() {
                 <p>
                   <span className="text-2xl font-semibold text-slate-900">₹{products.product?.discountedPrice}</span>
                   <span className="text-lg text-gray-500 p-1 line-through">₹{products.product?.price}</span>
-                  <span className="text-lg text-green-500 p-1 ">{products.product?.discountedPercent}Off</span>
+                  <span className="text-lg text-green-500 p-1 ">{result}% Off</span>
                 </p>
 
               </div>
@@ -326,16 +327,6 @@ export default function Example() {
           </Grid>
           </div>
         </section>
-        <section className='pt-10'>
-          <h1 className='ml-4 font-bold text-xl'>Similar Products</h1>
-          <div className='flex flex-wrap space-y-5 pb-5'>
-              {
-                [1,1,1,1,1,1,1,1,1,1,1,1,1].map(()=><DefaultProductCard/>)
-              }
-          </div>
-
-        </section>
-
       </div>
     </div>
 

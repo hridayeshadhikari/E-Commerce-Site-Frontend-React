@@ -8,6 +8,7 @@ import { Avatar, Button, Menu, MenuItem } from '@mui/material'
 import AuthModal from '../../../Auth/AuthModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserProfile, logout } from '../../../Redux/Auth/Action'
+import { usersCart } from '../../../Redux/Cart/Action'
 
 const navigation = {
   categories: [
@@ -145,7 +146,7 @@ export default function Navbar() {
   const [anchorE1, setAnchorE1] = useState(null);
   const openUserMenu = Boolean(anchorE1);
   const jwt = localStorage.getItem("jwt")
-  const { auth } = useSelector(store => store);
+  const { auth,cart } = useSelector(store => store);
   const dispatch = useDispatch()
   const handleOpen = () => {
     setOpenAuthModal(true);
@@ -186,6 +187,12 @@ export default function Navbar() {
     handleCloseUserMenu()
   }
 
+  const toCart=()=>{
+    navigate("/cart")
+  }
+  useEffect(()=>{
+    dispatch(usersCart());
+},[cart.updateCartItem,cart.deleteCartItem])
   return (
     <div className="bg-white relative z-50">
       {/* Mobile menu */}
@@ -516,10 +523,12 @@ export default function Navbar() {
                 <div className="ml-4 flow-root lg:ml-6">
                   <a href="#" className="group -m-2 flex items-center p-2">
                     <ShoppingBagIcon
+                      onClick={toCart}
+                
                       className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
                     />
-                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                    <span className="ml-1 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cart.cart?.itemQuantity}</span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>
                 </div>

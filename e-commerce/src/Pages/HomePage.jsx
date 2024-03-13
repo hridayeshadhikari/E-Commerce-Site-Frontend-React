@@ -9,7 +9,10 @@ const HomePage = () => {
       <CarouselDefault/>
       </div>
       <div>
-        <ProductsCrousel/>
+        <ProductsCrousel sectionName="Jackets"/>
+        <ProductsCrousel sectionName="Watches"/>
+        <ProductsCrousel sectionName="Mobiles"/>
+        <ProductsCrousel sectionName="Laptop"/>
       </div>
     </div>
   )
