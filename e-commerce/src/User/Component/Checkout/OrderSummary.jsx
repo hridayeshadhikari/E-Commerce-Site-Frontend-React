@@ -30,11 +30,10 @@ const OrderSummary = () => {
         <div className='lg:grid grid-cols-3 lg:px-0 relative pt-3'>
           <div className="lg:col-span-2 ">
             <div className=" space-y-3">
-              {order.order?.orderItems.map((item) => (
-                <>
-                  <CheckoutOrderItems item={item} showButton={false} />
-                </>
-              ))}
+            {order?.order?.orderItems &&
+                order.order.orderItems.map((item) => (
+                  <CheckoutOrderItems key={item.id} item={item} showButton={false} />
+                ))}
             </div>
           </div>
           <div className='px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0'>

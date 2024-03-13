@@ -3,17 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatePayment } from "../../../Redux/Customers/Payment/Action";
 import { Alert, AlertTitle, Grid } from "@mui/material";
 import { getOrderById } from "../../../Redux/Customers/Order/Action";
-<<<<<<< HEAD:e-commerce/src/User/Component/Payment/PaymentDone.jsx
-import OrderTracker from "../Order/OrderTracker";
-import AddressCard from "../AddressCard/AddressCard";
-import { useParams } from "react-router-dom";
-import { getOrderById } from "../../../Redux/Order/Action";
-=======
 import { getOrderById } from "../../../Redux/Order/Action";
 import OrderTracker from "../Order/OrderTracker";
 import AddressCard from "../AddressCard/AddressCard";
 import { useParams } from "react-router-dom";
->>>>>>> dev1:e-commerce/src/User/Component/Payment/Payment.jsx
 import { updatePayment } from "../../../Redux/Payment/Action";
 
 const Payment = () => {
@@ -27,21 +20,7 @@ const Payment = () => {
 
   useEffect(() => {
     console.log("orderId",orderId)
-    const urlParams = new URLSearchParams(window.location.search);
-    setPaymentId(urlParams.get("razorpay_payment_link_id"));
-    setReferenceId(urlParams.get("razorpay_payment_link_reference_id"));
-    setPaymentStatus(urlParams.get("razorpay_payment_link_status"));
-<<<<<<< HEAD:e-commerce/src/User/Component/Payment/PaymentDone.jsx
-    const urlParam = new URLSearchParams(window.location.search);
-    setPaymentId(urlParam.get("razorpay_payment_id"));
-    setReferenceId(urlParam.get("razorpay_payment_link_reference_id"));
-    setPaymentStatus(urlParam.get("razorpay_payment_link_status"));
-  }, []);
-
-  useEffect(() => {
-    if (paymentId && paymentStatus === "paid") {
-    if(paymentId){
-=======
+   
     const urlParams = new URLSearchParams(window.location.search);
     setPaymentId(urlParams.get("razorpay_payment_id"));
     setReferenceId(urlParams.get("razorpay_payment_link_reference_id"));
@@ -50,7 +29,6 @@ const Payment = () => {
 
   useEffect(() => {
     if (paymentId) {
->>>>>>> dev1:e-commerce/src/User/Component/Payment/Payment.jsx
       const data = { orderId, paymentId};
       dispatch(getOrderById(orderId));
       dispatch(updatePayment(data));
@@ -93,14 +71,8 @@ const Payment = () => {
                   <p className="opacity-50 text-xs font-semibold space-x-5">
                     <span>Color: {item?.product.color}</span> <span>Size: {item?.size}</span>
                   </p>
-<<<<<<< HEAD:e-commerce/src/User/Component/Payment/PaymentDone.jsx
-                  <p>Seller: {item.product.brand}</p>
-                  <p>₹{item.price}</p>
-                  <p>₹{item.discountedPrice}</p>
-=======
                   <p>Seller: {item.product?.brand}</p>
                   <p>₹{item?.discountedPrice}</p>
->>>>>>> dev1:e-commerce/src/User/Component/Payment/Payment.jsx
                 </div>
               </div>
             </Grid>
