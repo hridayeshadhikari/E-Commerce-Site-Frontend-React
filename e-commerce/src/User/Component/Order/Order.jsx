@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from '@mui/material';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { orderHistory } from '../../../Redux/Order/Action';
 
 const Order = () => {
     const navigate=useNavigate();
+    const dispatch=useDispatch();
+    const {order}=useSelector(store=>store);
+    
+    
+    useEffect(()=>{
+        dispatch(orderHistory())
+    },[])
+    console.log("-----",order)
     return (
-        <div onClick={()=>navigate(`/account/order/${5}`)} className="cursor-pointer container mt-8 lg:mx-auto mb-3 p-4 border shadow-md rounded-e-md justify-center">
+       <div>
+        {
+         <div onClick={()=>navigate(`/account/order/${order.orders.id}`)} className="cursor-pointer container mt-8 lg:mx-auto mb-3 p-4 border shadow-md rounded-e-md justify-center">
             <Grid container spacing={2} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
                 <Grid item xs={12} sm={6}>
                     <div className='flex'>
@@ -20,7 +32,7 @@ const Order = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={3} className='font-semibold'>
-                    <p>Price ₹5999</p>
+                    <p>Price ₹{order?.orders.discountPrice}</p>
                 </Grid>
 
                 <Grid item xs={12} sm={3}>
@@ -31,7 +43,8 @@ const Order = () => {
                     </p>
                 </Grid>
             </Grid>
-        </div>
+        </div>}
+       </div>
     );
 };
 

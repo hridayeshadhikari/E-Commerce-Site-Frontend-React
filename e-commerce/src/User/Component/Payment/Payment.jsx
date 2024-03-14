@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePayment } from "../../../Redux/Customers/Payment/Action";
 import { Alert, AlertTitle, Grid } from "@mui/material";
-import { getOrderById } from "../../../Redux/Customers/Order/Action";
 import { getOrderById } from "../../../Redux/Order/Action";
 import OrderTracker from "../Order/OrderTracker";
 import AddressCard from "../AddressCard/AddressCard";
@@ -67,11 +65,11 @@ const Payment = () => {
                   alt=""
                 />
                 <div className="ml-5 space-y-2">
-                  <p className="">{item?.product?.title}</p>
+                  <p className="">{item?.product.title}</p>
                   <p className="opacity-50 text-xs font-semibold space-x-5">
                     <span>Color: {item?.product.color}</span> <span>Size: {item?.size}</span>
                   </p>
-                  <p>Seller: {item.product?.brand}</p>
+                  <p>Seller: {item?.product.brand}</p>
                   <p>₹{item?.discountedPrice}</p>
                 </div>
               </div>

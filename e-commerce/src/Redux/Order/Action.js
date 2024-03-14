@@ -29,8 +29,9 @@ export const getOrderById=(orderId)=>async (dispatch)=>{
 export const orderHistory=()=>async (dispatch)=>{
     dispatch({type:GET_ORDER_HISTORY_REQUEST})
     try {
-        const {data}=await api.post("/api/order/all")
+        const {data}=await api.get("/api/order/all")
         dispatch({type:GET_ORDER_HISTORY_SUCCESS,payload:data})
+        console.log("order history----",data)
     } catch (error) {
         dispatch({type:GET_ORDER_HISTORY_FAILURE,payload:error.message})
     }
