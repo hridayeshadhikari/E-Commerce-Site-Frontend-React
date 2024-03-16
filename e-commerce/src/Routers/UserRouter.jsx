@@ -18,6 +18,7 @@ import TermsOfUse from '../User/Component/Footer/FooterLinks/TermsOfUse';
 import Login from '../Auth/Login'
 import Register from '../Auth/Register'
 import Payment from '../User/Component/Payment/Payment'
+import RateProduct from '../User/Component/Rating/RateProduct'
 
 const UserRouter = () => {
   return (
@@ -36,6 +37,7 @@ const UserRouter = () => {
         <Route path='/account/order' element={<Order/>}></Route>
         <Route path='/account/order/:orderId' element={<OrderDetail/>}></Route>
         <Route path="/payment/:orderId" element={<Payment/>}></Route>
+        <Route path='/account/rate/:productId' element={<RateProduct/>}></Route>
 
         <Route path='/faq' element={<FAQ/>}></Route>
         <Route path='/paymentf' element={<Payments/>}></Route>
