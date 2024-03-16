@@ -5,7 +5,6 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Rating from '@mui/material/Rating';
 import { Grid } from '@mui/material';
 import ProductReviewCard from './ProductReviewCard';
-import DefaultProductCard from '../HomeSectionCard/DefaultProductCard'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { findById } from '../../../Redux/Product/Action';
@@ -71,17 +70,16 @@ export default function Example() {
   const [selectedColor, setSelectedColor] = useState()
   const [selectedSize, setSelectedSize] = useState("")
   const navigate=useNavigate();
-  const params=useParams();
+  const {productId}=useParams();
   const dispatch=useDispatch();
   const {products}=useSelector(store=>store);
 
   useEffect(()=>{
-    const data={productId:params.productId}
-    dispatch(findById(data))
-  },[params.productId])
+    dispatch(findById(productId))
+  },[])
 
   const handleAddToCart=()=>{ 
-    const data={productId:params.productId,size:selectedSize.name}
+    const data={productId:productId,size:selectedSize.name}
     console.log("data----",data)
     dispatch(addToCart(data))
     navigate('/cart')
@@ -166,8 +164,8 @@ export default function Example() {
               <div className="mt-6">
                 <div className='flex items-center space-x-5'>
                   <Rating name="read-only" value={4.1} readOnly />
-                  <p className='opacity-50 text-sm'>{products.product?.rating}</p>
-                  <p className='text-sm text-indigo-600 hover:text-indigo-500'>{products.product?.review}</p>
+                  <p className='opacity-50 text-sm'>{products.product?.rating.length} ratings</p>
+                  <p className='text-sm text-indigo-600 hover:text-indigo-500'>{products.product?.review.length} review</p>
                 </div>
               </div>
 

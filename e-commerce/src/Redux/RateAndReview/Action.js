@@ -10,7 +10,7 @@ export const createReview=(reqData)=>async (dispatch)=>{
     }
 }
 
-export const getALLReview=(productId)=>async (dispatch)=>{
+export const getAllReview=(productId)=>async (dispatch)=>{
     try {
         const {data}=await api.post(`/api/review/create/${productId}`);
         dispatch({type:GET_ALL_REVIEWS_SUCCESS,payload:data})
@@ -19,7 +19,7 @@ export const getALLReview=(productId)=>async (dispatch)=>{
     }
 }
 
-export const getALLRating=(productId)=>async (dispatch)=>{
+export const getAllRating=(productId)=>async (dispatch)=>{
     try {
         const {data}=await api.post(`/api/rating/product/${productId}`);
         dispatch({type:GET_ALL_RATINGS_SUCCESS,payload:data})

@@ -93,7 +93,7 @@ const OrderDetails = () => {
               {
                 <Box
                   sx={{ color: deepPurple[500] }}
-                  onClick={() => navigate(`/account/rate/${item.product.id}`)}
+                  onClick={() => navigate(`/account/rate/${item.product.productId}`)}
                   className="flex items-center cursor-pointer"
                 >
                   <StarIcon
