@@ -1,67 +1,113 @@
-import React, { useEffect } from 'react'
-import OrderTracker from './OrderTracker'
-import AddressCard from '../AddressCard/AddressCard'
-import { Grid } from '@mui/material';
-import AdjustIcon from '@mui/icons-material/Adjust';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
-import { getOrderById } from '../../../Redux/Order/Action';
+import { Box, Button, Grid, Typography } from "@mui/material";
+import React from "react";
+import OrderTracker from "./OrderTracker";
+import StarIcon from "@mui/icons-material/Star";
+import { useNavigate, useParams } from "react-router-dom";
+import AddressCard from "../AddressCard/AddressCard";
+import { deepPurple } from "@mui/material/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getOrderById } from "../../../Redux/Order/Action";
 
-const OrderDetail = () => {
+const OrderDetails = () => {
+  const dispatch = useDispatch();
+  const { orderId } = useParams();
+  const { order } = useSelector((store) => store);
 
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location);
-    const { order } = useSelector(store => store);
-    const { orderId } = useParams();
+  console.log("order", order.order);
 
-    useEffect(() => {
-        dispatch(getOrderById(orderId));
-    }, [])
+  useEffect(() => {
+    dispatch(getOrderById(orderId));
+  }, []);
 
-    console.log("------order detatil-----", order)
+  const navigate = useNavigate();
+  return (
+    <div className=" px-2 lg:px-36 space-y-7 mt-10 mb-5">
+      <Grid container className="p-3 shadow-lg">
+        <Grid xs={12}>
+          <p className="font-bold text-lg py-2 ml-3">Delivery Address</p>
+        </Grid>
+        <Grid item xs={6}>
+          <AddressCard address={order.order?.shippingAddress} />
+        </Grid>
+      </Grid>
+      <Box className="p-5 shadow-lg border rounded-md">
+        <Grid
+          container
+          sx={{ justifyContent: "space-between", alignItems: "center" }}
+        >
+          <Grid item xs={9}>
+            <OrderTracker
+              activeStep={
+                order.order?.orderStatus === "PLACED"
+                  ? 1
+                  : order.order?.orderStatus === "CONFIRMED"
+                  ? 2
+                  : order.order?.orderStatus === "SHIPPED"
+                  ? 3
+                  : 5
+              }
+            />
+          </Grid>
+          <Grid item>
+           {order.order?.orderStatus==="DELIVERED" && <Button sx={{ color: ""}} color="error" variant="text" >
+              RETURN
+            </Button>}
 
-    return (
-        <div>
-            <div className='ml-[4rem] mr-[4rem] mt-5'>
-                <h1 className='text-lg font-bold lg:mt-[3rem] '>Delivery Address</h1>
-                <AddressCard />
-            </div>
-            <div className='mt-[3rem]'>
-                <OrderTracker />
-            </div>
-            <div>
-                {order.orderItems.map((item) => {
-                    <div className="container mt-8 lg:mx-auto mb-3 p-4 border shadow-md rounded-e-md  justify-center">
-                        <Grid container spacing={2} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Grid item xs={12} sm={6}>
-                                <div className='flex'>
-                                    <img src="https://image.made-in-china.com/2f0j00ceFlBLZnwzrO/New-Style-Casual-Men-Light-Running-Air-Cushion-Shoes-Hot-Selling-Shooes.webp" alt="Product" className="w-[8rem] h-auto" />
-                                    <div className='flex flex-col p-2'>
-                                        <p className='mt-3 font-semibold'>Mens Shooes</p>
-                                        <p className='mt-2 font-semibold text-gray-500'>Size {item.size}</p>
-                                        <p className='font-semibold text-gray-500'>color : Black</p>
-                                    </div>
-                                </div>
-                            </Grid>
+            {order.order?.orderStatus!=="DELIVERED" && <Button sx={{ color: deepPurple[500] }} variant="text">
+              cancel order
+            </Button>}
+          </Grid>
+        </Grid>
+      </Box>
 
-                            <Grid item xs={12} sm={3} className='font-semibold'>
-                                <p>Price ₹{order.order.discountPrice}</p>
-                            </Grid>
+    
 
-                            <Grid item xs={12} sm={3}>
-                                <p className='font-semibold'>
-                                    <AdjustIcon sx={{ color: "#66BB6A", marginRight: 1 }} />
-                                    Expected Delhivery on March 15
-                                    <p className='text-sm font-medium'>Your item is on the way</p>
-                                </p>
-                            </Grid>
-                        </Grid>
-                    </div>
-                })}
-            </div>
-        </div>
-    )
-}
-
-export default OrderDetail
+      <Grid container className="space-y-5">
+        {order.order?.orderItems.map((item) => (
+          <Grid
+            container
+            item
+            className="shadow-xl rounded-md p-5 border"
+            sx={{ alignItems: "center", justifyContent: "space-between" }}
+          >
+            <Grid item xs={6}>
+              {" "}
+              <div className="flex  items-center ">
+                <img
+                  className="w-[5rem] h-[5rem] object-cover object-top"
+                  src={item?.product.imageUrl}
+                  alt=""
+                />
+                <div className="ml-5 space-y-2">
+                  <p className="">{item.product.title}</p>
+                  <p className="opacity-70 text-xs font-semibold space-x-5">
+                    <span>Color: {item.product.color}</span> <span>Size: {item.size}</span>
+                  </p>
+                  <p>Seller: {item.product.brand}</p>
+                  <p>₹{item.discountedPrice} </p>
+                </div>
+              </div>
+            </Grid>
+            <Grid item>
+              {
+                <Box
+                  sx={{ color: deepPurple[500] }}
+                  onClick={() => navigate(`/account/rate/${item.product.id}`)}
+                  className="flex items-center cursor-pointer"
+                >
+                  <StarIcon
+                    sx={{ fontSize: "2rem" }}
+                    className="px-2 text-5xl"
+                  />
+                  <span>Rate & Review Product</span>
+                </Box>
+              }
+            </Grid>
+          </Grid>
+        ))}
+      </Grid>
+    </div>
+  );
+};
+export default OrderDetails;
