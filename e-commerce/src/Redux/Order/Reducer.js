@@ -13,22 +13,21 @@ export const orderReducer = (state = initialState, action) => {
         case CREATE_ORDER_REQUEST:
         case GET_ORDER_BY_ID_REQUEST:
             return {
-                ...state,
+
                 loading: true,
-                error: null
             }
 
         case CREATE_ORDER_SUCCESS:
-            return { ...state, order: action.payload, error: null, success: true, loading: false }
+            return { order: action.payload, success: true, loading: false }
 
         case GET_ORDER_BY_ID_SUCCESS:
-            return { ...state, order: action.payload, loading: false, error: null }
+            return { order: action.payload, loading: false, error: null }
 
         case GET_ORDER_BY_ID_FAILURE:
-            return { ...state, loading: false, error: action.payload }
+            return { loading: false, error: action.payload }
 
         case CREATE_ORDER_FAILURE:
-            return { ...state, error: action.payload, loading: false }
+            return { error: action.payload, loading: false }
 
         case GET_ORDER_HISTORY_REQUEST:
             return {

@@ -1,8 +1,7 @@
 import {
   Button,
-  Divider,
   Grid,
-  Rating, 
+  Rating,
   TextField,
   Typography,
   useMediaQuery,
@@ -16,13 +15,13 @@ import { createRating, createReview } from "../../../Redux/RateAndReview/Action"
 
 const RateProduct = () => {
 
-  const {products}=useSelector((store)=>store);
-  const  {productId} = useParams();
+  const { products } = useSelector((store) => store);
+  const { productId } = useParams();
   const [formData, setFormData] = useState({ title: "", description: "" });
   const [rating, setRating] = useState();
   const isLargeScreen = useMediaQuery("(min-width:1200px)");
   const dispatch = useDispatch();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handleRateProduct = (e, value) => {
     console.log("rating ----- ", value);
@@ -41,9 +40,9 @@ const RateProduct = () => {
 
     console.log(formData);
 
-    dispatch(createReview({review:formData.title,productId}))
-    dispatch(createRating({rating:rating,productId}))
-    setFormData({title:"",description:""})
+    dispatch(createReview({ review: formData.title, productId }))
+    dispatch(createRating({ rating: rating, productId }))
+    setFormData({ title: "", description: "" })
     navigate(`/product/${productId}`)
 
   };
@@ -51,7 +50,21 @@ const RateProduct = () => {
   useEffect(() => {
     dispatch(findById(productId));
   }, []);
-  console.log("product========>",products);
+  console.log("product========>", products);
+
+  function findAverage(ratings) {
+    ratings?.forEach(item => {
+      if (item.rating !== null) {
+        totalRating += item.rating;
+      }
+    });
+    return totalRating / ratings?.length;
+  }
+  let totalRating = 0;
+  var ratings = products?.product?.rating;
+  var average = findAverage(ratings);
+
+  // console.log("total rating ====>", average)
 
   return (
     <div className="px-5 lg:px-20">
@@ -78,13 +91,13 @@ const RateProduct = () => {
               {products?.product?.brand}
             </p>
             <p>₹{products.product?.discountedPrice}</p>
-           {products.product?.color && <p>Color: {products.product?.color}</p>}
+            {products.product?.color && <p>Color: {products.product?.color}</p>}
             <div className="flex items-center space-x-3">
-              <Rating name="read-only" value={4.6} precision={0.5} readOnly />
+              <Rating name="read-only" value={average} precision={0.5} readOnly />
 
               <p className="opacity-60 text-sm">{products.product?.rating.length} Ratings</p>
               <p className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-              {products.product?.review.length} reviews
+                {products.product?.review.length} reviews
               </p>
             </div>
             <div>

@@ -39,7 +39,7 @@ export default function Checkout() {
 
                 
                 <div className='pt-[5rem]'>
-                    {step == 2 ? <DeliveryAddress /> : <OrderSummary />}
+                    {step == 2 ? <DeliveryAddress handleNext={handleNext}/> : <OrderSummary />}
                 </div>
             </Box>
         </div>

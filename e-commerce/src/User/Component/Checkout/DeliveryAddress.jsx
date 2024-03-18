@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Grid, TextField, Box } from '@mui/material';
 import AddressCard from '../AddressCard/AddressCard';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../../../Redux/Order/Action';
 import { useNavigate } from 'react-router-dom';
 
-function DeliveryAddress() {
-  const navigate=useNavigate()
-  const dispatch=useDispatch();
+function DeliveryAddress({handleNext}) {
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const { auth } = useSelector((store) => store)
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget)
@@ -21,25 +23,48 @@ function DeliveryAddress() {
       zipCode: data.get("postalCode"),
       mobile: data.get("phoneNumber")
     }
-    const reqData={address,navigate}
+    const reqData = { address, navigate }
     dispatch(createOrder(reqData))
     console.log("address", address);
+    handleNext();
   }
+  // const handleCreateOrder = (address) => {
+  //   const reqData = { address, navigate }
+  //   console.log("=======>",address)
+  //   dispatch(createOrder(reqData));
+  // };
+  const handleCreateOrder = (item) => {
+    const reqData = { address:item, navigate }
+    dispatch(createOrder(reqData));
+    console.log("=======>",item)
+    handleNext();
+  };
+
 
   return (
     <div className='container'>
       <Grid container spacing={4}>
         <Grid xs={12} lg={4} className=' h-[30rem] overflow-y-scroll lg:ml-[5rem]'>
-          <div className='p-5 py-7 border-b cursor-pointer'>
-            <AddressCard />
-            <Button
-
-              variant='contained'
-              sx={{ bgcolor: "#33b249", marginTop: '1rem' }}
-              type='submit'
-            >
-              Deliver Here
-            </Button>
+          <div className='p-5 py-7 border-lg cursor-pointer'>
+            {auth.user?.address?.map((item) => (
+              <div
+                onClick={() => setSelectedAddress(item)}
+                className="p-5 py-7 border rounded-md shadow-md cursor-pointer"
+              >
+                {" "} 
+                <AddressCard address={item} />
+                {selectedAddress?.id === item.id && (
+                  <Button
+                    sx={{ bgcolor: "#33b249", mt: 2 }}
+                    size="large"
+                    variant="contained"
+                    onClick={() => handleCreateOrder(item)}
+                  >
+                    Deliverd Here
+                  </Button>
+                )}
+              </div>
+            ))}
           </div>
         </Grid>
         <Grid xs={12} lg={7} spacing={3}>

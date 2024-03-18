@@ -69,22 +69,38 @@ function classNames(...classes) {
 export default function Example() {
   const [selectedColor, setSelectedColor] = useState()
   const [selectedSize, setSelectedSize] = useState("")
-  const navigate=useNavigate();
-  const {productId}=useParams();
-  const dispatch=useDispatch();
-  const {products}=useSelector(store=>store);
+  const navigate = useNavigate();
+  const { productId } = useParams();
+  const dispatch = useDispatch();
+  const { products } = useSelector(store => store);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(findById(productId))
-  },[])
+  }, [])
 
-  const handleAddToCart=()=>{ 
-    const data={productId:productId,size:selectedSize.name}
-    console.log("data----",data)
+  const handleAddToCart = () => {
+    const data = { productId: productId, size: selectedSize.name }
+    console.log("data----", data)
     dispatch(addToCart(data))
     navigate('/cart')
   }
   var result = Math.round(((products.product?.price - products.product?.discountedPrice) / products.product?.price) * 100);
+  function findAverage(rating) {
+    rating?.forEach(item => {
+      if (item.rating !== null) {
+        totalRating += item.rating;
+      }
+    });
+
+    
+    
+
+    return totalRating/ rating?.length;
+  }
+  let totalRating = 0;
+  var rating = products?.product?.rating;
+  var average = findAverage(rating);
+  // console.log("average rating ",average)
 
   return (
     <div className="bg-white">
@@ -163,7 +179,7 @@ export default function Example() {
               {/* Reviews */}
               <div className="mt-6">
                 <div className='flex items-center space-x-5'>
-                  <Rating name="read-only" value={4.1} readOnly />
+                  <Rating name="read-only" value={average} precision={0.5} readOnly />
                   <p className='opacity-50 text-sm'>{products.product?.rating.length} ratings</p>
                   <p className='text-sm text-indigo-600 hover:text-indigo-500'>{products.product?.review.length} review</p>
                 </div>
@@ -315,14 +331,14 @@ export default function Example() {
         <section>
           <h1 className='font-semibold text-lg pb-4 ml-4'>Recent ratings and reviews</h1>
           <div className='border p-5'>
-          <Grid container spacing={7}>
-            <Grid item xs={7}>
-                      <div className='space-y-5'>
-                          { [1,1,1,1].map(()=><ProductReviewCard/>)}
-                      </div>
-            </Grid>
+            <Grid container spacing={7}>
+              <Grid item xs={7}>
+                <div className='space-y-5'>
+                  {products.product?.review?.map((item, index) => <ProductReviewCard key={index} item={item} rating={products.product.rating}/>)}
+                </div>
+              </Grid>
 
-          </Grid>
+            </Grid>
           </div>
         </section>
       </div>
