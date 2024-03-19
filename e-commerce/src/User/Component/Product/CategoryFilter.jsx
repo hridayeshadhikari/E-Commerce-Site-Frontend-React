@@ -14,9 +14,6 @@ import { getProducts } from '../../../Redux/Product/Action'
 import { Pagination } from '@mui/material'
 
 const sortOptions = [
-  { name: 'Most Popular', href: '#', current: true },
-  { name: 'Best Rating', href: '#', current: false },
-  { name: 'Newest', href: '#', current: false },
   { name: 'Price: Low to High', href: '#', current: false },
   { name: 'Price: High to Low', href: '#', current: false },
 ]
@@ -49,11 +46,12 @@ const singleFilter = [{
   id: 'price',
   name: 'Price',
   options: [
-    { value: '199-299', label: '199 To 299' },
-    { value: '299-599', label: '29 To 599' },
-    { value: '599-999', label: '599 To 999' },
-    { value: '999-1999', label: '999 To 1999' },
-    { value: '1999-4999', label: '1999 To 4999' },
+    { value: '199-299', label: '199 To 399' },
+    { value: '299-599', label: '399 To 699' },
+    { value: '599-999', label: '699 To 999' },
+    { value: '999-1999', label: '999 To 2999' },
+    { value: '1999-4999', label: '2999 To 6999' },
+    { value: '1999-4999', label: '6999 To 29999' },
   ],
 },
 

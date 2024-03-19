@@ -12,7 +12,7 @@ export default function DefaultProductCard({ product }) {
       <Card sx={{ maxWidth: 345 }} className="cursor-pointer mt-5 items-center mx-3 flex h-[20rem] w-[15rem] flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
 
         <CardMedia className="relative mx-3 mt-3 flex h-[17rem] w-[13rem] overflow-hidden rounded-xl" >
-          <img className="object-cover h-full" src={product?.imageUrl} alt="product image" />
+          <img className="object-cover h-full w-full" src={product?.imageUrl} alt="product image" />
           <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">{result}% OFF</span>
         </CardMedia>
         <div className="mt-3 px-5 pb-5">

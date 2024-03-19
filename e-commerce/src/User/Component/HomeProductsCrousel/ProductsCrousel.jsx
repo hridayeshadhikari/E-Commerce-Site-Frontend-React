@@ -12,9 +12,10 @@ const responsive = {
     1024: { items: 5 },
 };
 
-const items = [1, 1, 1, 1, 1, 1, 1].map((item) => <DefaultProductCard />);
 
-const ProductCarousel = ({sectionName}) => {
+
+const ProductCarousel = ({sectionName,data}) => {
+    
     
     const [activeIndex, setActiveIndex] = useState(0); // State to hold the active index
 
@@ -29,6 +30,8 @@ const ProductCarousel = ({sectionName}) => {
     };
 
     let carousel = null;
+
+    const items = data && data.map((item) => <DefaultProductCard product={item}/>);
 
     return (
         <div className=' px-4 lg:px-8 mt-5 mb-5' >
@@ -53,7 +56,7 @@ const ProductCarousel = ({sectionName}) => {
                     onClick={handlePrevClick}
                     endIcon={<KeyboardArrowLeftIcon sx={{transform:'translate(-30%) rotate(90deg)',color:'black'}}/>}
                 />}
-                {activeIndex!== items.length - 1 && <Button
+                {activeIndex!== items?.length - 1 && <Button
                     
                     variant="contained"
                     className="z-50 bg-white"

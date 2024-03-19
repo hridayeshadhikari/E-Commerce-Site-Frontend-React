@@ -19,11 +19,14 @@ import Login from '../Auth/Login'
 import Register from '../Auth/Register'
 import Payment from '../User/Component/Payment/Payment'
 import RateProduct from '../User/Component/Rating/RateProduct'
+import ScrollToTop from "../User/Component/Scroll/ScrollToTop"
 
 const UserRouter = () => {
   return (
     <div>
+      <ScrollToTop/>
       <div>
+        
         <Navbar/>
       </div>
       <Routes>

@@ -48,7 +48,7 @@ const navigation = {
           id: 'accessories',
           name: 'Accessories',
           items: [
-            { name: 'Watches', href: '#' },
+            { name: 'Watches',id:"watches",href: '#' },
             { name: 'Wallets', href: '#' },
             { name: 'Bags', href: '#' },
             { name: 'Sunglasses', href: '#' },
@@ -126,11 +126,69 @@ const navigation = {
         },
       ],
     },
+    {
+      id: 'Electronics',
+      name: 'Electronics',
+      featured: [
+        {
+          name: 'New Arrivals',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
+          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
+        },
+        {
+          name: 'Basic Tees',
+          href: '#',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
+          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+        },
+      ],
+      sections: [
+        {
+          id: 'clothing',
+          name: 'Clothing',
+          items: [
+            { name: 'Tops', href: '#' },
+            { name: 'Dresses', href: '#' },
+            { name: 'Pants', href: '#' },
+            { name: 'Denim', href: '#' },
+            { name: 'Sweaters', href: '#' },
+            { name: 'T-Shirts', href: '#' },
+            { name: 'Jackets', href: '#' },
+            { name: 'Activewear', href: '#' },
+            { name: 'Browse All', href: '#' },
+          ],
+        },
+        {
+          id: 'accessories',
+          name: 'Accessories',
+          items: [
+            { name: 'Watches', id:"women_watch",href: '{women/clothing/watches}' },
+            { name: 'Wallets', id:"women_wallet"},
+            { name: 'Bags', id:"bag" },
+            { name: 'Sunglasses', id:"women_sunglasses"},
+            { name: 'Hats', id:"women_hat"},
+            { name: 'Belts', id:"women_belt"},
+          ],
+        },
+        {
+          id: 'brands',
+          name: 'Brands',
+          items: [
+            { name: 'Full Nelson', id: '#' },
+            { name: 'My Way', id: '#' },
+            { name: 'Re-Arranged', id: '#' },
+            { name: 'Counterfeit', id: '#' },
+            { name: 'Significant Other', id: '#' },
+          ],
+        },
+      ],
+    },
 
   ],
   pages: [
     { name: 'Company', id: '/' },
-    { name: 'Stores', id: '/' },
+    
   ],
 }
 
@@ -303,7 +361,7 @@ export default function Navbar() {
                         {page.name}
                       </a>
                     </div>
-                  ))}
+                  ))} 
                 </div>
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
