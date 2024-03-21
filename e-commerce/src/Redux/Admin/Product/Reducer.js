@@ -1,4 +1,4 @@
-import { DELETE_PRODUCT_FAILURE, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS } from "./ActionType";
+import { CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS } from "./ActionType";
 
 const initialState={
     loading:false,
@@ -27,6 +27,20 @@ export const adminProductReducer=(state=initialState,action)=>{
                 ...state,
                 loading:false,
                 error:action.payload
+            }
+
+        case CREATE_PRODUCT_REQUEST:
+            return{
+                ...state,
+                loading:true,
+                error:null
+            }
+        case CREATE_PRODUCT_SUCCESS:
+            return{
+                ...state,
+                loading:false,
+                error:null,
+                products:action.payload
             }
     
         default:
