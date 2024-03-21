@@ -145,11 +145,11 @@ const navigation = {
       ],
       sections: [
         {
-          id: 'accessories',
-          name: 'Accessories',
+          id: 'Gadget',
+          name: 'Gadget',
           items: [
-            { name: 'mobiles', href: '#' },
-            { name: 'laptop', href: '#' },
+            { name: 'mobiles', href: '#' ,id:"mobile"},
+            { name: 'laptop', href: '#',id:"laptop" },
             { name: 'tablets', href: '#' },
             { name: 'TV', href: '#' },
             { name: 'Inverter Ac', href: '#' },

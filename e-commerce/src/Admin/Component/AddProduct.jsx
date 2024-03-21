@@ -1,7 +1,9 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../Redux/Admin/Product/Action';
+
 
 const defaultSize = [
   { name: "S", quantity: 0 },
@@ -11,11 +13,11 @@ const defaultSize = [
 ]
 
 export default function AddProduct() {
-  const [extraImageUrl, setExtraImageUrl] = useState([]);
+  const dispatch=useDispatch()
   const [productData, setProductData] = React.useState({
 
     "imageUrl": "",
-    "extraImageUrl": extraImageUrl,
+    "extraImageUrl": [],
     "brand": "",
     "highlights": [],
     "title": "",
@@ -32,10 +34,6 @@ export default function AddProduct() {
 
   })
 
-  const handleExtraImageUrlChange = (event) => {
-    setExtraImageUrl(event.target.value);
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProductData((prevState) => ({
@@ -46,7 +44,7 @@ export default function AddProduct() {
 
   const handleSizeChange = (e, index) => {
     let { name, value } = e.target;
-    name==="size_quantity"?name="quantity":name=e.target.name;
+    name === "size_quantity" ? name = "quantity" : name = e.target.name;
 
     const sizes = [...productData.size];
     sizes[index][name] = value;
@@ -57,8 +55,22 @@ export default function AddProduct() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(addProduct(productData))
     console.log("=====>", productData)
   }
+
+  const handleExtraImageUrlChange = (index, value) => {
+    const updatedExtraImageUrl = [...productData.extraImageUrl];
+    updatedExtraImageUrl[index] = value;
+    setProductData({ ...productData, extraImageUrl: updatedExtraImageUrl });
+  };
+
+  const handleHighlightsChange = (index, value) => {
+    const updatedHighlights = [...productData.highlights];
+    updatedHighlights[index] = value;
+    setProductData({ ...productData, highlights: updatedHighlights });
+  };
+
   console.log("=====>", productData)
   return (
     <div>
@@ -80,44 +92,20 @@ export default function AddProduct() {
             />
 
           </Grid>
-          <Grid item xs={12} sm={6}>
+          {[...Array(4)].map((_, index) => (<Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              name="extraImageUrl[0]"
-              onChange={handleExtraImageUrlChange}
+              name="extraImageUrl"
+              value={productData.extraImageUrl[index] || ''}
+              onChange={(e) => handleExtraImageUrlChange(index, e.target.value)}
               id="outlined-required"
-              label="Image Url 1"
+              label={`Image URL ${index + 1}`}
             />
 
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              name="extraImageUrl[1]"
-              onChange={handleExtraImageUrlChange}
-              id="outlined-required"
-              label="Image Url 2"
-            />
+          </Grid>))}
 
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              onChange={handleExtraImageUrlChange}
-              id="outlined-required"
-              label="Image Url 3"
-            />
 
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              onChange={handleExtraImageUrlChange}
-              id="outlined-required"
-              label="Image Url 4"
-            />
 
-          </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -243,7 +231,7 @@ export default function AddProduct() {
                 </Grid>
                 <Grid item >
                   <TextField
-                    onChange={(event)=>handleSizeChange(event,index)}
+                    onChange={(event) => handleSizeChange(event, index)}
                     label="Quantity"
                     name="size_quantity"
                     type="number"
@@ -276,6 +264,19 @@ export default function AddProduct() {
             />
 
           </Grid>
+          {[...Array(6)].map((_, index) => (<Grid item>
+            <TextField
+              fullWidth
+              name="highlights"
+              value={productData.highlights[index] || ''}
+              onChange={(e) => handleHighlightsChange(index, e.target.value)}
+              id="outlined-required"
+              label="Highlights"
+            />
+
+          </Grid>))}
+
+
           <Grid item xs={12} >
             <Button
               variant="contained"
