@@ -127,7 +127,7 @@ const navigation = {
       ],
     },
     {
-      id: 'Electronics',
+      id: 'electronics',
       name: 'Electronics',
       featured: [
         {
@@ -145,10 +145,10 @@ const navigation = {
       ],
       sections: [
         {
-          id: 'Gadget',
+          id: 'gadget',
           name: 'Gadget',
           items: [
-            { name: 'mobiles', href: '#' ,id:"mobile"},
+            { name: 'Mobiles', href: '#' ,id:"mobile"},
             { name: 'laptop', href: '#',id:"laptop" },
             { name: 'tablets', href: '#' },
             { name: 'TV', href: '#' },

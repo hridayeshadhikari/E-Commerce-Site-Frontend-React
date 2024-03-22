@@ -168,9 +168,9 @@ export default function AddProduct() {
                 onChange={handleChange}
                 label="First Level Category"
               >
-                <MenuItem value="men">Men</MenuItem>
-                <MenuItem value="women">Women</MenuItem>
-                <MenuItem value="electronics">Electronics</MenuItem>
+                <MenuItem value="Men">Men</MenuItem>
+                <MenuItem value="Women">Women</MenuItem>
+                <MenuItem value="Electronics">Electronics</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -183,9 +183,9 @@ export default function AddProduct() {
                 onChange={handleChange}
                 label="Second Level Category"
               >
-                <MenuItem value="clothing">Clothing</MenuItem>
-                <MenuItem value="accessories">Accessories</MenuItem>
-                <MenuItem value="gadget">Gadget</MenuItem>
+                <MenuItem value="Clothing">Clothing</MenuItem>
+                <MenuItem value="Accessories">Accessories</MenuItem>
+                <MenuItem value="Gadget">Gadget</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -198,9 +198,10 @@ export default function AddProduct() {
                 onChange={handleChange}
                 label="Third Level Category"
               >
-                <MenuItem value="watch">Watches</MenuItem>
+                <MenuItem value="watches">Watches</MenuItem>
                 <MenuItem value="women_watch">Women Watches</MenuItem>
-                <MenuItem value="mobile">mobile</MenuItem>
+                <MenuItem value="mobile">Mobile</MenuItem>
+                <MenuItem value="jackets">Jackets</MenuItem>
               </Select>
             </FormControl>
           </Grid>

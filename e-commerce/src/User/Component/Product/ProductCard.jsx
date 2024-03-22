@@ -211,7 +211,7 @@ export default function Example() {
 
 
                 {/* Sizes */}
-                {products.product?.size?.length > 0 && (
+                {products?.product?.size.filter(size => size.quantity > 0).length > 0 &&  (
 
                   <div className="mt-10 mb-12">
                     <div className="flex items-center justify-between">

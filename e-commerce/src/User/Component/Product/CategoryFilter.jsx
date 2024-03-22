@@ -46,12 +46,12 @@ const singleFilter = [{
   id: 'price',
   name: 'Price',
   options: [
-    { value: '199-299', label: '199 To 399' },
-    { value: '299-599', label: '399 To 699' },
-    { value: '599-999', label: '699 To 999' },
-    { value: '999-1999', label: '999 To 2999' },
-    { value: '1999-4999', label: '2999 To 6999' },
-    { value: '1999-4999', label: '6999 To 29999' },
+    { value: '199-299', label: '199-299' },
+    { value: '299-599', label: '299-599' },
+    { value: '599-999', label: '599-999' },
+    { value: '999-9999', label: '999-9999' },
+    { value: '9999-99999', label: '9999-99999' },
+    { value: '99999-599999', label: '99999-599999' },
   ],
 },
 
@@ -113,7 +113,7 @@ export default function CategoryFilter() {
 
   useEffect(() => {
     const [minPrice, maxPrice] =
-      price === null ? [0, 10000] : price.split("-").map(Number);
+      price === null ? [0, 1000000] : price.split("-").map(Number);
     const data = {
       category: param.levelThree,
       colors: colorValue || [],
