@@ -7,6 +7,8 @@ const OrderTable = () => {
       <Typography variant="h3"
         sx={{ textAlign: "center" }}
         className="py-10 text-center ">Order Details</Typography>
+
+      
     </div>
   )
 }
