@@ -16,7 +16,7 @@ const rootReducer=combineReducers({
     order:orderReducer,
     rating:ratingReducer,
     adminProduct:adminProductReducer,
-    adminOrder:adminOrderReducer
+    adminOrder:adminOrderReducer,
 })
 
 export const store=legacy_createStore(rootReducer,applyMiddleware(thunk));

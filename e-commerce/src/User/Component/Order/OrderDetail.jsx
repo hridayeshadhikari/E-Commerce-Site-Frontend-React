@@ -45,7 +45,7 @@ const OrderDetails = () => {
                   ? 2
                   : order.order?.orderStatus === "SHIPPED"
                   ? 3
-                  : 5
+                  : 4
               }
             />
           </Grid>

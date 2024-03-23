@@ -3,35 +3,22 @@ import Stepper from '@mui/material/Stepper';
 import StepLabel from '@mui/material/StepLabel';
 import { useLocation } from 'react-router-dom';
 import Step from '@mui/material/Step';
+import { Box } from '@mui/material';
 
-const steps = ['Ordered', 'Confirmed', 'Shipped', 'Delivered'];
+const steps = ['Order Placed', 'Confirmed', 'Shipped', 'Delivered'];
 
-const OrderTracker = () => {
-    const [activeStep, setActiveStep] = React.useState(0);
-
-    const location = useLocation();
-    const querySearch = new URLSearchParams(location.search);
-    const step = querySearch.get("step")
-
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-  return (
-    <div className='w-full'>
-        <Stepper activeStep={step} alternativeLabel>
-                    {steps.map((label, index) => (
-                        <Step key={label}>
-                            <StepLabel>{label}</StepLabel>
-                        </Step>
-                    ))}
-                </Stepper>
-      
-    </div>
-  )
-}
-
-export default OrderTracker
+export default function OrderTraker({activeStep}) {
+    
+    return (
+      <Box sx={{ width: '100%' }} >
+        
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel  sx={{ color: '#9155FD',fontSize: '44px' }}  className={``}>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </Box>
+    );
+  }

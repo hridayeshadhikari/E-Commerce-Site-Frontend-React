@@ -1,4 +1,3 @@
-import { GET_CART_FAILURE } from "../../Cart/ActionType";
 import { CANCEL_ORDER_FAILURE, CANCEL_ORDER_REQUEST, CANCEL_ORDER_SUCCESS, CONFIRM_ORDER_FAILURE, CONFIRM_ORDER_REQUEST, CONFIRM_ORDER_SUCCESS, DELETE_ORDER_FAILURE, DELETE_ORDER_REQUEST, DELETE_ORDER_SUCCESS, DELIVERED_ORDER_FAILURE, DELIVERED_ORDER_REQUEST, DELIVERED_ORDER_SUCCESS, GET_ORDERS_FAILURE, GET_ORDERS_REQUEST, GET_ORDERS_SUCCESS, SHIPPED_ORDER_FAILURE, SHIPPED_ORDER_REQUEST, SHIPPED_ORDER_SUCCESS } from "./ActionType";
 
 const initialState = {
@@ -7,7 +6,7 @@ const initialState = {
     orders: []
 }
 
-const adminOrderReducer = (state = initialState, action) => {
+export const adminOrderReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ORDERS_REQUEST:
             return {
@@ -26,7 +25,7 @@ const adminOrderReducer = (state = initialState, action) => {
         case DELETE_ORDER_REQUEST:
             return {
                 ...state,
-                loading: true
+                loading: false
             }
 
         case GET_ORDERS_SUCCESS:
@@ -76,7 +75,7 @@ const adminOrderReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: null,
-                orders: state.orders.filter((order) => order.id !== action.payload)
+                deletedOrder: action.payload
             }
 
         case CONFIRM_ORDER_FAILURE:
