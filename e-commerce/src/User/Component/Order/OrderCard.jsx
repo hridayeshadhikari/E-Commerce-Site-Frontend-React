@@ -24,7 +24,7 @@ const OrderCard = ({ item, order }) => {
             <div className="ml-5">
               <p className="mb-2">{item?.product.title}</p>
               <p className="opacity-50 text-xs font-semibold space-x-5">
-                <span>Size: {item?.size}</span>
+                {item.size!==null && <span>Size: {item?.size}</span>}
               </p>
             </div>
           </div>
@@ -41,7 +41,8 @@ const OrderCard = ({ item, order }) => {
                   sx={{ width: "15px", height: "15px" }}
                   className="text-green-600 p-0 mr-2 text-sm"
                 />
-                <span>Delivered On March 20</span>
+                <span>Delivered On {order.deliveryDate}</span>
+                <p className="text-xs">Your Item Has Been Delivered</p>
 
             </>
             ):  <>
@@ -50,11 +51,12 @@ const OrderCard = ({ item, order }) => {
                 sx={{ width: "15px", height: "15px" }}
                 className="text-green-600 p-0 mr-2 text-sm"
               />
-              <span>Expected Delivery On March 20</span>
+              <span>Expected Delivery On  { order.orderDate|date:"Y-m-d"|add_days:5 }</span>
+              <p className="text-xs">your item is on the way</p>
               </>}
             
           </p>
-          <p className="text-xs">Your Item Has Been Delivered</p>
+          
           {item.orderStatus === "DELIVERED" && (
             <div
               onClick={() => navigate(`/account/rate/{id}`)}

@@ -94,9 +94,8 @@ const OrderTable = () => {
                         <InputLabel id="demo-simple-select-filled-label">Status</InputLabel>
                         <Select
                           labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          value={orderStatus}
-                          label="Age"
+                          id={`basic-menu-${item.id}`}
+                          value={item.orderStatus}
                           onChange={(event) => handleChange(event.target.value, item.id)}
                         >
                           <MenuItem value="SHIPPED">Shipped</MenuItem>
