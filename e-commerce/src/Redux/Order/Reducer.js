@@ -1,4 +1,5 @@
-import { CREATE_ORDER_FAILURE, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, GET_ORDER_BY_ID_FAILURE, GET_ORDER_BY_ID_REQUEST, GET_ORDER_BY_ID_SUCCESS, GET_ORDER_HISTORY_FAILURE, GET_ORDER_HISTORY_REQUEST, GET_ORDER_HISTORY_SUCCESS } from "./ActionType"
+import { CANCEL_ORDER_FAILURE } from "../Admin/Order/ActionType"
+import { CANCEL_ORDER_REQUEST, CANCEL_ORDER_SUCCESS, CREATE_ORDER_FAILURE, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, GET_ORDER_BY_ID_FAILURE, GET_ORDER_BY_ID_REQUEST, GET_ORDER_BY_ID_SUCCESS, GET_ORDER_HISTORY_FAILURE, GET_ORDER_HISTORY_REQUEST, GET_ORDER_HISTORY_SUCCESS } from "./ActionType"
 
 const initialState = {
     order: null,
@@ -17,6 +18,26 @@ export const orderReducer = (state = initialState, action) => {
                 loading: true,
             }
 
+        case CANCEL_ORDER_REQUEST:
+            return{
+                ...state,
+                error:null,
+                loading:true
+            }
+
+        case CANCEL_ORDER_SUCCESS:
+            return{
+                ...state,
+                error:null,
+                cancel:action.payload
+            }
+
+        case CANCEL_ORDER_FAILURE:
+            return{
+                ...state,
+                error:action.payload,
+                loading:false
+            }
         case CREATE_ORDER_SUCCESS:
             return { order: action.payload, success: true, loading: false }
 

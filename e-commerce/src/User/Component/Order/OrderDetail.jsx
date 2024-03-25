@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import React from "react";
 import OrderTracker from "./OrderTracker";
 import StarIcon from "@mui/icons-material/Star";
@@ -7,7 +7,7 @@ import AddressCard from "../AddressCard/AddressCard";
 import { deepPurple } from "@mui/material/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getOrderById } from "../../../Redux/Order/Action";
+import { cancelOrderRequest, getOrderById } from "../../../Redux/Order/Action";
 
 const OrderDetails = () => {
   const dispatch = useDispatch();
@@ -19,6 +19,11 @@ const OrderDetails = () => {
   useEffect(() => {
     dispatch(getOrderById(orderId));
   }, []);
+
+  const handleCancelOrder=(orderId)=>{
+    dispatch(cancelOrderRequest(orderId))
+    dispatch(getOrderById(orderId)); 
+  }
 
   const navigate = useNavigate();
   return (
@@ -37,7 +42,7 @@ const OrderDetails = () => {
           sx={{ justifyContent: "space-between", alignItems: "center" }}
         >
           <Grid item xs={9}>
-            <OrderTracker
+            {order.order?.orderStatus!=="CANCELLED" ? (<OrderTracker
               activeStep={
                 order.order?.orderStatus === "PLACED"
                   ? 1
@@ -47,14 +52,16 @@ const OrderDetails = () => {
                   ? 3
                   : 4
               }
-            />
+            />):(<div className="font-semibold">
+              Order Cancelled
+            </div>)}
           </Grid>
           <Grid item>
            {order.order?.orderStatus==="DELIVERED" && <Button sx={{ color: ""}} color="error" variant="text" >
               RETURN
             </Button>}
 
-            {order.order?.orderStatus!=="DELIVERED" && <Button sx={{ color: deepPurple[500] }} variant="text">
+            {order.order?.orderStatus!=="DELIVERED" && order.order?.orderStatus!=="CANCELLED" && <Button onClick={()=>handleCancelOrder(order.order?.id)} sx={{ color: deepPurple[500] }} variant="text">
               cancel order
             </Button>}
           </Grid>

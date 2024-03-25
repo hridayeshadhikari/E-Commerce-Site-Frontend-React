@@ -1,7 +1,6 @@
 import React from 'react'
 import Stepper from '@mui/material/Stepper';
 import StepLabel from '@mui/material/StepLabel';
-import { useLocation } from 'react-router-dom';
 import Step from '@mui/material/Step';
 import { Box } from '@mui/material';
 
