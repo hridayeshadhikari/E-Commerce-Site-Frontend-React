@@ -7,6 +7,7 @@ import {orderReducer} from "./Order/Reducer"
 import { ratingReducer } from "./RateAndReview/Reducer";
 import { adminProductReducer } from "./Admin/Product/Reducer";
 import { adminOrderReducer } from "./Admin/Order/Reducer";
+import { adminReducer } from "./Admin/User/Reducer";
 
 
 const rootReducer=combineReducers({
@@ -17,6 +18,7 @@ const rootReducer=combineReducers({
     rating:ratingReducer,
     adminProduct:adminProductReducer,
     adminOrder:adminOrderReducer,
+    adminAction:adminReducer
 })
 
 export const store=legacy_createStore(rootReducer,applyMiddleware(thunk));
