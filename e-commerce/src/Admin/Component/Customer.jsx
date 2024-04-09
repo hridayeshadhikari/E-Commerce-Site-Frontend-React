@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers } from '../../Redux/Admin/User/Action';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { TableCell, TableHead, Table, TableContainer, Box, Paper, TableRow, Avatar, TableBody, IconButton ,Typography} from '@mui/material'
 
 
@@ -25,7 +24,8 @@ const Customer = () => {
                 <TableCell>Image</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Email</TableCell>
-                <TableCell>Delete</TableCell>
+                <TableCell>Roles</TableCell>
+                
               </TableRow>
             </TableHead>
             <TableBody>
@@ -46,14 +46,17 @@ const Customer = () => {
                       {item.email}
                     </Typography>
                   </TableCell>
-                  
+                  {item.roles.map((item)=>( 
+                  <TableCell>
+                    <Typography variant='caption'>
+                     {item.name}
+                    </Typography>
+                  </TableCell>
+                  ))}
+                 
                   
                  
-                  <TableCell>
-                    <IconButton aria-label="delete" color='error' >
-                      <DeleteOutlineIcon />
-                    </IconButton>
-                  </TableCell>
+                  
                 </TableRow>
               ))}
             </TableBody>

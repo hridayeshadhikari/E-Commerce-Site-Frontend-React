@@ -38,7 +38,7 @@ const navigation = {
             { name: 'Shirt',id:"shirt", href: '#' },
             { name: 'Pants',id:"pant", href: '#' },
             { name: 'Sweaters',id:"sweatshirt", href: '#' },
-            { name: 'T-Shirts',id:"tshirts", href: '#' },
+            { name: 'T-Shirts',id:"t-shirts", href: '#' },
             { name: 'Jackets',id:"jackets", href: '#' },
             { name: 'Activewear',id:"activewear", href: '#' },
             { name: 'Browse All',id:"all", href: '#' },

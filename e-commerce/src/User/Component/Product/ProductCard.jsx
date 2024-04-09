@@ -211,7 +211,7 @@ export default function Example() {
 
 
                 {/* Sizes */}
-                {products?.product?.size.filter(size => size.quantity > 0).length > 0 &&  (
+                {products?.product?.size.filter(size => size.quantity > 0).length > 0 && (
 
                   <div className="mt-10 mb-12">
                     <div className="flex items-center justify-between">
@@ -222,66 +222,71 @@ export default function Example() {
                     <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
                       <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
                       <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4 w-[10rem] h-[3rem]">
-                        {product.sizes.map((size) => (
-                          <RadioGroup.Option
-                            key={size.name}
-                            value={size}
-                            disabled={!size.inStock}
-                            className={({ active }) =>
-                              classNames(
-                                size.inStock
-                                  ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
-                                  : 'cursor-not-allowed bg-gray-50 text-gray-200',
-                                active ? 'ring-2 ring-indigo-500' : '',
-                                'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
-                              )
-                            }
-                          >
-                            {({ active, checked }) => (
-                              <>
-                                <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
-                                {size.inStock ? (
-                                  <span
-                                    className={classNames(
-                                      active ? 'border' : 'border-2',
-                                      checked ? 'border-indigo-500' : 'border-transparent',
-                                      'pointer-events-none absolute -inset-px rounded-md'
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <span
-                                    aria-hidden="true"
-                                    className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                                  >
-                                    <svg
-                                      className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                      viewBox="0 0 100 100"
-                                      preserveAspectRatio="none"
-                                      stroke="currentColor"
+                        {products?.product?.size
+                          ?.sort((a, b) => {
+                            const sizeOrder = { S: 1, M: 2, L: 3, XL: 4 };
+                            return sizeOrder[a.name] - sizeOrder[b.name];
+                          })
+                          .map((size) => (
+                            <RadioGroup.Option
+                              key={size.name}
+                              value={size.name}
+                              disabled={!size.inStock}
+                              className={({ active }) =>
+                                classNames(
+                                  size.inStock
+                                    ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
+                                    : 'cursor-not-allowed bg-gray-50 text-gray-200',
+                                  active ? 'ring-2 ring-indigo-500' : '',
+                                  'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
+                                )
+                              }
+                            >
+                              {({ active, checked }) => (
+                                <>
+                                  <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
+                                  {size.inStock ? (
+                                    <span
+                                      className={classNames(
+                                        active ? 'border' : 'border-2',
+                                        checked ? 'border-indigo-500' : 'border-transparent',
+                                        'pointer-events-none absolute -inset-px rounded-md'
+                                      )}
+                                      aria-hidden="true"
+                                    />
+                                  ) : (
+                                    <span
+                                      aria-hidden="true"
+                                      className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
                                     >
-                                      <line x1={0} y1={100} x2={100} y2={0} vectorEffect="non-scaling-stroke" />
-                                    </svg>
-                                  </span>
-                                )}
-                              </>
-                            )}
-                          </RadioGroup.Option>
-                        ))}
+                                      <svg
+                                        className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
+                                        viewBox="0 0 100 100"
+                                        preserveAspectRatio="none"
+                                        stroke="currentColor"
+                                      >
+                                        <line x1={0} y1={100} x2={100} y2={0} vectorEffect="non-scaling-stroke" />
+                                      </svg>
+                                    </span>
+                                  )}
+                                </>
+                              )}
+                            </RadioGroup.Option>
+                          ))}
                       </div>
                     </RadioGroup>
                   </div>)}
                 <div className='flex gap-5'>
-                  <div className='item-center ali'><LocalShippingIcon sx={{ fontSize: "3rem" ,marginLeft:"1rem",color:grey[700]}} />
+                  <div className='item-center ali'><LocalShippingIcon sx={{ fontSize: "3rem", marginLeft: "1rem", color: grey[700] }} />
                     <p className='text-gray-600 text-sm'>Free Delivery</p>
                   </div>
-                  <div><SecurityIcon sx={{ fontSize: "3rem",marginLeft:"1.5rem" ,color:grey[700]}} />
+                  <div><SecurityIcon sx={{ fontSize: "3rem", marginLeft: "1.5rem", color: grey[700] }} />
                     <p className='text-gray-600 text-sm'>1 year warrenty</p>
                   </div>
-                  <div><PublishedWithChangesIcon sx={{ fontSize: "3rem",marginLeft:"2.5rem",color:grey[700] }} />
+                  <div><PublishedWithChangesIcon sx={{ fontSize: "3rem", marginLeft: "2.5rem", color: grey[700] }} />
                     <p className='text-gray-600 text-sm'>10 days replacement</p>
                   </div>
-                  <div><FlashOnIcon sx={{ fontSize: "3rem",marginLeft:"1rem",color:grey[700] }} />
+                  <div><FlashOnIcon sx={{ fontSize: "3rem", marginLeft: "1rem", color: grey[700] }} />
                     <p className='text-gray-600 text-sm'>Fast Delivery</p>
                   </div>
                 </div>
