@@ -25,6 +25,9 @@ import AddProduct from './Component/AddProduct';
 import ProductTable from './Component/ProductTable';
 import OrderTable from './Component/OrderTable';
 import Customer from './Component/Customer';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { logout } from '../Redux/Auth/Action';
+import { useDispatch } from 'react-redux';
 
 const drawerWidth = 240;
 
@@ -32,6 +35,8 @@ function Admin(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+
+  const dispatch=useDispatch();
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -53,9 +58,16 @@ function Admin(props) {
     {name:"Customers",path:"/admin/customer",icon:<SupervisedUserCircleIcon />},
     {name:"Orders",path:"/admin/orders",icon:<StarBorderIcon />},
     {name:"Products",path:"/admin/products",icon:<InventoryIcon />},
-    {name:"Add Products",path:"/admin/product/add",icon:<LibraryAddIcon />}
+    {name:"Add Products",path:"/admin/product/add",icon:<LibraryAddIcon />},
+    {name:"Logout",path:"/logout",icon:<LogoutIcon/>}
   ]
 
+  const handleLogout = () => {
+   
+    dispatch(logout())
+   
+    navigate('/'); 
+  };
   const navigate=useNavigate();
 
   const drawer = (
@@ -64,7 +76,7 @@ function Admin(props) {
       <Divider />
       <List>
         {menuItems.map((item,index) => (
-          <ListItem key={item.name} onClick={()=>navigate(item.path)} disablePadding>
+          <ListItem key={item.name} onClick={item.name === 'Logout' ? handleLogout : () => navigate(item.path)} disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 {item.icon}
