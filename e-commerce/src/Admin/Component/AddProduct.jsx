@@ -3,6 +3,8 @@ import TextField from '@mui/material/TextField';
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../Redux/Admin/Product/Action';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const defaultSize = [
@@ -57,6 +59,33 @@ export default function AddProduct() {
     e.preventDefault();
     dispatch(addProduct(productData))
     console.log("=====>", productData)
+    toast.success('Product Added Successfully', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    setProductData({
+      "imageUrl": "",
+      "extraImageUrl": [],
+      "brand": "",
+      "highlights": [],
+      "title": "",
+      "color": "",
+      "discountedPrice": 0,
+      "price": 0,
+      "discountPercent": 0,
+      "size": defaultSize,
+      "quantity": 0,
+      "firstLevelCategory": "",
+      "secondLevelCategory": "",
+      "thirdLevelCategory": "",
+      "description": ""
+    });
   }
 
   const handleExtraImageUrlChange = (index, value) => {
@@ -202,6 +231,7 @@ export default function AddProduct() {
                 <MenuItem value="women_watch">Women Watches</MenuItem>
                 <MenuItem value="mobile">Mobile</MenuItem>
                 <MenuItem value="jackets">Jackets</MenuItem>
+                <MenuItem value="laptop">Laptop</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -288,6 +318,18 @@ export default function AddProduct() {
             >
               Add Product
             </Button>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </Grid>
         </Grid>
       </form>

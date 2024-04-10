@@ -14,6 +14,8 @@ import SecurityIcon from '@mui/icons-material/Security';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import FlashOnIcon from '@mui/icons-material/FlashOn';
 import { grey } from '@mui/material/colors';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -54,7 +56,6 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const [selectedColor, setSelectedColor] = useState()
   const [selectedSize, setSelectedSize] = useState("")
   const navigate = useNavigate();
   const { productId } = useParams();
@@ -79,11 +80,21 @@ export default function Example() {
     setMainImage(image);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (event) => {
+    event.preventDefault();
     const data = { productId: productId, size: selectedSize.name }
     console.log("data----", data)
     dispatch(addToCart(data))
-    navigate('/cart')
+    toast.success('Item added to cart', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   }
   var result = Math.round(((products.product?.price - products.product?.discountedPrice) / products.product?.price) * 100);
   function findAverage(rating) {
@@ -291,14 +302,38 @@ export default function Example() {
                   </div>
                 </div>
 
-                <button
-                  onClick={handleAddToCart}
-                  type="submit"
-                  className="mt-10 flex w-[11rem] items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-base font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
-                >
-                  <AddShoppingCartIcon />
-                  Add to cart
-                </button>
+                {!products?.product?.size.filter(size => size.quantity > 0).length > 0 || selectedSize ? (
+                  <button
+                    onClick={handleAddToCart}
+                    type="button"
+                    className="mt-10 flex w-[11rem] items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-base font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
+                  >
+                    <AddShoppingCartIcon />
+                    Add to cart
+                  </button>
+
+                ) : (
+                  <button
+                    type="button"
+                    disabled
+                    className="mt-10 flex w-[11rem] items-center justify-center rounded-md border border-transparent bg-gray-300 px-8 py-3 text-base font-medium text-gray-500 cursor-not-allowed"
+                  >
+                    <AddShoppingCartIcon />
+                    Add to cart
+                  </button>
+                )}
+                <ToastContainer
+                  position="top-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
               </form>
             </div>
 

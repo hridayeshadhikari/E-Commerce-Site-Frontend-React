@@ -10,8 +10,10 @@ const HomePage = () => {
   const {auth}=useSelector(store=>store)
   // console.log("===== data",auth.user.roles[0].name)
   if(auth.user && auth.user.roles[0].name==="ROLE_ADMIN"){
+    setTimeout(()=>{
+      navigate("/admin")
+    },1000)
     
-    navigate("/admin")
   }
 
   return (

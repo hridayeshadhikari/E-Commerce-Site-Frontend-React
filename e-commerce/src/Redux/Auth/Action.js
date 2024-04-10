@@ -12,9 +12,9 @@ export const signup = (userData) => async (dispatch) => {
             localStorage.setItem("jwt", data.token)
         }
         console.log("register success", data)
-        dispatch({ type: SIGNUP_SUCCESS, payload: data.jwt })
+        dispatch({ type: SIGNUP_SUCCESS, payload: data })
     } catch (error) {
-        console.log("--------", error)
+        console.log("registration error----", error)
         dispatch({ type: SIGNUP_FAILURE, payload: error })
     }
 }

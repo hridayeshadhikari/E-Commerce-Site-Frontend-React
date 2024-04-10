@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import DefaultProductCard from '../HomeSectionCard/DefaultProductCard';
-import { Button } from '@mui/material';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import './Crousel.css'
 
 const responsive = {
     0: { items: 1.5 },
@@ -48,23 +46,12 @@ const ProductCarousel = ({sectionName,data}) => {
                     ref={(el) => (carousel = el)}
                 />
                 {activeIndex!== 0 &&
-                <Button
-                    variant='contained'
-                    className="z-50 bg-white"
-                    sx={{position:'absolute', top:'8rem',left:'0rem',transform:'translate(-50%) rotate(-90deg)',bgcolor:'white'}}
-                    aria-label='previous'
-                    onClick={handlePrevClick}
-                    endIcon={<KeyboardArrowLeftIcon sx={{transform:'translate(-30%) rotate(90deg)',color:'black'}}/>}
-                />}
-                {activeIndex!== items?.length - 1 && <Button
-                    
-                    variant="contained"
-                    className="z-50 bg-white"
-                    sx={{position:'absolute', top:'8rem',right:'0rem',transform:'translate(50%) rotate(-90deg)',bgcolor:'white'}}
-                    aria-label='next'
-                    onClick={handleNextClick}
-                    endIcon={<KeyboardArrowRightIcon sx={{transform:'translate(-25%) rotate(90deg)',color:'black'}}/>}
-                />}
+                <button onClick={handlePrevClick} className="left-arrow">
+                &lt;
+            </button>}
+                {activeIndex!== items?.length - 1 &&  <button onClick={handleNextClick} className="right-arrow">
+                        &gt;
+                    </button>}
             </div>
         </div>
     );

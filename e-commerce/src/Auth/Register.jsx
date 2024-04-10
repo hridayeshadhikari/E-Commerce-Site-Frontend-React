@@ -12,130 +12,178 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import sitelogo from "../Assets/trendsphere-high-resolution-logo-transparent.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile, signup } from '../Redux/Auth/Action';
-import { useEffect } from 'react';
-
-
+import { signup } from '../Redux/Auth/Action';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const defaultTheme = createTheme();
 
+// Validation schema using Yup
+const validationSchema = Yup.object({
+  firstName: Yup.string().required('First Name is required'),
+  lastName: Yup.string().required('Last Name is required'),
+  email: Yup.string().email('Invalid email address').required('Email is required'),
+  password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
+  terms: Yup.boolean().oneOf([true], 'You must accept the terms and conditions'),
+});
+
 export default function Register() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const jwt = localStorage.getItem("jwt");
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const {auth}=useSelector(store=>store)
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const userData = {
-            firstName: data.get("firstName"),
-            lastName: data.get("lastName"),
-            email: data.get("email"),
-            password: data.get("password"),
+ 
 
-        }
-        dispatch(signup(userData));
-        console.log("userdata", userData)
-    };
+  const handleSubmit = (values) => {
+   
 
-    useEffect(() => {
-        if (jwt) {
-            dispatch(getUserProfile(jwt))
-        }
-    }, [jwt, auth.jwt])
+    toast.success('Registration Successfull', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    setTimeout(() => {
+        dispatch(signup(values));
+      }, 3000);
+  };
 
-
-    return (
-        <div className='mb-[4rem]'>
-            <ThemeProvider theme={defaultTheme}>
-                <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <Box
-                        sx={{
-                            marginTop: 4,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <div className='mb-4'>
-                            <img className='h-[4rem] ' src={sitelogo} alt="" />
-                        </div>
-                        <Typography component="h1" variant="h5">
-                            Sign up
-                        </Typography>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        autoComplete="given-name"
-                                        name="firstName"
-                                        required
-                                        fullWidth
-                                        id="firstName"
-                                        label="First Name"
-                                        autoFocus
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="lastName"
-                                        label="Last Name"
-                                        name="lastName"
-                                        autoComplete="family-name"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="email"
-                                        label="Email Address"
-                                        name="email"
-                                        autoComplete="email"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        name="password"
-                                        label="Password"
-                                        type="password"
-                                        id="password"
-                                        autoComplete="new-password"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <FormControlLabel
-                                        control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                        label="Terms & conditions"
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Sign Up
-                            </Button>
-                            <Grid container justifyContent="flex-end">
-                                <Grid item>
-                                    <p className='text-sm text-blue-600'>
-                                        Already have an account? <button className='cursor-pointer hover:underline' onClick={() => navigate("/login")}>Sign in</button>
-                                    </p>
-                                </Grid>
-                            </Grid>
-                        </Box>
-                    </Box>
-
-                </Container>
-            </ThemeProvider>
-        </div>
-    );
+  return (
+    <div className='mb-[4rem]'>
+      <ThemeProvider theme={defaultTheme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <div className='mb-4'>
+              <img className='h-[4rem] ' src={sitelogo} alt="" />
+            </div>
+            <div className='mb-4'>
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            </div>
+            <Formik
+              initialValues={{
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: '',
+                terms: false,
+              }}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              {({ errors, touched }) => (
+                <Form>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <Field
+                        as={TextField}
+                        autoComplete="given-name"
+                        name="firstName"
+                        required
+                        fullWidth
+                        id="firstName"
+                        label="First Name"
+                        autoFocus
+                        error={touched.firstName && Boolean(errors.firstName)}
+                        helperText={touched.firstName && errors.firstName}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Field
+                        as={TextField}
+                        required
+                        fullWidth
+                        id="lastName"
+                        label="Last Name"
+                        name="lastName"
+                        autoComplete="family-name"
+                        error={touched.lastName && Boolean(errors.lastName)}
+                        helperText={touched.lastName && errors.lastName}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Field
+                        as={TextField}
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        error={touched.email && Boolean(errors.email)}
+                        helperText={touched.email && errors.email}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Field
+                        as={TextField}
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="new-password"
+                        error={touched.password && Boolean(errors.password)}
+                        helperText={touched.password && errors.password}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <FormControlLabel
+                        control={<Field as={Checkbox} name="terms" color="primary" />}
+                        label="Terms & conditions"
+                        error={touched.terms && Boolean(errors.terms)}
+                      />
+                      {touched.terms && errors.terms && <Typography variant="body2" color="error">{errors.terms}</Typography>}
+                    </Grid>
+                  </Grid>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign Up
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <p className='text-sm text-blue-600'>
+                  Already have an account? <button className='cursor-pointer hover:underline' onClick={() => navigate("/login")}>Sign in</button>
+                </p>
+              </Grid>
+            </Grid>
+          </Box>
+        </Container>
+      </ThemeProvider>
+    </div>
+  );
 }
