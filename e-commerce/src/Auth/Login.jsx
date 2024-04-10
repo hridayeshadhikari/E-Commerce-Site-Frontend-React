@@ -32,7 +32,6 @@ export default function SignUp() {
     const navigate = useNavigate();
 
     const handleSubmit = (values, { setSubmitting }) => {
-
         console.log("userdata", values);
         setSubmitting(false);
         setTimeout(() => {
@@ -48,7 +47,6 @@ export default function SignUp() {
             progress: undefined,
             theme: "light",
         });
-        
     };
 
     return (
@@ -75,7 +73,7 @@ export default function SignUp() {
                             validationSchema={validationSchema}
                             onSubmit={handleSubmit}
                         >
-                            {({ isSubmitting }) => (
+                            {({ isSubmitting, errors, touched }) => (
                                 <Form noValidate>
                                     <Box component="div" sx={{ mt: 3 }}>
                                         <Grid container spacing={2}>
@@ -88,6 +86,8 @@ export default function SignUp() {
                                                     label="Email Address"
                                                     name="email"
                                                     autoComplete="email"
+                                                    error={errors.email && touched.email}
+                                                    helperText={errors.email && touched.email && errors.email}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -100,13 +100,17 @@ export default function SignUp() {
                                                     type="password"
                                                     id="password"
                                                     autoComplete="new-password"
+                                                    error={errors.password && touched.password}
+                                                    helperText={errors.password && touched.password && errors.password}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <FormControlLabel
                                                     control={<Field as={Checkbox} name="terms" color="primary" />}
                                                     label="Terms & conditions."
+                                                    error={errors.terms && touched.terms}
                                                 />
+                                                {errors.terms && touched.terms && <div>{errors.terms}</div>}
                                             </Grid>
                                         </Grid>
                                         <Button
