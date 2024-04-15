@@ -222,7 +222,12 @@ export default function Navbar() {
   };
   const handleCategoryClick = (category, section, items, close) => {
     navigate(`/${category.id}/${section.id}/${items.id}`);
-    close();
+    close()
+  };
+
+  const handleCategoryClickMob = (category, section, items) => {
+    navigate(`/${category.id}/${section.id}/${items.id}`);
+    setOpen(false)
   };
 
   useEffect(() => {
@@ -341,9 +346,15 @@ export default function Navbar() {
                             >
                               {section.items.map((item) => (
                                 <li key={item.name} className="flow-root">
-                                  <a href={item.href} className="-m-2 block p-2 text-gray-500">
+                                  <p  
+                                  onClick={() => handleCategoryClickMob(
+                                    category,
+                                    section,
+                                    item
+                                  )}
+                                  className="-m-2 block p-2 text-gray-500 cursor-pointer">
                                     {item.name}
-                                  </a>
+                                  </p>
                                 </li>
                               ))}
                             </ul>
@@ -367,13 +378,18 @@ export default function Navbar() {
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   {!auth.user?.firstName? (
                     <div className="flow-root">
-                      <button onClick={handleOpen} className="-m-2 block p-2 font-medium text-gray-900">
+                      <button onClick={handleOpen} className="-m-2 block p-2 font-medium hover:text-blue-700">
                         Sign in
                       </button>
                     </div>
                   ) :
                   <div className="flow-root">{auth.user.firstName + " " + auth.user.lastName}</div>
                   }
+                  <div>
+                    {auth.user?.firstName?(
+                      <button className='hover:text-blue-700' onClick={handleLogout}>Logout</button>
+                    ):<div></div>}
+                  </div>
 
                 </div>
 

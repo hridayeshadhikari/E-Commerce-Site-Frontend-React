@@ -8,14 +8,14 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 const defaultSize = [
-  { name: "S", quantity: 0 },
-  { name: "M", quantity: 0 },
-  { name: "L", quantity: 0 },
-  { name: "XL", quantity: 0 }
+  { name: "S", quantity: 0 ,inStock:"true"},
+  { name: "M", quantity: 0 ,inStock:"true"},
+  { name: "L", quantity: 0 ,inStock:"true"},
+  { name: "XL", quantity: 0 ,inStock:"true"}
 ]
 
 export default function AddProduct() {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const [productData, setProductData] = React.useState({
 
     "imageUrl": "",
@@ -268,6 +268,21 @@ export default function AddProduct() {
                     type="number"
                     fullWidth
                   />
+                </Grid>
+                <Grid item xs={6} sm={4}>
+                  <FormControl fullWidth>
+                    <InputLabel>In Stock</InputLabel>
+                    <Select
+                      name="In Stock"
+                      value={productData.inStock}
+                      onChange={handleChange}
+                      label="Third Level Category"
+                    >
+                      <MenuItem value="true">True</MenuItem>
+                      <MenuItem value="false">False</MenuItem>
+
+                    </Select>
+                  </FormControl>
                 </Grid>
               </Grid>
 

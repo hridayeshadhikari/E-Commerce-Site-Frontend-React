@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Alert, AlertTitle, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { getOrderById } from "../../../Redux/Order/Action";
 import OrderTracker from "../Order/OrderTracker";
 import AddressCard from "../AddressCard/AddressCard";
 import { useParams } from "react-router-dom";
 import { updatePayment } from "../../../Redux/Payment/Action";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Payment = () => {
   const [paymentId, setPaymentId] = useState();
@@ -26,27 +27,45 @@ const Payment = () => {
   }, []);
 
   useEffect(() => {
+    
     if (paymentId) {
+      toast.success('Order placed Successfully', {
+        position: "top-center",
+        autoClose: 3500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });  
       const data = { orderId, paymentId};
       dispatch(getOrderById(orderId));
       dispatch(updatePayment(data));
+      
     }
   }, [orderId, paymentId]);
 
   return (
     <div className="px-2 lg:px-36">
       <div className="flex flex-col justify-center items-center">
-        <Alert
-          variant="filled"
-          severity="success"
-          sx={{ mb: 6, width: "fit-content" }}
-        >
-          <AlertTitle>Payment Success</AlertTitle>
-         Order Placed Successfully
-        </Alert>
+       
       </div>
-
+      <ToastContainer
+                  position="top-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
+      <div className="mt-[8rem]">
       <OrderTracker activeStep={1}/>
+      </div>
 
       <Grid container className="space-y-5 py-5 pt-20">
         {order.order?.orderItems.map((item) => (
@@ -79,6 +98,7 @@ const Payment = () => {
             </Grid>
           </Grid>
         ))}
+        
       </Grid>
     </div>
   );

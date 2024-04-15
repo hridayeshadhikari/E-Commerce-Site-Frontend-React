@@ -14,8 +14,8 @@ import { getProducts } from '../../../Redux/Product/Action'
 import { Pagination } from '@mui/material'
 
 const sortOptions = [
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
+  { name: 'Price: Low to High', value: 'price_low', current: false },
+  { name: 'Price: High to Low', value: 'price_high', current: false },
 ]
 
 const filters = [
@@ -168,6 +168,13 @@ export default function CategoryFilter() {
     const query = searchParams.toString();
     navigate({ search: `?${query}` })
   }
+  const handleSortChange = (sortValue) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("sort", sortValue);
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+  };
+
 
   return (
     <div className="bg-white">
@@ -332,7 +339,8 @@ export default function CategoryFilter() {
                         <Menu.Item key={option.name}>
                           {({ active }) => (
                             <a
-                              href={option.href}
+                              href="#"
+                              onClick={() => handleSortChange(option.value)}
                               className={classNames(
                                 option.current ? 'font-medium text-gray-900' : 'text-gray-500',
                                 active ? 'bg-gray-100' : '',

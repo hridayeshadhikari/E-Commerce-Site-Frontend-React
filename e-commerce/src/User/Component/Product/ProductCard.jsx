@@ -68,7 +68,7 @@ export default function Example() {
   }, [])
 
   const imgArr = products.product?.extraImageUrl
-  console.log("======>", imgArr)
+  // console.log("======>", imgArr)
 
   useEffect(() => {
     if (products.product?.extraImageUrl && products.product.extraImageUrl.length > 0) {
@@ -252,6 +252,7 @@ export default function Example() {
                                   'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
                                 )
                               }
+                              onClick={() => setSelectedSize(size)} // <-- Add this line
                             >
                               {({ active, checked }) => (
                                 <>
