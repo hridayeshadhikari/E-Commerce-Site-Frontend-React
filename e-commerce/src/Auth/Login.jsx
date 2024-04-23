@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Button from '@mui/material/Button';
@@ -13,7 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import sitelogo from "../Assets/trendsphere-high-resolution-logo-transparent.png";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../Redux/Auth/Action';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -30,24 +31,31 @@ const validationSchema = Yup.object().shape({
 export default function SignUp() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const error = useSelector(state => state.auth.error);
 
-    const handleSubmit = (values, { setSubmitting }) => {
+    // Local state to control the visibility of the error message
+    const [showError, setShowError] = useState(false);
+
+    const handleSubmit = async (values, { setSubmitting }) => {
         console.log("userdata", values);
         setSubmitting(false);
-        setTimeout(() => {
-            dispatch(login(values));
-        }, 2000);
-        toast.success('Login Successful', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        dispatch(login(values));
     };
+
+    useEffect(() => {
+        if (error && showError) {
+            toast.error("Invalid email or password", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }, [error, showError]);
 
     return (
         <div className='mb-[4rem]'>
@@ -71,7 +79,10 @@ export default function SignUp() {
                         <Formik
                             initialValues={{ email: '', password: '', terms: false }}
                             validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
+                            onSubmit={(values, actions) => {
+                                setShowError(true); // Set showError to true on form submission
+                                handleSubmit(values, actions);
+                            }}
                         >
                             {({ isSubmitting, errors, touched }) => (
                                 <Form noValidate>

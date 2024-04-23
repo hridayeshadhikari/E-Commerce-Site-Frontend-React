@@ -15,25 +15,25 @@ export const signup = (userData) => async (dispatch) => {
         dispatch({ type: SIGNUP_SUCCESS, payload: data })
     } catch (error) {
         console.log("registration error----", error)
-        dispatch({ type: SIGNUP_FAILURE, payload: error })
+        dispatch({ type: SIGNUP_FAILURE, payload: error.response.data.message || "An error occurred during signup" })
     }
 }
 
 export const login = (userData) => async (dispatch) => {
-    dispatch({ type: LOGIN_REQUEST })
+    dispatch({ type: LOGIN_REQUEST });
     try {
-        const { data } = await axios.post(`${API_BASE_URL}/auth/login`, userData)
+        const { data } = await axios.post(`${API_BASE_URL}/auth/login`, userData);
         if (data.token) {
-            localStorage.setItem("jwt", data.token)
+            localStorage.setItem("jwt", data.token);
         }
-        console.log("login success", data)
-        dispatch({ type: LOGIN_SUCCESS, payload: data })
+        console.log("login success", data);
+        dispatch({ type: LOGIN_SUCCESS, payload: data });
+    } catch (error) {
+        console.log("------", error);
+        dispatch({ type: LOGIN_FAILURE, payload: error.response.data.message || "An error occurred during login" });
     }
-    catch (error) {
-        console.log("------", error)
-        dispatch({ type: LOGIN_FAILURE, payload: error })
-    }
-}
+};
+
 
 export const getUserProfile = (jwt) => async (dispatch) => {
     dispatch({ type: GET_USER_REQUEST })

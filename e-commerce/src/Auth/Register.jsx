@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react'; // Import useState and useEffect
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -32,26 +33,28 @@ const validationSchema = Yup.object({
 export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
- 
+  const error = useSelector(state => state.auth.error);
+  const [showError, setShowError] = useState(false);
 
   const handleSubmit = (values) => {
-   
-
-    toast.success('Registration Successfull', {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-    setTimeout(() => {
-        dispatch(signup(values));
-      }, 3000);
+    setShowError(true); 
+    dispatch(signup(values));
   };
+
+  useEffect(() => {
+    if (error && showError) { 
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }, [error, showError]);
 
   return (
     <div className='mb-[4rem]'>
@@ -70,9 +73,9 @@ export default function Register() {
               <img className='h-[4rem] ' src={sitelogo} alt="" />
             </div>
             <div className='mb-4'>
-            <Typography component="h1" variant="h5">
-              Sign up
-            </Typography>
+              <Typography component="h1" variant="h5">
+                Sign up
+              </Typography>
             </div>
             <Formik
               initialValues={{
