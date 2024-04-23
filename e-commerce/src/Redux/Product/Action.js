@@ -1,11 +1,12 @@
 
+import axios from "axios";
 import api from "../../Config/ApiConfig";
 import { FIND_PRODUCT_BY_CATEGORY_REQUEST, FIND_PRODUCT_BY_CATEGORY_FAILURE, FIND_PRODUCT_BY_CATEGORY_SUCCESS, FIND_PRODUCT_BY_ID_FAILURE, FIND_PRODUCT_BY_ID_REQUEST, FIND_PRODUCT_BY_ID_SUCCESS } from "./ActionType"
 
 export const findById = (productId) => async (dispatch) => {
   dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST })
   try {
-    const { data } = await api.get(`/api/product/${productId}`)
+    const { data } = await axios.get(`http://localhost:1213/apis/product/${productId}`)
     console.log("product----", data)
     dispatch({ type: FIND_PRODUCT_BY_ID_SUCCESS, payload: data })
   } catch (error) {
@@ -30,8 +31,8 @@ export const getProducts = (reqData) =>async (dispatch) => {
   } = reqData;
 
   try {
-    const { data } = await api.get(
-      `/api/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+    const { data } = await axios.get(
+      `http://localhost:1213/apis/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
 
     console.log("get product by category - ", data);
