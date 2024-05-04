@@ -1,48 +1,55 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react'; // Import useState and useEffect
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
+import * as React from "react";
+import { useState, useEffect } from "react"; // Import useState and useEffect
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import sitelogo from "../Assets/trendsphere-high-resolution-logo-transparent.png";
 import { useDispatch, useSelector } from "react-redux";
-import { signup } from '../Redux/Auth/Action';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { signup } from "../Redux/Auth/Action";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const defaultTheme = createTheme();
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
-  firstName: Yup.string().required('First Name is required'),
-  lastName: Yup.string().required('Last Name is required'),
-  email: Yup.string().email('Invalid email address').required('Email is required'),
-  password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
-  terms: Yup.boolean().oneOf([true], 'You must accept the terms and conditions'),
+  firstName: Yup.string().required("First Name is required"),
+  lastName: Yup.string().required("Last Name is required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters"),
+  terms: Yup.boolean().oneOf(
+    [true],
+    "You must accept the terms and conditions"
+  ),
 });
 
 export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const error = useSelector(state => state.auth.error);
+  const error = useSelector((state) => state.auth.error);
   const [showError, setShowError] = useState(false);
 
   const handleSubmit = (values) => {
-    setShowError(true); 
+    setShowError(true);
     dispatch(signup(values));
   };
 
   useEffect(() => {
-    if (error && showError) { 
+    if (error && showError) {
       toast.error(error, {
         position: "top-center",
         autoClose: 2000,
@@ -57,32 +64,32 @@ export default function Register() {
   }, [error, showError]);
 
   return (
-    <div className='mb-[4rem]'>
+    <div className="mb-[4rem]">
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
             sx={{
               marginTop: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <div className='mb-4'>
-              <img className='h-[4rem] ' src={sitelogo} alt="" />
+            <div className="mb-4">
+              <img className="h-[4rem] " src={sitelogo} alt="" />
             </div>
-            <div className='mb-4'>
+            <div className="mb-4">
               <Typography component="h1" variant="h5">
                 Sign up
               </Typography>
             </div>
             <Formik
               initialValues={{
-                firstName: '',
-                lastName: '',
-                email: '',
-                password: '',
+                firstName: "",
+                lastName: "",
+                email: "",
+                password: "",
                 terms: false,
               }}
               validationSchema={validationSchema}
@@ -147,11 +154,18 @@ export default function Register() {
                     </Grid>
                     <Grid item xs={12}>
                       <FormControlLabel
-                        control={<Field as={Checkbox} name="terms" color="primary" />}
+                        control={
+                          <Field as={Checkbox} name="terms" color="primary" />
+                        }
+                        className="text-xs"
                         label="Terms & conditions"
                         error={touched.terms && Boolean(errors.terms)}
                       />
-                      {touched.terms && errors.terms && <Typography variant="body2" color="error">{errors.terms}</Typography>}
+                      {touched.terms && errors.terms && (
+                        <Typography variant="body2" color="error">
+                          {errors.terms}
+                        </Typography>
+                      )}
                     </Grid>
                   </Grid>
                   <Button
@@ -179,8 +193,14 @@ export default function Register() {
             />
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <p className='text-sm text-blue-600'>
-                  Already have an account? <button className='cursor-pointer hover:underline' onClick={() => navigate("/login")}>Sign in</button>
+                <p className="text-sm text-black-600">
+                  Already have an account ?{" "}
+                  <button
+                    className="cursor-pointer text-blue-600 underline"
+                    onClick={() => navigate("/login")}
+                  >
+                    Sign in
+                  </button>
                 </p>
               </Grid>
             </Grid>
