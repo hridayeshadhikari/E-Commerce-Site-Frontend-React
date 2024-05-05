@@ -12,8 +12,6 @@ const Order = () => {
     dispatch(orderHistory());
   }, []);
 
-  console.log("-----", order);
-
   return (
     <div className="mt-10 mb-5">
       <Box className="px-10">

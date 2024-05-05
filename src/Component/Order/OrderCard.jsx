@@ -7,8 +7,6 @@ import StarIcon from "@mui/icons-material/Star";
 
 const OrderCard = ({ item, order }) => {
   const navigate = useNavigate();
-  console.log("items ", item, order, order.orderStatus);
-
   function getDateFourDaysAhead(inputDate) {
     // Parse the input date string into a Date object
     const parts = inputDate.split("/");
@@ -30,7 +28,6 @@ const OrderCard = ({ item, order }) => {
   }
   const inputDate = order.orderDate;
   const result = getDateFourDaysAhead(inputDate);
-  console.log(result);
   return (
     <Box className="p-5 shadow-lg hover:shadow-2xl border ">
       <Grid spacing={2} container sx={{ justifyContent: "space-between" }}>

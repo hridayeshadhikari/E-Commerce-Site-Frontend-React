@@ -63,7 +63,6 @@ export default function AddProduct() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addProduct(productData));
-    console.log("=====>", productData);
     toast.success("Product Added Successfully", {
       position: "top-center",
       autoClose: 2000,
@@ -105,7 +104,6 @@ export default function AddProduct() {
     setProductData({ ...productData, highlights: updatedHighlights });
   };
 
-  console.log("=====>", productData);
   return (
     <div>
       <Typography

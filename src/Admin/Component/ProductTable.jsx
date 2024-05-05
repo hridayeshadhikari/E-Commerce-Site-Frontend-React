@@ -22,7 +22,6 @@ export default function ProductTable() {
     const { products } = useSelector((store) => store);
     const location=useLocation();
     const navigate=useNavigate();
-    console.log("========>", products);
     const searchParams = new URLSearchParams(location.search);
     const page=searchParams.get("page");
 

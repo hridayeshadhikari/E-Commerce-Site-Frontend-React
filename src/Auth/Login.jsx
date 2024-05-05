@@ -5,8 +5,6 @@ import * as Yup from "yup";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -25,7 +23,6 @@ const defaultTheme = createTheme();
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().required("Password is required"),
-  terms: Yup.boolean().oneOf([true], "Must accept terms and conditions"),
 });
 
 export default function SignUp() {
@@ -37,7 +34,6 @@ export default function SignUp() {
   const [showError, setShowError] = useState(false);
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    console.log("userdata", values);
     setSubmitting(false);
     dispatch(login(values));
   };
@@ -77,7 +73,7 @@ export default function SignUp() {
               Login
             </Typography>
             <Formik
-              initialValues={{ email: "", password: "", terms: false }}
+              initialValues={{ email: "", password: "" }}
               validationSchema={validationSchema}
               onSubmit={(values, actions) => {
                 setShowError(true); // Set showError to true on form submission
@@ -121,14 +117,6 @@ export default function SignUp() {
                           }
                         />
                       </Grid>
-                      {/* <Grid item xs={12}>
-                                                <FormControlLabel
-                                                    control={<Field as={Checkbox} name="terms" color="primary" />}
-                                                    label="Terms & conditions."
-                                                    error={errors.terms && touched.terms}
-                                                />
-                                                {errors.terms && touched.terms && <div>{errors.terms}</div>}
-                                            </Grid> */}
                     </Grid>
                     <Button
                       type="submit"

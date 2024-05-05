@@ -25,18 +25,15 @@ function DeliveryAddress({ handleNext }) {
     };
     const reqData = { address, navigate };
     dispatch(createOrder(reqData));
-    console.log("address", address);
     handleNext();
   };
   // const handleCreateOrder = (address) => {
   //   const reqData = { address, navigate }
-  //   console.log("=======>",address)
   //   dispatch(createOrder(reqData));
   // };
   const handleCreateOrder = (item) => {
     const reqData = { address: item, navigate };
     dispatch(createOrder(reqData));
-    console.log("=======>", item);
     handleNext();
   };
 

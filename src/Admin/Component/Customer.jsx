@@ -12,8 +12,6 @@ const Customer = () => {
     dispatch(getAllUsers())
   }, [])
 
-  console.log("======>", adminAction)
-
   return (
     <div>
       <Box width={"100%"}>

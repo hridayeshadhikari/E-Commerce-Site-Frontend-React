@@ -1,6 +1,5 @@
 import axios from "axios";
-const LOCALHOST = "http://localhost:1213";
-
+const LOCALHOST = "https://e-commerce-railway-production.up.railway.app";
 export const API_BASE_URL = LOCALHOST;
 
 const api = axios.create({

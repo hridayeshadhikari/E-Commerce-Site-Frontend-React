@@ -33,7 +33,6 @@ export default function Example() {
   }, []);
 
   const imgArr = products.product?.extraImageUrl;
-  // console.log("======>", imgArr)
 
   useEffect(() => {
     if (
@@ -51,7 +50,6 @@ export default function Example() {
   const handleAddToCart = (event) => {
     event.preventDefault();
     const data = { productId: productId, size: selectedSize.name };
-    console.log("data----", data);
     dispatch(addToCart(data));
     if (auth.user !== null) {
       toast.success("Item added to cart", {
@@ -94,7 +92,6 @@ export default function Example() {
   let totalRating = 0;
   var rating = products?.product?.rating;
   var average = findAverage(rating);
-  // console.log("average rating ",average)
 
   return (
     <div className="bg-white">
