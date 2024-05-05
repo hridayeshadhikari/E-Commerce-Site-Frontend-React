@@ -6,6 +6,7 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 import companyLogo from "../../Assets/trendsphere-high-resolution-logo-transparent.png";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
@@ -207,7 +208,7 @@ const navigation = {
       ],
     },
   ],
-  pages: [{ name: "Company", id: "/" }],
+  pages: [{ name: "", id: "/" }],
 };
 
 function classNames(...classes) {
@@ -475,7 +476,9 @@ export default function Navbar() {
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
                   <span className="sr-only">Your Company</span>
-                  <img className="h-8 w-auto" src={companyLogo} alt="" />
+                  <Link to="/">
+                    <img className="h-8 w-auto" src={companyLogo} alt="" />
+                  </Link>
                 </a>
               </div>
 
@@ -509,7 +512,6 @@ export default function Navbar() {
                             leaveTo="opacity-0"
                           >
                             <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500">
-                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                               <div
                                 className="absolute inset-0 top-1/2 bg-white shadow"
                                 aria-hidden="true"
