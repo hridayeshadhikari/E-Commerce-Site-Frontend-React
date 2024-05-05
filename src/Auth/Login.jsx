@@ -74,7 +74,7 @@ export default function SignUp() {
               <img className="h-[4rem] " src={sitelogo} alt="" />
             </div>
             <Typography component="h1" variant="h5">
-              Sign in
+              Login
             </Typography>
             <Formik
               initialValues={{ email: "", password: "", terms: false }}
@@ -137,7 +137,7 @@ export default function SignUp() {
                       sx={{ mt: 3, mb: 2 }}
                       disabled={isSubmitting}
                     >
-                      Sign in
+                      Login
                     </Button>
                     <ToastContainer
                       position="top-center"
@@ -154,7 +154,7 @@ export default function SignUp() {
                     <Grid container justifyContent="flex-end">
                       <Grid item>
                         <p className="text-sm text-black-600">
-                          Don't have an account ?{" "}
+                          New To TrendSphere ?{" "}
                           <button
                             className="cursor-pointer underline text-blue-600"
                             onClick={() => navigate("/signup")}

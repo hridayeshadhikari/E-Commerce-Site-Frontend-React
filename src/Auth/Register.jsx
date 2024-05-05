@@ -174,7 +174,7 @@ export default function Register() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    Sign Up
+                    Sign up
                   </Button>
                 </Form>
               )}
@@ -193,13 +193,13 @@ export default function Register() {
             />
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <p className="text-sm text-black-600">
-                  Already have an account ?{" "}
+                <p className="text-sm text-blue-600">
+                  Existing User ?{" "}
                   <button
-                    className="cursor-pointer text-blue-600 underline"
+                    className="cursor-pointer underline"
                     onClick={() => navigate("/login")}
                   >
-                    Sign in
+                    Login
                   </button>
                 </p>
               </Grid>
