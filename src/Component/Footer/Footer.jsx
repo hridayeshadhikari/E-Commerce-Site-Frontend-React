@@ -51,25 +51,21 @@ const Footer = () => {
               <Typography
                 variant="h5"
                 sx={{ margin: "15px" }}
-                style={{ fontSize: "17px", fontWeight: "300", color: "gray" }}
+                style={{ fontSize: "18px", fontWeight: "700" }}
               >
                 About
               </Typography>
               <Typography variant="h5" sx={{ margin: "15px" }}>
                 <Link
                   style={{ fontSize: "13px" }}
-                  to="/about-us"
+                  to="/"
                   className="linkStyle cursor-pointer"
                 >
                   About us
                 </Link>
               </Typography>
               <Typography variant="h6" sx={{ margin: "15px" }}>
-                <Link
-                  style={{ fontSize: "13px" }}
-                  to="/contact-us"
-                  className="linkStyle"
-                >
+                <Link style={{ fontSize: "13px" }} to="/" className="linkStyle">
                   Contact us
                 </Link>
               </Typography>
@@ -78,7 +74,7 @@ const Footer = () => {
               <Typography
                 variant="h5"
                 sx={{ margin: "15px" }}
-                style={{ fontSize: "17px", fontWeight: "500", color: "gray" }}
+                style={{ fontSize: "18px", fontWeight: "700" }}
               >
                 Help
               </Typography>
@@ -114,7 +110,7 @@ const Footer = () => {
               <Typography
                 variant="h5"
                 sx={{ margin: "15px" }}
-                style={{ fontSize: "17px", fontWeight: "500", color: "gray" }}
+                style={{ fontSize: "18px", fontWeight: "700" }}
               >
                 Consumer Policy
               </Typography>
@@ -150,7 +146,7 @@ const Footer = () => {
               <Typography
                 variant="h5"
                 sx={{ margin: "15px" }}
-                style={{ fontSize: "17px", fontWeight: "500", color: "gray" }}
+                style={{ fontSize: "18px", fontWeight: "700" }}
               >
                 Mail us
               </Typography>
@@ -174,9 +170,9 @@ const Footer = () => {
               <Typography
                 variant="h5"
                 sx={{ margin: "15px" }}
-                style={{ fontSize: "17px", fontWeight: "500", color: "gray" }}
+                style={{ fontSize: "18px", fontWeight: "700" }}
               >
-                Social
+                Connect Us Here
               </Typography>
               <Typography variant="h7" sx={{ margin: "15px" }}>
                 <a href="instagram.com" target="blank" className="icn">
@@ -203,7 +199,7 @@ const Footer = () => {
               <Typography
                 variant="h5"
                 sx={{ margin: "15px" }}
-                style={{ fontSize: "17px", fontWeight: "500", color: "gray" }}
+                style={{ fontSize: "18px", fontWeight: "700" }}
               >
                 Secure Payment Gateway
               </Typography>
@@ -251,10 +247,6 @@ const Footer = () => {
             py: 1.4,
             px: 1.4,
             mt: "2%",
-            backgroundColor: (theme) =>
-              theme.palette.mode === "#37475A"
-                ? theme.palette.grey[400]
-                : theme.palette.grey[800],
           }}
         >
           <Container maxWidth="sm">

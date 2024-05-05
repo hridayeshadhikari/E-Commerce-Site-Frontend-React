@@ -12,8 +12,13 @@ const Sitemap = () => {
         <div className="innersite">
           <div className="inner1site">
             <div>
-              <h1 id="main-site">Categories</h1>
-
+              <h1
+                id="main-site"
+                style={{ fontSize: "25px", fontWeight: "700" }}
+                className="mb-5  text-center"
+              >
+                Categories
+              </h1>
               <div className="content-sitemap">
                 <p>
                   <strong>Gadgets</strong>
@@ -27,7 +32,7 @@ const Sitemap = () => {
                   Mods | Mobile Body Panels | Bluetooth Shutter Remotes | Mobile
                   Battery | Photo Printers | Satellite Phone.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>Home Decor</strong>
                 </p>
                 <p>
@@ -39,7 +44,7 @@ const Sitemap = () => {
                   Shelves | Key Holders | Decorative Mirrors | Wall Hangings
                   Decorative | Masks Name Plates | Tin & Metal Signs
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>Clothing</strong>
                 </p>
                 <p>
@@ -49,7 +54,7 @@ const Sitemap = () => {
                   Fabrics | Winter & Seasonal Wear | Women's Clothing | Ethnic
                   Wear | Western Wear | Lingerie{" "}
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>Footwear</strong>
                 </p>
                 <p>
@@ -62,7 +67,7 @@ const Sitemap = () => {
                   Laces Men’s | Casual Shoes | Men’s Sports Shoes | Men’s Formal
                   Shoes
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>Watches</strong>
                 </p>
                 <p>
@@ -72,7 +77,7 @@ const Sitemap = () => {
                   Stations | Clocks | Wall Clocks | Table Clocks | Pocket
                   Watches
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>Bags, Wallets & Belts</strong>
                 </p>
                 <p>

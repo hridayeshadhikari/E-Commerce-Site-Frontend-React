@@ -58,7 +58,12 @@ export default function FAQ() {
     <div>
       <div ref={faqRef} className="p-10">
         <div>
-          <h1 className="font-bold mb-3">Frequently Asked Questions</h1>
+          <h1
+            className="font-bold my-5"
+            style={{ fontSize: "25px", fontWeight: "700" }}
+          >
+            Frequently Asked Questions (FAQs)
+          </h1>
           <Accordion
             expanded={expanded === "panel1"}
             onChange={handleChange("panel1")}

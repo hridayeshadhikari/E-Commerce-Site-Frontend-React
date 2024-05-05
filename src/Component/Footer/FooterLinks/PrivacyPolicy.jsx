@@ -12,12 +12,25 @@ const PrivacyPolicy = () => {
         <div className="innerprpo">
           <div className="inner1prpo">
             <div>
-              <h1 id="mainprpo">Privacy Policy</h1>
-
-              <div className="content-container">
-                <p>TrendSphere E-Commerce Privacy policy</p>
-                12-10-2023
-                <p>
+              <h1
+                id="mainprpo"
+                className="text-center"
+                style={{ fontSize: "25px", fontWeight: "700" }}
+              >
+                Privacy Policy
+                <p
+                  style={{
+                    float: "right",
+                    fontSize: "15px",
+                    fontWeight: "500",
+                  }}
+                  className="mt-3"
+                >
+                  12-05-2024
+                </p>
+              </h1>
+              <div className="content-container ">
+                <p className="mt-3">
                   <strong>1. Introduction</strong>
                 </p>
                 <p>
@@ -29,7 +42,7 @@ const PrivacyPolicy = () => {
                   website, you consent to the practices described in this
                   Privacy Policy.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>2. Information We Collect</strong>
                 </p>
                 <p>
@@ -37,7 +50,7 @@ const PrivacyPolicy = () => {
                   address, phone number, shipping address, and payment
                   information.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>3. How We Use Your Information</strong>
                 </p>
                 <p>
@@ -70,7 +83,7 @@ const PrivacyPolicy = () => {
                   <span className="dot"></span> Complying with legal and
                   regulatory requirements.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>4. Data Security</strong>
                 </p>
                 <p>
@@ -81,7 +94,7 @@ const PrivacyPolicy = () => {
                   completely secure, so we cannot guarantee the absolute
                   security of your information.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>5. Sharing Your Information</strong>
                 </p>
                 <p>We may share your information with: </p>
@@ -115,7 +128,7 @@ const PrivacyPolicy = () => {
                 <p>
                   <span className="dot"></span> Changing cookie preferences.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>7. Children's Privacy</strong>
                 </p>
                 <p>
@@ -123,7 +136,7 @@ const PrivacyPolicy = () => {
                   and we do not knowingly collect personal information from
                   children.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>8. Changes to this Privacy Policy</strong>
                 </p>
                 <p>
@@ -131,7 +144,7 @@ const PrivacyPolicy = () => {
                   changes in our practices and services. Please review this
                   policy periodically for any updates.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>9. Contact Us</strong>
                 </p>
                 <p>

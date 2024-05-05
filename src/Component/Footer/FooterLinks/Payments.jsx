@@ -13,7 +13,11 @@ const Payments = () => {
           <div className="innerprpo">
             <div className="inner1prpo">
               <div>
-                <h1 id="mainprpo" className="font-bold mb-3 mt-5">
+                <h1
+                  id="mainprpo"
+                  style={{ fontSize: "25px", fontWeight: "700" }}
+                  className="font-bold my-5 text-center"
+                >
                   Payments
                 </h1>
 

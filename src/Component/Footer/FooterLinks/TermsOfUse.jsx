@@ -13,11 +13,24 @@ const TermsOfUse = () => {
         <div className="innerprpo">
           <div className="inner1prpo">
             <div>
-              <h1 id="mainprpo">Terms of use</h1>
-
-              <div className="content-container">
-                <p>TrendSphere E-Commerce Terms of Use</p>
-                12-10-2023
+              <h1
+                id="mainprpo"
+                className="text-center"
+                style={{ fontSize: "25px", fontWeight: "700" }}
+              >
+                Terms of use
+                <p
+                  style={{
+                    float: "right",
+                    fontSize: "15px",
+                    fontWeight: "500",
+                  }}
+                  className="mt-3"
+                >
+                  12-05-2024
+                </p>
+              </h1>
+              <div className="content-container mt-4">
                 <p>
                   <strong>1. Acceptance of Terms</strong>
                 </p>
@@ -27,7 +40,7 @@ const TermsOfUse = () => {
                   If you do not agree to these terms, please do not use the
                   Site.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>2. Changes to Terms</strong>
                 </p>
                 <p>
@@ -36,7 +49,7 @@ const TermsOfUse = () => {
                   Site after any such changes constitutes acceptance of the
                   revised terms.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>3. User Registration</strong>
                 </p>
                 <p>
@@ -50,7 +63,7 @@ const TermsOfUse = () => {
                   your account information and for all activities that occur
                   under your account.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>4. Privacy Policy</strong>
                 </p>
                 <p>
@@ -59,7 +72,7 @@ const TermsOfUse = () => {
                   Site, you consent to the collection, use, and sharing of your
                   information as described in the Privacy Policy.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>5. Orders and Payments</strong>
                 </p>
                 <p>
@@ -72,7 +85,7 @@ const TermsOfUse = () => {
                   b. Payment information must be accurate and valid. You agree
                   to pay all charges incurred in connection with your order.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>6. Shipping and Returns</strong>
                 </p>
                 <p>
@@ -80,7 +93,7 @@ const TermsOfUse = () => {
                   are described in detail on the Site. By placing an order, you
                   agree to abide by these policies.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>7. Intellectual Property</strong>
                 </p>
                 <p>
@@ -93,7 +106,7 @@ const TermsOfUse = () => {
                   b. You may not use, reproduce, or distribute any content from
                   the Site without our written permission.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>8. Prohibited Activities</strong>
                 </p>
                 <p>You agree not to:</p>
@@ -101,14 +114,14 @@ const TermsOfUse = () => {
                 <p>b. Violate any applicable laws or regulations.</p>
                 <p>c. Engage in fraudulent or deceptive activities.</p>
                 <p>d. Interfere with the security or operation of the Site.</p>
-                <p>
+                <p className="mt-3">
                   <strong>9. Termination</strong>
                 </p>
                 <p>
                   TrendSphere may terminate your access to the Site at any time,
                   with or without cause.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>10. Disclaimer of Warranties</strong>
                 </p>
                 <p>
@@ -117,7 +130,7 @@ const TermsOfUse = () => {
                   warranties, including but not limited to, implied warranties
                   of merchantability and fitness for a particular purpose.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>11. Limitation of Liability</strong>
                 </p>
                 <p>
@@ -125,14 +138,14 @@ const TermsOfUse = () => {
                   incidental, special, or consequential damages arising out of
                   or in any way connected with your use of the Site.
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>12. Governing Law</strong>
                 </p>
                 <p>
                   These Terms of Use are governed by and construed in accordance
                   with the laws of [Your Jurisdiction].
                 </p>
-                <p>
+                <p className="mt-3">
                   <strong>13. Contact Information</strong>
                 </p>
                 <p>
