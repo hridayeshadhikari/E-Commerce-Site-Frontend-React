@@ -7,7 +7,7 @@ import {
   GET_ALL_RATINGS_SUCCESS,
   GET_ALL_REVIEWS_FAILURE,
   GET_ALL_REVIEWS_SUCCESS,
-} from "./ActioType";
+} from "./ActionType";
 
 const initialState = {
   error: null,

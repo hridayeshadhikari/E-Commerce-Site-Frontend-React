@@ -12,11 +12,11 @@ import MailIcon from "@mui/icons-material/Mail";
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import SecurePaymentImage from "../../../Assets/Razorpay_logo.webp";
-import SecurePaymentImage1 from "../../../Assets/pay-pal.png";
-import SecurePaymentImage2 from "../../../Assets/upi-icn.png";
-import SecurePaymentImage3 from "../../../Assets/visa-icn.png";
-import websitelogo from "../../../Assets/trendsphere-high-resolution-logo-transparent.png";
+import SecurePaymentImage from "../../Assets/Razorpay_logo.webp";
+import SecurePaymentImage1 from "../../Assets/pay-pal.png";
+import SecurePaymentImage2 from "../../Assets/upi-icn.png";
+import SecurePaymentImage3 from "../../Assets/visa-icn.png";
+import websitelogo from "../../Assets/trendsphere-high-resolution-logo-transparent.png";
 
 function Copyright() {
   return (
