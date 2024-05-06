@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { addProduct } from "../../Redux/Admin/Product/Action";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const defaultSize = [
   { name: "S", quantity: 0, inStock: "true" },
@@ -52,7 +53,6 @@ export default function AddProduct() {
   const handleSizeChange = (e, index) => {
     let { name, value } = e.target;
     name === "size_quantity" ? (name = "quantity") : (name = e.target.name);
-
     const sizes = [...productData.size];
     sizes[index][name] = value;
     setProductData((prevState) => ({
@@ -106,14 +106,22 @@ export default function AddProduct() {
 
   return (
     <div>
-      <Typography
-        variant="h3"
-        sx={{ textAlign: "center" }}
-        className="py-10 text-center "
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
-        Add New Product
-      </Typography>
-      <form onSubmit={handleSubmit}>
+        <Typography variant="h4" className="py-2">
+          Add New Product
+        </Typography>
+        <Link to="/admin/products">
+          <Button style={{ alignSelf: "flex-end" }}>Back</Button>
+        </Link>
+      </div>
+
+      <form onSubmit={handleSubmit} className="mt-3">
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -313,14 +321,12 @@ export default function AddProduct() {
             </Grid>
           ))}
 
-          <Grid item xs={12}>
-            <Button
-              variant="contained"
-              sx={{ p: 1.8 }}
-              className="py-20"
-              size="large"
-              type="submit"
-            >
+          <Grid
+            item
+            xs={12}
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
+            <Button variant="contained" size="medium" type="submit">
               Add Product
             </Button>
             <ToastContainer

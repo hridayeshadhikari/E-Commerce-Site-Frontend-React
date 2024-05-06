@@ -1,19 +1,33 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAllUsers } from '../../Redux/Admin/User/Action';
-import { TableCell, TableHead, Table, TableContainer, Box, Paper, TableRow, Avatar, TableBody, IconButton ,Typography} from '@mui/material'
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers } from "../../Redux/Admin/User/Action";
+import {
+  TableCell,
+  TableHead,
+  Table,
+  TableContainer,
+  Box,
+  Paper,
+  TableRow,
+  Avatar,
+  TableBody,
+  IconButton,
+  Typography,
+} from "@mui/material";
 
 const Customer = () => {
   const dispatch = useDispatch();
-  const { adminAction } = useSelector((store) => store)
+  const { adminAction } = useSelector((store) => store);
 
   useEffect(() => {
-    dispatch(getAllUsers())
-  }, [])
+    dispatch(getAllUsers());
+  }, []);
 
   return (
     <div>
+      <Typography variant="h4" className="py-2">
+        Customers
+      </Typography>
       <Box width={"100%"}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -23,38 +37,41 @@ const Customer = () => {
                 <TableCell>Name</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>Roles</TableCell>
-                
               </TableRow>
             </TableHead>
             <TableBody>
               {adminAction?.users?.map((item) => (
-                <TableRow key={item.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableRow
+                  key={item.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
                   <TableCell component="th" scope="row">
-                    <Avatar sx={{bgcolor:"blue"}}>{item.firstName[0].toUpperCase()+""+item.lastName[0].toUpperCase()}</Avatar>
+                    <Avatar sx={{ bgcolor: "blue" }}>
+                      {item.firstName[0].toUpperCase() +
+                        "" +
+                        item.lastName[0].toUpperCase()}
+                    </Avatar>
                   </TableCell>
                   <TableCell>
                     <Box>
-                      <Typography sx={{ fontWeight: 500, fontSize: "0.875rem !important" }}>
-                       {item.firstName+" "+item.lastName}
+                      <Typography
+                        sx={{
+                          fontWeight: 500,
+                          fontSize: "0.875rem !important",
+                        }}
+                      >
+                        {item.firstName + " " + item.lastName}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    <Typography variant='caption'>
-                      {item.email}
-                    </Typography>
+                    <Typography variant="caption">{item.email}</Typography>
                   </TableCell>
-                  {item.roles.map((item)=>( 
-                  <TableCell>
-                    <Typography variant='caption'>
-                     {item.name}
-                    </Typography>
-                  </TableCell>
+                  {item.roles.map((item) => (
+                    <TableCell>
+                      <Typography variant="caption">{item.name}</Typography>
+                    </TableCell>
                   ))}
-                 
-                  
-                 
-                  
                 </TableRow>
               ))}
             </TableBody>
@@ -62,7 +79,7 @@ const Customer = () => {
         </TableContainer>
       </Box>
     </div>
-  )
-}
+  );
+};
 
-export default Customer
+export default Customer;
