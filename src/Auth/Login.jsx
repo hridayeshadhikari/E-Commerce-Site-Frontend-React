@@ -5,8 +5,6 @@ import * as Yup from "yup";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -21,25 +19,25 @@ import { ToastContainer, toast } from "react-toastify";
 
 const defaultTheme = createTheme();
 
-// Define Yup schema for validation
+
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().required("Password is required"),
-  terms: Yup.boolean().oneOf([true], "Must accept terms and conditions"),
 });
 
 export default function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const error = useSelector((state) => state.auth.error);
+  const success = useSelector((state) => state.auth.success);
 
-  // Local state to control the visibility of the error message
   const [showError, setShowError] = useState(false);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     console.log("userdata", values);
     setSubmitting(false);
     dispatch(login(values));
+    setShowError(true);
   };
 
   useEffect(() => {
@@ -55,7 +53,20 @@ export default function SignUp() {
         theme: "light",
       });
     }
-  }, [error, showError]);
+    if (success && showError) {
+      toast.success("Login successful", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }, [error, showError, success]);
+
 
   return (
     <div className="mb-[4rem]">
@@ -80,7 +91,7 @@ export default function SignUp() {
               initialValues={{ email: "", password: "", terms: false }}
               validationSchema={validationSchema}
               onSubmit={(values, actions) => {
-                setShowError(true); // Set showError to true on form submission
+                setShowError(true); 
                 handleSubmit(values, actions);
               }}
             >
@@ -121,14 +132,7 @@ export default function SignUp() {
                           }
                         />
                       </Grid>
-                      {/* <Grid item xs={12}>
-                                                <FormControlLabel
-                                                    control={<Field as={Checkbox} name="terms" color="primary" />}
-                                                    label="Terms & conditions."
-                                                    error={errors.terms && touched.terms}
-                                                />
-                                                {errors.terms && touched.terms && <div>{errors.terms}</div>}
-                                            </Grid> */}
+                      
                     </Grid>
                     <Button
                       type="submit"

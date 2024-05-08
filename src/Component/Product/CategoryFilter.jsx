@@ -545,7 +545,7 @@ export default function CategoryFilter() {
 
               {/* Product grid */}
               <div className="lg:col-span-4 w-full ">
-                <div className="flex flex-wrap justify-center bg-white">
+                <div className="flex flex-wrap justify-start ml-10 bg-white">
                   {products?.products?.content?.map((item) => (
                     <DefaultProductCard product={item} />
                   ))}

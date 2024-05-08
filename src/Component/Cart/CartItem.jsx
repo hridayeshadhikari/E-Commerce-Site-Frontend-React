@@ -49,7 +49,7 @@ const CartItem = ({ item }) => {
           </div>
         </div>
       </div>
-      <div className="flex items-center lg:space-x-8">
+      <div className="flex items-center lg:space-x-2">
         <button
           className="text-gray-400 hover:text-gray-600"
           onClick={() => handleUpdateCartItem(-1)}

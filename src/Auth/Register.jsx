@@ -41,6 +41,7 @@ export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const error = useSelector((state) => state.auth.error);
+  const success = useSelector((state) => state.auth.success);
   const [showError, setShowError] = useState(false);
 
   const handleSubmit = (values) => {
@@ -61,7 +62,19 @@ export default function Register() {
         theme: "light",
       });
     }
-  }, [error, showError]);
+    if(success && showError){
+      toast.success("register success", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }, [error, showError,success]);
 
   return (
     <div className="mb-[4rem]">

@@ -13,7 +13,7 @@ export const findById = (productId) => async (dispatch) => {
   dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST });
   try {
     const { data } = await axios.get(
-      `http://localhost:1213/apis/product/${productId}`
+      `https://d1op8buhnp76or.cloudfront.net/apis/product/${productId}`
     );
     dispatch({ type: FIND_PRODUCT_BY_ID_SUCCESS, payload: data });
   } catch (error) {
@@ -38,7 +38,7 @@ export const getProducts = (reqData) => async (dispatch) => {
 
   try {
     const { data } = await axios.get(
-      `http://localhost:1213/apis/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      `https://d1op8buhnp76or.cloudfront.net/apis/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
     dispatch({ type: FIND_PRODUCT_BY_CATEGORY_SUCCESS, payload: data });
   } catch (error) {

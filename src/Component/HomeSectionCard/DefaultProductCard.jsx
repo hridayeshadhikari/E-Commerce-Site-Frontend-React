@@ -21,7 +21,7 @@ export default function DefaultProductCard({ product }) {
             src={product?.imageUrl}
             alt="product image"
           />
-          <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
+          <span className="absolute top-0 left-0 m-1 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
             {result}% OFF
           </span>
         </CardMedia>

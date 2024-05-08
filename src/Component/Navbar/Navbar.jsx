@@ -8,12 +8,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import companyLogo from "../../Assets/trendsphere-high-resolution-logo-transparent.png";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Avatar, Button, Menu, MenuItem } from "@mui/material";
+import { useLocation, useNavigate} from "react-router-dom";
+import { Button, Menu, MenuItem } from "@mui/material";
 import AuthModal from "../../Auth/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile, logout } from "../../Redux/Auth/Action";
 import { usersCart } from "../../Redux/Cart/Action";
+import PortraitIcon from '@mui/icons-material/Portrait';
 
 const navigation = {
   categories: [
@@ -236,6 +237,18 @@ export default function Navbar() {
   const handleCloseUserMenu = (event) => {
     setAnchorE1(null);
   };
+
+  const handleRedirectToProfile=()=>{
+    navigate("/account/profile")
+    setAnchorE1(null)
+  }
+  
+
+  const handleRedirectToOrder=(event)=>{
+    navigate("/account/order")
+    setAnchorE1(null);
+  }
+
   const handleClose = () => {
     setOpenAuthModal(false);
   };
@@ -267,6 +280,7 @@ export default function Navbar() {
   const handleLogout = () => {
     dispatch(logout());
     handleCloseUserMenu();
+    navigate("/")
   };
 
   const toCart = () => {
@@ -616,7 +630,9 @@ export default function Navbar() {
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   {auth.user?.firstName ? (
                     <div>
-                      <Avatar
+                      <Button sx={{color:"#757575"}} onClick={handleUserClick} ><PortraitIcon className="mr-2"/> { auth.user.firstName}</Button>
+                       
+                      {/* <Avatar
                         className="text-white"
                         onClick={handleUserClick}
                         aria-controls={open ? "basic-menu" : undefined}
@@ -629,7 +645,7 @@ export default function Navbar() {
                         }}
                       >
                         {auth.user?.firstName[0].toUpperCase()}
-                      </Avatar>
+                      </Avatar> */}
                       <Menu
                         sx={{ marginTop: ".5rem" }}
                         id="basic-menu"
@@ -640,10 +656,10 @@ export default function Navbar() {
                           "aria-labelledby": "basic-button",
                         }}
                       >
-                        <MenuItem onClick={handleCloseUserMenu}>
+                        <MenuItem onClick={handleRedirectToProfile}>
                           Profile
                         </MenuItem>
-                        <MenuItem onClick={() => navigate("/account/order")}>
+                        <MenuItem onClick={handleRedirectToOrder}>
                           My Orders
                         </MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
@@ -671,11 +687,11 @@ export default function Navbar() {
                 </div> */}
 
                 {/* Cart */}
-                <div className="ml-4 flow-root lg:ml-6">
+                {auth.user && <div className="ml-4 flow-root lg:ml-6">
                   <a href="#" className="group -m-2 flex items-center p-2">
                     <ShoppingBagIcon
                       onClick={toCart}
-                      className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                      className="h-6 w-6 flex-shrink-0 text-gray-600 group-hover:text-gray-500"
                       aria-hidden="true"
                     />
                     <span className="ml-1 text-sm font-medium text-gray-700 group-hover:text-gray-800">
@@ -683,7 +699,7 @@ export default function Navbar() {
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>
-                </div>
+                </div>}
               </div>
             </div>
           </div>

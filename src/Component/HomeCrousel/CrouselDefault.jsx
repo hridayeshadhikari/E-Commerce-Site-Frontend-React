@@ -15,7 +15,7 @@ const CarouselDefault = () => {
   return (
     <div>
       <AliceCarousel
-        autoPlayDirection="rtl"
+        autoPlayDirection="lrt"
         fadeOutAnimation={true}
         mouseTrackingEnabled={true}
         items={items}

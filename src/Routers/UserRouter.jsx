@@ -20,6 +20,7 @@ import Register from "../Auth/Register";
 import Payment from "../Component/Payment/Payment";
 import RateProduct from "../Component/Rating/RateProduct";
 import ScrollToTop from "../Component/Scroll/ScrollToTop";
+import ProfilePage from "../Pages/ProfilePage";
 
 const UserRouter = () => {
   return (
@@ -42,6 +43,7 @@ const UserRouter = () => {
         <Route path="/account/order" element={<Order />}></Route>
         <Route path="/account/order/:orderId" element={<OrderDetail />}></Route>
         <Route path="/payment/:orderId" element={<Payment />}></Route>
+        <Route path="/account/profile" element={<ProfilePage />}></Route>
         <Route
           path="/account/rate/:productId"
           element={<RateProduct />}
