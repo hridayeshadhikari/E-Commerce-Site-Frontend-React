@@ -1,13 +1,13 @@
 export const mens_jacket = [
   {
-    "productId": 1,
+    "productId": 2,
     "imageUrl": "https://m.media-amazon.com/images/I/31Dfi8OX0NL.jpg",
     "title": "NEW KNOWS Men Solid Bomber Jacket",
     "discountedPrice": 899,
     "price": 3499,
   },
   {
-    "productId": 2,
+    "productId": 1,
     "imageUrl": "https://rukminim2.flixcart.com/image/832/832/xif0q/jacket/o/h/l/l-no-mf-cb-jkt-21-blue-mia-fashion-original-imagyxy8gyfbvr4d.jpeg?q=70&crop=false",
     "title": "Men Colorblock Casual Jacket",
     "discountedPrice": 799,

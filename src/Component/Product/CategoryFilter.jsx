@@ -17,6 +17,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Product/Action";
 import { Pagination } from "@mui/material";
+import HashLoader from "react-spinners/HashLoader";
 
 const sortOptions = [
   { name: "Price: Low to High", value: "price_low", current: false },
@@ -96,6 +97,7 @@ export default function CategoryFilter() {
   const dispatch = useDispatch();
   const param = useParams();
   const { products } = useSelector((store) => store);
+  const {loading}=useSelector(state=>state.products)
   
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
@@ -176,6 +178,27 @@ export default function CategoryFilter() {
 
   return (
     <div className="bg-white">
+      {loading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 9999,
+          }}
+        >
+          <HashLoader 
+          color="#2196F3"
+          size={70}
+          />
+        </div>
+      )}
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import api from "../../Config/ApiConfig";
+import api, { API_BASE_URL } from "../../Config/ApiConfig";
 import {
   FIND_PRODUCT_BY_CATEGORY_REQUEST,
   FIND_PRODUCT_BY_CATEGORY_FAILURE,
@@ -13,7 +13,7 @@ export const findById = (productId) => async (dispatch) => {
   dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST });
   try {
     const { data } = await axios.get(
-      `https://d1op8buhnp76or.cloudfront.net/apis/product/${productId}`
+      `${API_BASE_URL}/apis/product/${productId}`
     );
     dispatch({ type: FIND_PRODUCT_BY_ID_SUCCESS, payload: data });
   } catch (error) {
@@ -38,7 +38,7 @@ export const getProducts = (reqData) => async (dispatch) => {
 
   try {
     const { data } = await axios.get(
-      `https://d1op8buhnp76or.cloudfront.net/apis/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      `${API_BASE_URL}/apis/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
     dispatch({ type: FIND_PRODUCT_BY_CATEGORY_SUCCESS, payload: data });
   } catch (error) {

@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { usersCart } from "../../Redux/Cart/Action";
 import { Button } from "@mui/material";
-import emptyCart from "../../Assets/emptycart.png"
+import emptyCart from "../../Assets/emptycart.png";
+import HashLoader from "react-spinners/HashLoader";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { cart } = useSelector((store) => store);
+  const {cart } = useSelector((state) => state);
+  const { loading} = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const handleCheckout = () => {
     navigate("/checkout?step=2");
@@ -20,11 +22,32 @@ const Cart = () => {
 
   return (
     <div>
-      {
-        cart?.cart?.cartItems.length > 0 ? <div className="lg:grid grid-cols-3 lg:px-16 relative pt-3">
+      {loading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 9999,
+          }}
+        >
+          <HashLoader 
+          color="#2196F3"
+          size={70}
+          />
+        </div>
+      )}
+      {cart?.cart?.cartItems.length > 0 ? (
+        <div className="lg:grid grid-cols-3 lg:px-16 relative pt-3">
           <div className="col-span-2">
             {cart.cart?.cartItems.map((item) => (
-              <CartItem item={item} />
+              <CartItem item={item} key={item.id} />
             ))}
           </div>
 
@@ -63,12 +86,15 @@ const Cart = () => {
             </button>
           </div>
         </div>
-          : <div className="flex mt-0 justify-center items-center flex-col mb-5">
-            <img src={emptyCart} alt="" className="w-[25rem] h-[26rem]" />
-            <h1 className="mt-2 font-bold mb-6">Your cart is empty!!</h1>
-            
-            <Button variant="contained" onClick={()=>navigate("/")}>Shop now</Button>
-          </div>}
+      ) : (
+        <div className="flex mt-0 justify-center items-center flex-col mb-5">
+          <img src={emptyCart} alt="" className="w-[25rem] h-[26rem]" />
+          <h1 className="mt-2 font-bold mb-6">Your cart is empty!!</h1>
+          <Button variant="contained" onClick={() => navigate("/")}>
+            Shop now
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

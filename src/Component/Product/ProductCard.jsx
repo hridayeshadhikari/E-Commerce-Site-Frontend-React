@@ -15,6 +15,7 @@ import FlashOnIcon from "@mui/icons-material/FlashOn";
 import { grey } from "@mui/material/colors";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import HashLoader from "react-spinners/HashLoader";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -26,6 +27,7 @@ export default function Example() {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const { products, auth } = useSelector((store) => store);
+  const {loading} = useSelector(state=>state.products)
   const [mainImage, setMainImage] = useState("");
 
   useEffect(() => {
@@ -98,6 +100,27 @@ export default function Example() {
 
   return (
     <div className="bg-white">
+      {loading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 9999,
+          }}
+        >
+          <HashLoader 
+          color="#2196F3"
+          size={70}
+          />
+        </div>
+      )}
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol

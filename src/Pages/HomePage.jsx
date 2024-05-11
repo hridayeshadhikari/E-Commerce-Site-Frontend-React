@@ -9,7 +9,7 @@ import "../App.css";
 const HomePage = () => {
   const navigate = useNavigate();
   const { auth } = useSelector((store) => store);
-  if (auth.user && auth.user.roles[0].name === "ROLE_ADMIN") {
+  if (auth?.user && auth?.user?.roles[0]?.name === "ROLE_ADMIN") {
     setTimeout(() => {
       navigate("/admin");
     }, 1000);

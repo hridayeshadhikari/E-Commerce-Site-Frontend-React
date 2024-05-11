@@ -5,10 +5,12 @@ import { orderHistory } from "../../Redux/Order/Action";
 import OrderCard from "./OrderCard";
 import { useNavigate } from "react-router-dom";
 import noordersimg from "../../Assets/noorders.jpg"
+import HashLoader from "react-spinners/HashLoader";
 
 const Order = () => {
   const dispatch = useDispatch();
   const { order } = useSelector((store) => store);
+  const { loading } = useSelector((store) => store.order);
   const navigate =useNavigate();
 
   useEffect(() => {
@@ -19,6 +21,27 @@ const Order = () => {
 
   return (
     <div className="mt-10 mb-5">
+      {loading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 9999,
+          }}
+        >
+          <HashLoader 
+          color="#2196F3"
+          size={70}
+          />
+        </div>
+      )}
       <Box className="px-10">
         <div className="container">
           <div className="p-5">
