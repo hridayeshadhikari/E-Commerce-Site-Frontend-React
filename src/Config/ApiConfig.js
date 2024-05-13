@@ -1,5 +1,5 @@
 import axios from "axios";
-const LOCALHOST = "ec2-54-206-114-28.ap-southeast-2.compute.amazonaws.com:1213";
+const LOCALHOST = "http://ec2-54-206-114-28.ap-southeast-2.compute.amazonaws.com:1213";
 
 export const API_BASE_URL = LOCALHOST;
 
