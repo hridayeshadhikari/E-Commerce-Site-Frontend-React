@@ -1,5 +1,5 @@
 import axios from "axios";
-const LOCALHOST = "https://nonstudiously-scabrous-bobbi.ngrok-free.dev:8080";
+const LOCALHOST = "https://nonstudiously-scabrous-bobbi.ngrok-free.dev";
 
 export const API_BASE_URL = LOCALHOST;
 
